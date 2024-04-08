@@ -78,4 +78,23 @@ title: Mermaid class structure
         +Position
         +Size
     }
+
+     Game --> Player
+    Game --> NPC
+    Game -->LevelEditor
+    Game --> Room
+    Game --> Inventory
+    Room --> door
+    Room --> Wall
+    Inventory-->Pill
+    Player o-- Pill
+    NPC *-- Pill
+    LevelEditor o-- Room
+    NPC *-- VisionCone
+    NPC *--NPCpathing
+    Pill *--PillArrow
+    Player*-- PatienceMeter
+    Player *-- Movement
+    Room ..> NPC
+    Room ..> Player
 ```
