@@ -12,6 +12,10 @@ User Stories:
 
  ![image](./Misc%20Images/CRC%20cards.jpg)
 
+```mermaid
+---
+title: Mermaid class structure
+---
  classDiagram
     class Player{
     }
@@ -74,3 +78,4 @@ User Stories:
         +Position
         +Size
     }
+```
