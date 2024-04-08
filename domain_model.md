@@ -11,4 +11,66 @@ User Stories:
  - As a player, I want to see if the medication has been spawned so I know which ones to collect at first. (Veronika) 
 
  ![image](./Misc%20Images/CRC%20cards.jpg)
- 
+
+ classDiagram
+    class Player{
+    }
+    class Movement{
+      +Vector2f PlayerPosition
+      +getInput()
+      +movePlayer()
+    }
+    class Inventory{
+      +Pill currentPill
+      +handlePickup()
+    }
+    class PatienceMeter{
+        +currentPatience
+        +decreasePatience()
+        +increasePatience()
+    }
+    class VisionCone{
+        +cone
+        +collideWithPlayer()
+        +sweepCone()
+    }
+    class NPC{
+        +Pill requestedPill
+        +takePill()
+    }
+    class NPCpathing{
+        +pathingType
+        +choosePath()
+        +moveNpcOnPath()
+        +FollowPlayer()
+    }
+    class PillArrow{
+        +PillPosition
+        +updateArrowTowardsPill()
+    }
+    class Game{
+        +update()
+        +render()
+        +Events()
+    }
+    class Room {
+        +roomShape
+        +checkWallCollision()
+    }
+    class Pill{
+        +pillType
+        +Position
+    }
+    class door{
+        +Position
+        +Size
+        +MoveToNextRoom()
+    }
+    class LevelEditor{
+        +userInput()
+        +saveArrangement()
+    }
+    class Wall{
+        +Position
+        +Size
+    }
