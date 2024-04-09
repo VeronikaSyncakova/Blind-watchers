@@ -58,6 +58,12 @@
     <Filter Include="Resource Files\YAML_PARSER">
       <UniqueIdentifier>{b7114d13-99ca-4c0d-b632-c526ca100284}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GamePlay\Pawn">
+      <UniqueIdentifier>{4eadee10-0295-48d0-90f0-aebe7dac2060}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GamePlay\Pawn">
+      <UniqueIdentifier>{2b40bc46-5909-4a67-8c65-c4d83faac7ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Button.cpp">
@@ -86,6 +92,15 @@
     </ClCompile>
     <ClCompile Include="src\GamePlay.cpp">
       <Filter>Source Files\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Pawn.cpp">
+      <Filter>Source Files\GamePlay\Pawn</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Player.cpp">
+      <Filter>Source Files\GamePlay\Pawn</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CharacterSelection.cpp">
+      <Filter>Source Files\GameMode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +253,18 @@
     </ClInclude>
     <ClInclude Include="include\yaml-cpp\node\detail\node_ref.h">
       <Filter>Resource Files\YAML_PARSER</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Player.h">
+      <Filter>Header Files\GamePlay\Pawn</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Pawn.h">
+      <Filter>Header Files\GamePlay\Pawn</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CharacterSelection.h">
+      <Filter>Header Files\GameMode</Filter>
+    </ClInclude>
+    <ClInclude Include="include\playerStats.h">
+      <Filter>Header Files\GamePlay\Pawn</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

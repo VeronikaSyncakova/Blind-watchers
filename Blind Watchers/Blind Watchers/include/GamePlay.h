@@ -1,7 +1,8 @@
 #ifndef GAMEPLAY_H
 #define GAMEPLAY_H
 
-#include"GameMode.h"
+#include "GameMode.h"
+#include "Player.h"
 
 class GamePlay : public GameMode
 {
@@ -17,6 +18,7 @@ private:
 	void processKeys(sf::Event& t_event)override;      // handles all key inputs
 	void processMouse(sf::Event& t_event)override;     // handles all mouse events
 
+	std::shared_ptr<Pawn> m_player;
 };
 
 #endif // !GAMEPLAY_H

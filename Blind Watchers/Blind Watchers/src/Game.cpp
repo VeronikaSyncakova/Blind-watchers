@@ -10,9 +10,11 @@
 #include "Menu.h"
 #include "Settings.h"
 #include "GamePlay.h"
+#include "CharacterSelection.h"
 
 
 // setup of static variables
+PlayerType Game::s_selectedPlayer = PlayerType::Fast;
 GameModeClass Game::s_currentGameMode = GameModeClass::Menu;
 bool Game::s_changeGameMode = true;
 bool Game::s_gameActive = true;
@@ -151,6 +153,8 @@ void Game::changeGameMode()
 			m_gameMode = std::make_shared<GamePlay>();
 		else if (s_currentGameMode == GameModeClass::Settings)
 			m_gameMode = std::make_shared<Settings>();
+		else if (s_currentGameMode == GameModeClass::CharacterSelection)
+			m_gameMode = std::make_shared<CharacterSelection>();
 
 		s_changeGameMode = false;
 	}

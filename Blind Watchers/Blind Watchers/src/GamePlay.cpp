@@ -5,6 +5,7 @@
 /// </summary>
 GamePlay::GamePlay()
 {
+	m_player = std::make_shared<Player>();
 }
 
 /// <summary>
@@ -19,6 +20,7 @@ GamePlay::~GamePlay()
 /// </summary>
 void GamePlay::resetLevel()
 {
+	m_player->initialise();
 }
 
 /// <summary>
@@ -53,6 +55,7 @@ void GamePlay::processKeys(sf::Event& t_event)
 /// <param name="t_deltaTime">delta time passed from game</param>
 void GamePlay::update()
 {
+	m_player->update();
 }
 
 /// <summary>

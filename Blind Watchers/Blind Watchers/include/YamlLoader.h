@@ -7,6 +7,8 @@
 #include "yaml-cpp\yaml.h"
 #include "Globals.h"
 
+struct PlayerData;
+
 class yamlLoader
 {
 public:
@@ -15,6 +17,7 @@ public:
 	static void loadSettings(std::string t_loadFileName, SettingsData& t_settings);
 	static void WriteSettings(std::string t_loadFileName, SettingsData& t_settings);
 
+	static void loadPlayerData(PlayerData& t_data);
 };
 
 #endif // !YAML_LOADER_H

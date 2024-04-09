@@ -5,12 +5,24 @@
 const unsigned int SCREEN_WIDTH = 1920; // width of the screen for maths
 const unsigned int SCREEN_HEIGHT = 1080; // height of the screen for maths
 
+enum class PawnType
+{
+	Player, BlindNpc
+};
+
+const int PLAYER_TYPE_AMT = 2;
+enum class PlayerType
+{
+	Fast, Small
+};
+
 enum class GameModeClass
 {
 	None,
 	Menu,
 	Gameplay,
-	Settings
+	Settings,
+	CharacterSelection
 };
 
 struct Vector2i

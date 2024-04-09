@@ -1,5 +1,6 @@
-#include"GameMode.h"
-#include"Button.h"
+#include "GameMode.h"
+#include "Button.h"
+#include "SimpleButton.h"
 
 class Menu : public GameMode
 {
@@ -28,5 +29,7 @@ private:
 
 	std::shared_ptr<sf::Font> m_globalFont;
 	std::shared_ptr<sf::Text> m_hudText;
+
+	std::shared_ptr<SimpleButton> m_simpleButton;
 };
 

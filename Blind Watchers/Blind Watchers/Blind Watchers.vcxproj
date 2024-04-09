@@ -20,17 +20,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Button.cpp" />
+    <ClCompile Include="src\CharacterSelection.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameMode.cpp" />
     <ClCompile Include="src\GamePlay.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Menu.cpp" />
+    <ClCompile Include="src\Pawn.cpp" />
+    <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\RenderObject.cpp" />
     <ClCompile Include="src\Settings.cpp" />
     <ClCompile Include="src\YamlLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Button.h" />
+    <ClInclude Include="include\CharacterSelection.h" />
     <ClInclude Include="include\DEBUG.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameMode.h" />
@@ -38,6 +42,9 @@
     <ClInclude Include="include\GlobalFontStorage.h" />
     <ClInclude Include="include\Globals.h" />
     <ClInclude Include="include\Menu.h" />
+    <ClInclude Include="include\Pawn.h" />
+    <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\playerStats.h" />
     <ClInclude Include="include\RenderObject.h" />
     <ClInclude Include="include\Settings.h" />
     <ClInclude Include="include\SettingsStorage.h" />

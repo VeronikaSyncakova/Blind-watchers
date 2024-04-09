@@ -14,6 +14,7 @@
 // Abstract class
 #include"GameMode.h"
 #include"GamePlay.h"
+#include"playerStats.h"
 
 class Game
 {
@@ -32,6 +33,7 @@ public:
 	static bool s_gameActive;
 	static float deltaTime; // global delta time
 
+	static PlayerType s_selectedPlayer;
 private:
 
 	void processEvents();
