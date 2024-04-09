@@ -36,5 +36,7 @@ struct PlayerData
 	sf::Vector2f m_size = { 30.f,30.f };
 	sf::Color m_color = sf::Color::White;
 	std::string m_name;
+	float m_sprintSpeed;
+	float m_sprintTime;
 };
 

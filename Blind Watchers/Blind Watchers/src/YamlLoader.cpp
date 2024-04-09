@@ -29,6 +29,8 @@ void operator >> (const YAML::Node& t_node, PlayerData& t_data)
 									   t_node[i]["colour"]["g"].as<int>(), 
 									   t_node[i]["colour"]["b"].as<int>(),
 									   t_node[i]["colour"]["a"].as<int>());
+			t_data.m_sprintSpeed = t_node[i]["sprintSpeed"].as<int>();
+			t_data.m_sprintTime = t_node[i]["sprintTime"].as<float>();
 		}
 	}
 }

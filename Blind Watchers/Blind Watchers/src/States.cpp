@@ -37,10 +37,6 @@ void playerInputState::update(std::shared_ptr<Pawn> t_pawn)
 	{
 		moveVector.x -= 1;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
-	{
-		moveVector *= 1.5f;
-	}
 	t_pawn->moveBody(moveVector);
 }
 

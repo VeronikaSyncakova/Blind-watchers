@@ -14,6 +14,9 @@ Player::Player()
 	m_body->setSize(tempData.m_size);
 	m_body->setFillColor(tempData.m_color);
 	m_moveSpeed = tempData.m_speed;
+	m_sprintSpeed = tempData.m_sprintSpeed;
+	m_maxSprintTime = tempData.m_sprintTime;
+	m_sprintTimeLeft = m_maxSprintTime;
 
 	RenderObject::getInstance().add(m_body);
 }
@@ -28,9 +31,35 @@ void Player::initialise()
 
 void Player::update()
 {
+	if (m_sprinting)
+	{
+		m_sprintTimeLeft -= Game::deltaTime;
+
+		if (m_sprintTimeLeft < 0.f)
+			m_sprintTimeLeft = 0.f;
+	}
+	else
+	{
+		m_sprintTimeLeft += Game::deltaTime;
+		if (m_sprintTimeLeft > m_maxSprintTime)
+		{
+			m_sprintTimeLeft = m_maxSprintTime;
+		}
+	}
 }
 
 void Player::moveBody(sf::Vector2f const& t_moveVector)
 {
-	m_body->move(t_moveVector * (m_moveSpeed * Game::deltaTime));
+	float ExtraSpeed = 0.f;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift))
+	{
+		m_sprinting = true;
+		if(m_sprintTimeLeft > 0.f)
+			ExtraSpeed = m_sprintSpeed;
+	}
+	else
+	{
+		m_sprinting = false;
+	}
+	m_body->move(t_moveVector * ((m_moveSpeed + ExtraSpeed) * Game::deltaTime));
 }
