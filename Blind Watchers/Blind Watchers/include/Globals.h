@@ -10,10 +10,10 @@ enum class PawnType
 	Player, BlindNpc
 };
 
-const int PLAYER_TYPE_AMT = 2;
+const int PLAYER_TYPE_AMT = 3;
 enum class PlayerType
 {
-	Fast, Small
+	Normal, Fast, Small
 };
 
 enum class GameModeClass

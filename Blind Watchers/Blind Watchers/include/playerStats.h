@@ -11,6 +11,9 @@ struct PlayerData
 	{
 		switch (t_rhs)
 		{
+		case PlayerType::Normal:
+			m_name = "normal";
+			break;
 		case PlayerType::Fast:
 			m_name = "fast";
 			break;
@@ -18,6 +21,7 @@ struct PlayerData
 			m_name = "small";
 			break;
 		default:
+			m_name = "normal";
 			break;
 		}
 		yamlLoader::loadPlayerData(*this);
