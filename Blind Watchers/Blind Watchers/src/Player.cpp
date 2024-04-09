@@ -29,3 +29,8 @@ void Player::initialise()
 void Player::update()
 {
 }
+
+void Player::moveBody(sf::Vector2f const& t_moveVector)
+{
+	m_body->move(t_moveVector * (m_moveSpeed * Game::deltaTime));
+}

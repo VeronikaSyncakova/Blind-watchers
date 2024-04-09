@@ -1,12 +1,12 @@
 - name: fast
   size: {x: 35, y: 35}
-  speed: 3.4
+  speed: 200
   colour: {r: 0 , g: 206 , b: 209 , a: 255}
 - name: small
   size: {x: 20, y: 20}
-  speed: 2.8
+  speed: 100
   colour: {r: 255 , g: 215 , b: 3 , a: 255}
 - name: normal
   size: {x: 30, y: 30}
-  speed: 2.8
+  speed: 100
   colour: {r: 255 , g: 255 , b: 255 , a: 255}

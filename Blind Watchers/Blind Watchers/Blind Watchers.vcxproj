@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\CharacterSelection.cpp" />
+    <ClCompile Include="src\States.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameMode.cpp" />
     <ClCompile Include="src\GamePlay.cpp" />
@@ -33,8 +34,10 @@
     <ClCompile Include="src\YamlLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\AbstractState.h" />
     <ClInclude Include="include\Button.h" />
     <ClInclude Include="include\CharacterSelection.h" />
+    <ClInclude Include="include\States.h" />
     <ClInclude Include="include\DEBUG.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\GameMode.h" />

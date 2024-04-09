@@ -11,7 +11,7 @@ public:
 	void initialise()override;
 	void update()override;
 
+	void moveBody(sf::Vector2f const& t_moveVector)override;
 private:
 	std::shared_ptr<sf::RectangleShape> m_body;
-	float m_moveSpeed{ 0.f };
 };

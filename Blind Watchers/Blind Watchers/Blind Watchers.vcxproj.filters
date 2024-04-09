@@ -64,6 +64,12 @@
     <Filter Include="Source Files\GamePlay\Pawn">
       <UniqueIdentifier>{2b40bc46-5909-4a67-8c65-c4d83faac7ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GamePlay\Pawn\StateMachine">
+      <UniqueIdentifier>{6a272a10-5aec-4624-9de3-8860f343ad9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GamePlay\Pawn\StateMachine">
+      <UniqueIdentifier>{3902dfa7-c2ca-4192-aebf-65455f628151}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Button.cpp">
@@ -101,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="src\CharacterSelection.cpp">
       <Filter>Source Files\GameMode</Filter>
+    </ClCompile>
+    <ClCompile Include="src\States.cpp">
+      <Filter>Source Files\GamePlay\Pawn\StateMachine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +274,12 @@
     </ClInclude>
     <ClInclude Include="include\playerStats.h">
       <Filter>Header Files\GamePlay\Pawn</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AbstractState.h">
+      <Filter>Header Files\GamePlay\Pawn\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\States.h">
+      <Filter>Header Files\GamePlay\Pawn\StateMachine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

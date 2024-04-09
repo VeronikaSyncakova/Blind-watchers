@@ -6,6 +6,7 @@
 GamePlay::GamePlay()
 {
 	m_player = std::make_shared<Player>();
+	StateManager::changeCommand(State::PlayerInput, m_player);
 }
 
 /// <summary>
@@ -56,6 +57,7 @@ void GamePlay::processKeys(sf::Event& t_event)
 void GamePlay::update()
 {
 	m_player->update();
+	StateManager::update(m_player);
 }
 
 /// <summary>
