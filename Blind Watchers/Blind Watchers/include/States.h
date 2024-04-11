@@ -4,7 +4,7 @@
 
 enum class State
 {
-	None, PlayerInput
+	None, PlayerInput, Wander
 };
 
 
@@ -18,6 +18,14 @@ public:
 };
 
 class playerInputState : public AbstractState
+{
+public:
+	virtual void enter(std::shared_ptr<Pawn> t_pawn);
+	virtual void update(std::shared_ptr<Pawn> t_pawn);
+	virtual void exit(std::shared_ptr<Pawn> t_pawn);
+};
+
+class WanderState : public AbstractState
 {
 public:
 	virtual void enter(std::shared_ptr<Pawn> t_pawn);
