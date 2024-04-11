@@ -1,14 +1,6 @@
 #pragma once
-#include <SFML/Graphics.hpp>
 #include "RenderObject.h"
-
-struct DoorData
-{
-	std::string m_doorType="East";
-	float m_positionX=30.f;
-	float m_positionY=30.f;
-	float m_rotation=0.f;
-};
+#include "levelData.h"
 
 class Door
 {

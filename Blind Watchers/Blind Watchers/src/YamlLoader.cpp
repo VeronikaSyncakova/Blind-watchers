@@ -70,6 +70,12 @@ void operator >> (const YAML::Node& t_node, levelData& t_data)
 
 		t_data.m_npcs.push_back(newNpc);
 	}
+
+	const YAML::Node& roomNode = t_node["rooms"].as<YAML::Node>();
+	for (unsigned i = 0; i < roomNode.size(); i++)
+	{
+		//TO DO: finish loading of the level from the yaml file, write into the Yaml file
+	}
 }
 
 /// <summary>

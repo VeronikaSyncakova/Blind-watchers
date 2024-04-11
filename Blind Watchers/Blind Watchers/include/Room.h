@@ -1,13 +1,6 @@
 #pragma once 
 #include "RenderObject.h"
-struct RoomData
-{
-	std::string m_roomType="TopRight";
-	float m_sizeX=800.f;
-	float m_sizeY=500.f;
-	float m_positionX=0.f;
-	float m_positionY=0.f;
-};
+#include "levelData.h"
 
 class Room
 {
