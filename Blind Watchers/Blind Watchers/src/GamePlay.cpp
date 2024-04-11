@@ -8,6 +8,8 @@
 /// </summary>
 GamePlay::GamePlay()
 {
+	initialiseRandom();
+
 	// loads the npc
 	yamlLoader::loadLevelData(m_level, 1);
 
@@ -15,7 +17,7 @@ GamePlay::GamePlay()
 	{
 		std::shared_ptr<blindNpc> newNpc;
 		newNpc = std::make_shared<blindNpc>(m_level.m_npcs.at(i));
-		StateManager::changeCommand(State::None, newNpc);
+		StateManager::changeCommand(State::Wander, newNpc);
 
 		m_pawns.push_back(newNpc);
 	}
@@ -98,4 +100,12 @@ void GamePlay::processMouse(sf::Event& t_event)
 	{
 		//mouseButtonUp();
 	}
+}
+
+// initialise the random seed to a random value
+#include <ctime>
+#include <cstdlib>
+void GamePlay::initialiseRandom()
+{
+	srand(static_cast<unsigned int> (time(nullptr)));
 }

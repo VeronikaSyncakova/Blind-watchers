@@ -22,5 +22,5 @@ public:
 	virtual void moveBody(sf::Vector2f const& t_moveVector)override;
 private:
 	std::shared_ptr<body> m_body;
-	float m_maxSpeed{ 0.f };
+	float m_maxSpeed{ 100.f };
 };

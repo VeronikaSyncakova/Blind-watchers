@@ -16,6 +16,7 @@ public:
 	virtual void moveBody(sf::Vector2f const& t_moveVector) = 0;
 
 	bool getActive() { return m_active; }
+	sf::Vector2f getPosition() { return m_position; }
 private:
 
 protected:

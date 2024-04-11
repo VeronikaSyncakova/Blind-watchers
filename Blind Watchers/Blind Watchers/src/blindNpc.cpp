@@ -1,10 +1,12 @@
 #include "blindNpc.h"
 #include "RenderObject.h"
+#include "Game.h"
 
 blindNpc::blindNpc(npcData& t_characterData)
 {
 	m_body = std::make_shared<body>();
 	m_body->initialiseBody(t_characterData);
+	m_position = t_characterData.position;
 }
 
 blindNpc::~blindNpc()
@@ -17,7 +19,8 @@ void blindNpc::update()
 
 void blindNpc::moveBody(sf::Vector2f const& t_moveVector)
 {
-	m_body->moveBody(t_moveVector * m_maxSpeed);
+	m_position += t_moveVector * m_maxSpeed * Game::deltaTime;
+	m_body->moveBody(m_position);
 }
 
 void body::initialiseBody(npcData& t_data)

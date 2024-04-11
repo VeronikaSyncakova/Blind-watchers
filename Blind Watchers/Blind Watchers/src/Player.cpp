@@ -12,7 +12,8 @@ Player::Player()
 
 	PlayerData tempData;
 	tempData = Game::s_selectedPlayer;
-	m_body->setPosition(100.f,100.f);
+	m_position = { 100.f,100.f };
+	m_body->setPosition(m_position);
 	m_body->setSize(tempData.m_size);
 	m_body->setFillColor(tempData.m_color);
 	m_moveSpeed = tempData.m_speed;

@@ -42,6 +42,7 @@
     <ClInclude Include="include\blindNpc.h" />
     <ClInclude Include="include\levelData.h" />
     <ClInclude Include="include\Room.h" />
+    <ClInclude Include="include\simpleMaths.h" />
     <ClInclude Include="include\States.h" />
     <ClInclude Include="include\DEBUG.h" />
     <ClInclude Include="include\Game.h" />

@@ -19,6 +19,8 @@ private:
 	void processKeys(sf::Event& t_event)override;      // handles all key inputs
 	void processMouse(sf::Event& t_event)override;     // handles all mouse events
 
+	void initialiseRandom();
+
 	std::vector<std::shared_ptr<Pawn>> m_pawns;
 	levelData m_level;
 };
