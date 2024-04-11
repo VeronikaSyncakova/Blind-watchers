@@ -1,5 +1,6 @@
 #include "YamlLoader.h"
 #include "playerStats.h"
+#include "levelData.h"
 
 // read
 void operator >> (const YAML::Node& t_node, SettingsData& t_settingsData)
@@ -17,6 +18,7 @@ void operator << (YAML::Node& t_node, const SettingsData& t_settingsData)
 	t_node["Screen"]["y"] = t_settingsData.ScreenSize.y;
 }
 
+// read player data
 void operator >> (const YAML::Node& t_node, PlayerData& t_data)
 {
 	for (unsigned i = 0; i < t_node.size(); ++i)
@@ -32,6 +34,41 @@ void operator >> (const YAML::Node& t_node, PlayerData& t_data)
 			t_data.m_sprintSpeed = t_node[i]["sprintSpeed"].as<int>();
 			t_data.m_sprintTime = t_node[i]["sprintTime"].as<float>();
 		}
+	}
+}
+
+//read npc data
+void operator >> (const YAML::Node& t_node, npcData& t_npc)
+{
+	// npc start position
+	t_npc.position.x = t_node["position"]["x"].as<float>();
+	t_npc.position.y = t_node["position"]["y"].as<float>();
+
+	//npc size
+	t_npc.size.x = t_node["size"]["x"].as<float>();
+	t_npc.size.y = t_node["size"]["y"].as<float>();
+
+	// npc colour
+	t_npc.color.r = t_node["colour"]["r"].as<int>();
+	t_npc.color.g = t_node["colour"]["g"].as<int>();
+	t_npc.color.b = t_node["colour"]["b"].as<int>();
+	t_npc.color.a = t_node["colour"]["a"].as<int>();
+
+	// npc speed
+	t_npc.speed = t_node["speed"].as<float>();
+}
+
+// read level data
+void operator >> (const YAML::Node& t_node, levelData& t_data)
+{
+	const YAML::Node& npcNode = t_node["npc"].as<YAML::Node>();
+	for (unsigned i = 0; i < npcNode.size(); ++i)
+	{
+		npcData newNpc;
+
+		npcNode[i] >> newNpc;
+
+		t_data.m_npcs.push_back(newNpc);
 	}
 }
 
@@ -119,6 +156,34 @@ void yamlLoader::loadPlayerData(PlayerData& t_data)
 			throw std::exception(message.c_str());
 		}
 		baseNode >> t_data;
+	}
+	catch (YAML::ParserException& e)
+	{
+		std::string message(e.what());
+		message = "YAML Parser Error: " + message;
+		throw std::exception(message.c_str());
+	}
+	catch (std::exception& e)
+	{
+		std::string message(e.what());
+		message = "Unexpected Error: " + message;
+		throw std::exception(message.c_str());
+	}
+}
+
+void yamlLoader::loadLevelData(levelData& t_levelData, int t_levelNum)
+{
+	std::string filename = ".\\ASSETS\\DATA\\LEVEL\\level" + std::to_string(t_levelNum) + ".yaml";
+
+	try
+	{
+		YAML::Node baseNode = YAML::LoadFile(filename);
+		if (baseNode.IsNull())
+		{
+			std::string message("File: " + filename + " not found");
+			throw std::exception(message.c_str());
+		}
+		baseNode >> t_levelData;
 	}
 	catch (YAML::ParserException& e)
 	{

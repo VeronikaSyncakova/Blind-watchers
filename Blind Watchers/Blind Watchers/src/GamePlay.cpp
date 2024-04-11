@@ -1,12 +1,31 @@
 #include "GamePlay.h"
+#include "YamlLoader.h"
+#include "Player.h"
+#include "blindNpc.h"
 
 /// <summary>
 /// default constructor
 /// </summary>
 GamePlay::GamePlay()
 {
-	m_player = std::make_shared<Player>();
-	StateManager::changeCommand(State::PlayerInput, m_player);
+	// loads the npc
+	yamlLoader::loadLevelData(m_level, 1);
+
+	for (unsigned int i = 0; i < m_level.m_npcs.size(); i++)
+	{
+		std::shared_ptr<blindNpc> newNpc;
+		newNpc = std::make_shared<blindNpc>(m_level.m_npcs.at(i));
+		StateManager::changeCommand(State::None, newNpc);
+
+		m_pawns.push_back(newNpc);
+	}
+	// loads player, done after so player would be on top
+	std::shared_ptr<Player> player;
+	player = std::make_shared<Player>();
+	StateManager::changeCommand(State::PlayerInput, player);
+
+	m_pawns.push_back(player);
+
 }
 
 /// <summary>
@@ -21,7 +40,6 @@ GamePlay::~GamePlay()
 /// </summary>
 void GamePlay::resetLevel()
 {
-	m_player->initialise();
 }
 
 /// <summary>
@@ -56,8 +74,11 @@ void GamePlay::processKeys(sf::Event& t_event)
 /// <param name="t_deltaTime">delta time passed from game</param>
 void GamePlay::update()
 {
-	m_player->update();
-	StateManager::update(m_player);
+	for(std::shared_ptr<Pawn>& p : m_pawns)
+	{
+		p->update();
+		StateManager::update(p);
+	}
 }
 
 /// <summary>

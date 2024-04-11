@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\CharacterSelection.cpp" />
+    <ClCompile Include="src\blindNpc.cpp" />
     <ClCompile Include="src\States.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameMode.cpp" />
@@ -37,6 +38,8 @@
     <ClInclude Include="include\AbstractState.h" />
     <ClInclude Include="include\Button.h" />
     <ClInclude Include="include\CharacterSelection.h" />
+    <ClInclude Include="include\blindNpc.h" />
+    <ClInclude Include="include\levelData.h" />
     <ClInclude Include="include\States.h" />
     <ClInclude Include="include\DEBUG.h" />
     <ClInclude Include="include\Game.h" />

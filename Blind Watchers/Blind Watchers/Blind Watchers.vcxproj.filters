@@ -111,6 +111,9 @@
     <ClCompile Include="src\States.cpp">
       <Filter>Source Files\GamePlay\Pawn\StateMachine</Filter>
     </ClCompile>
+    <ClCompile Include="src\blindNpc.cpp">
+      <Filter>Source Files\GamePlay\Pawn</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameMode.h">
@@ -280,6 +283,12 @@
     </ClInclude>
     <ClInclude Include="include\States.h">
       <Filter>Header Files\GamePlay\Pawn\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\blindNpc.h">
+      <Filter>Header Files\GamePlay\Pawn</Filter>
+    </ClInclude>
+    <ClInclude Include="include\levelData.h">
+      <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

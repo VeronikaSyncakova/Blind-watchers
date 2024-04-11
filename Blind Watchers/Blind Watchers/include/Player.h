@@ -8,7 +8,6 @@ public:
 	Player();
 	~Player();
 
-	void initialise()override;
 	void update()override;
 
 	void moveBody(sf::Vector2f const& t_moveVector)override;
