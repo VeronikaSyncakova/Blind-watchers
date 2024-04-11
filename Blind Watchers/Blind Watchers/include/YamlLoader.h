@@ -7,6 +7,7 @@
 #include "yaml-cpp\yaml.h"
 #include "Globals.h"
 
+struct levelData;
 struct PlayerData;
 
 class yamlLoader
@@ -18,6 +19,8 @@ public:
 	static void WriteSettings(std::string t_loadFileName, SettingsData& t_settings);
 
 	static void loadPlayerData(PlayerData& t_data);
+
+	static void loadLevelData(levelData& t_levelData, int t_levelNum);
 };
 
 #endif // !YAML_LOADER_H

@@ -10,11 +10,12 @@ public:
 	Pawn();
 	~Pawn();
 
-	virtual void initialise() = 0;
 	virtual void update() = 0;
 
 	// normalised vector that the pawn will move along
 	virtual void moveBody(sf::Vector2f const& t_moveVector) = 0;
+
+	bool getActive() { return m_active; }
 private:
 
 protected:
@@ -23,4 +24,6 @@ protected:
 
 	State m_currentState{ State::None };
 	std::shared_ptr<AbstractState> m_state;
+
+	bool m_active{ false };
 };

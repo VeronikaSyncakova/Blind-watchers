@@ -8,6 +8,8 @@ Player::Player()
 {
 	m_body = std::make_shared<sf::RectangleShape>();
 	
+	m_active = true;
+
 	PlayerData tempData;
 	tempData = Game::s_selectedPlayer;
 	m_body->setPosition(100.f,100.f);
@@ -22,10 +24,6 @@ Player::Player()
 }
 
 Player::~Player()
-{
-}
-
-void Player::initialise()
 {
 }
 

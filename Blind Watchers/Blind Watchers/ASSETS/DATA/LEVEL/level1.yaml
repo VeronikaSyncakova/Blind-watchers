@@ -1,0 +1,17 @@
+#sf::Vector2f position;
+#sf::Color color;
+#sf::Vector2f size;
+#float speed;
+npc:
+  - position: {x: 1000.0, y: 500.0}
+    colour: {r: 255, g: 255, b: 255, a: 255}
+    size: {x: 50, y: 50}
+    speed: 3.2
+    texture: unavailableCurrently.png
+    pathingType: none
+  - position: {x: 1300.0, y: 600.0}
+    colour: {r: 255, g: 0, b: 255, a: 255}
+    size: {x: 80, y: 80}
+    speed: 3.2
+    texture: unavailableCurrently.png
+    pathingType: none
