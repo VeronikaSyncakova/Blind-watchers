@@ -3,6 +3,7 @@
 
 #include "GameMode.h"
 #include "Player.h"
+#include "RoomPlan.h"
 
 class GamePlay : public GameMode
 {
@@ -19,6 +20,7 @@ private:
 	void processMouse(sf::Event& t_event)override;     // handles all mouse events
 
 	std::shared_ptr<Pawn> m_player;
+	RoomPlan m_roomPlan;
 };
 
 #endif // !GAMEPLAY_H

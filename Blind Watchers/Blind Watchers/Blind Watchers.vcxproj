@@ -21,7 +21,9 @@
   <ItemGroup>
     <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\CharacterSelection.cpp" />
+    <ClCompile Include="src\Door.cpp" />
     <ClCompile Include="src\Room.cpp" />
+    <ClCompile Include="src\RoomPlan.cpp" />
     <ClCompile Include="src\States.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameMode.cpp" />
@@ -38,7 +40,9 @@
     <ClInclude Include="include\AbstractState.h" />
     <ClInclude Include="include\Button.h" />
     <ClInclude Include="include\CharacterSelection.h" />
+    <ClInclude Include="include\Door.h" />
     <ClInclude Include="include\Room.h" />
+    <ClInclude Include="include\RoomPlan.h" />
     <ClInclude Include="include\States.h" />
     <ClInclude Include="include\DEBUG.h" />
     <ClInclude Include="include\Game.h" />

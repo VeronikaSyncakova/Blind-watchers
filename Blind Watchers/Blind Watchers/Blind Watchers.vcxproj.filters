@@ -70,6 +70,12 @@
     <Filter Include="Source Files\GamePlay\Pawn\StateMachine">
       <UniqueIdentifier>{3902dfa7-c2ca-4192-aebf-65455f628151}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GamePlay\Level">
+      <UniqueIdentifier>{c7e2074f-2b9b-4ae0-a34b-e8345c34e820}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GamePlay\Level">
+      <UniqueIdentifier>{15f0f76f-5a0f-4f5c-a183-e181636ca9cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Button.cpp">
@@ -112,7 +118,13 @@
       <Filter>Source Files\GamePlay\Pawn\StateMachine</Filter>
     </ClCompile>
     <ClCompile Include="src\Room.cpp">
-      <Filter>Source Files\GamePlay</Filter>
+      <Filter>Source Files\GamePlay\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Door.cpp">
+      <Filter>Source Files\GamePlay\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RoomPlan.cpp">
+      <Filter>Source Files\GamePlay\Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -285,7 +297,13 @@
       <Filter>Header Files\GamePlay\Pawn\StateMachine</Filter>
     </ClInclude>
     <ClInclude Include="include\Room.h">
-      <Filter>Header Files\GamePlay</Filter>
+      <Filter>Header Files\GamePlay\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Door.h">
+      <Filter>Header Files\GamePlay\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RoomPlan.h">
+      <Filter>Header Files\GamePlay\Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
