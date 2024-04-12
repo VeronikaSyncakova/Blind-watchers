@@ -68,6 +68,25 @@ void operator >> (const YAML::Node& t_node, npcData& t_npc)
 	}
 }
 
+//read the room data
+void operator >> (const YAML::Node& t_node, RoomData& t_room)
+{
+	t_room.m_roomType = t_node["type"].as<std::string>();
+	t_room.m_sizeX = t_node["size"]["x"].as<float>();
+	t_room.m_sizeY = t_node["size"]["y"].as<float>();
+	t_room.m_positionX = t_node["position"]["x"].as<float>();
+	t_room.m_positionY = t_node["position"]["y"].as<float>();
+}
+
+//read the door data
+void operator >> (const YAML::Node& t_node, DoorData& t_door)
+{
+	t_door.m_doorType = t_node["type"].as<std::string>();
+	t_door.m_positionX = t_node["position"]["x"].as<float>();
+	t_door.m_positionY = t_node["position"]["y"].as<float>();
+	t_door.m_rotation = t_node["rotation"].as<float>();
+}
+
 // read level data
 void operator >> (const YAML::Node& t_node, levelData& t_data)
 {
@@ -79,6 +98,22 @@ void operator >> (const YAML::Node& t_node, levelData& t_data)
 		npcNode[i] >> newNpc;
 
 		t_data.m_npcs.push_back(newNpc);
+	}
+
+	const YAML::Node& roomNode = t_node["rooms"].as<YAML::Node>();
+	for (unsigned i = 0; i < roomNode.size(); i++)
+	{
+		RoomData newRoom;
+		roomNode[i] >> newRoom;
+		t_data.m_rooms.push_back(newRoom);
+	}
+
+	const YAML::Node& doorNode = t_node["doors"].as<YAML::Node>();
+	for (unsigned i = 0; i < doorNode.size(); i++)
+	{
+		DoorData newDoor;
+		doorNode[i] >> newDoor;
+		t_data.m_doors.push_back(newDoor);
 	}
 }
 
