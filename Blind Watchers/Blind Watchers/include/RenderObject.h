@@ -76,6 +76,9 @@ public:
     sf::RenderWindow& getWindow() { return m_window; }
     void closeWindow() { m_window.close(); }
 
+    //updates camera view
+    void updateCamera(sf::Vector2f t_move);
+
     void loadsettings();
 
     // add a new item to be rendered
@@ -99,6 +102,8 @@ private:
     std::vector<std::weak_ptr< sf::Drawable >> m_assets;
 
     sf::RenderWindow m_window;
+    sf::View m_cameraView;
+    sf::View m_hudView;
 };
 
 #endif // !RENDER_OBJECT_H

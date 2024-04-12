@@ -60,4 +60,6 @@ void Player::moveBody(sf::Vector2f const& t_moveVector)
 		m_sprinting = false;
 	}
 	m_body->move(t_moveVector * ((m_moveSpeed + ExtraSpeed) * Game::deltaTime));
+
+	RenderObject::getInstance().updateCamera(t_moveVector);
 }
