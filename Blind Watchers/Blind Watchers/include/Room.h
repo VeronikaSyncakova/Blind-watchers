@@ -12,7 +12,8 @@ public:
 		BottomLeft
 	};
 
-	Room(RoomData& data);
+	Room();
+	void init(RoomData& data);
 
 private:
 	std::shared_ptr<sf::RectangleShape> m_roomWalls; //body of the room

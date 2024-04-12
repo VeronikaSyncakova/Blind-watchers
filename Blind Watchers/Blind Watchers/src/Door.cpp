@@ -1,6 +1,10 @@
 #include "Door.h"
 
-Door::Door(DoorData& data)
+Door::Door()
+{
+}
+
+void Door::init(DoorData& data)
 {
 	m_position = sf::Vector2f(data.m_positionX, data.m_positionY);
 	m_rotation = data.m_rotation;

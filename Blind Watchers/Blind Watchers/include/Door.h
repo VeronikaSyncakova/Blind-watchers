@@ -12,7 +12,8 @@ public:
 		North
 	};
 
-	Door(DoorData& data);
+	Door();
+	void init(DoorData& data);
 
 private:
 	sf::Vector2f m_position;

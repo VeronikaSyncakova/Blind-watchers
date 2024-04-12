@@ -113,6 +113,8 @@
     <Text Include="ASSETS\FONTS\License.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ASSETS\DATA\LEVEL\level1.yaml" />
+    <None Include="ASSETS\DATA\LEVEL\player.yaml" />
     <None Include="ASSETS\DATA\SETTINGS\settings.yaml" />
   </ItemGroup>
   <ItemGroup>

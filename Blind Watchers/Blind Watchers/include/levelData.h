@@ -11,26 +11,26 @@ struct npcData
 	float speed;
 };
 
+struct RoomData
+{
+	std::string m_roomType;
+	float m_sizeX;
+	float m_sizeY;
+	float m_positionX;
+	float m_positionY;
+};
+
+struct DoorData
+{
+	std::string m_doorType;
+	float m_positionX;
+	float m_positionY;
+	float m_rotation;
+};
+
 struct levelData
 {
 	std::vector<npcData> m_npcs;
 	std::vector<RoomData> m_rooms;
 	std::vector<DoorData> m_doors;
-};
-
-struct RoomData
-{
-	std::string m_roomType = "TopRight";
-	float m_sizeX = 800.f;
-	float m_sizeY = 500.f;
-	float m_positionX = 0.f;
-	float m_positionY = 0.f;
-};
-
-struct DoorData
-{
-	std::string m_doorType = "East";
-	float m_positionX = 30.f;
-	float m_positionY = 30.f;
-	float m_rotation = 0.f;
 };

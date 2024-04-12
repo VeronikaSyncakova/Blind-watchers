@@ -26,6 +26,8 @@ GamePlay::GamePlay()
 
 	m_pawns.push_back(player);
 
+	m_roomPlan.init(m_level);
+
 }
 
 /// <summary>

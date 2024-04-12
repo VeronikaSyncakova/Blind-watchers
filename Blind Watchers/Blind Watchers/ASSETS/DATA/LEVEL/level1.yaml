@@ -15,3 +15,29 @@ npc:
     speed: 3.2
     texture: unavailableCurrently.png
     pathingType: none
+rooms:
+  - type: TopRight
+    size: {x: 1700, y: 900}
+    position: {x: 1700, y: 0}
+  - type: TopLeft
+    size: {x: 1700, y: 900}
+    position: {x: 0, y: 0}
+  - type: BottomRight
+    size: {x: 1700, y: 900}
+    position: {x: 1700, y: 900}
+  - type: BottomLeft
+    size: {x: 1700, y: 900}
+    position: {x: 0, y: 900}
+doors:
+  - type: East
+    position: {x: 1700, y: 300}
+    rotation: 90
+  - type: West
+    position: {x: 1700, y: 1200}
+    rotation: 90
+  - type: South
+    position: {x: 400, y: 900}
+    rotation: 0
+  - type: North
+    position: {x: 2100, y: 900}
+    rotation: 0

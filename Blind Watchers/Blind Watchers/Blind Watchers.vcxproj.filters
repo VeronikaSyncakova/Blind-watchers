@@ -343,6 +343,12 @@
     <None Include="ASSETS\DATA\SETTINGS\settings.yaml">
       <Filter>Resource Files\DATA\SETTINGS</Filter>
     </None>
+    <None Include="ASSETS\DATA\LEVEL\level1.yaml">
+      <Filter>Resource Files\DATA</Filter>
+    </None>
+    <None Include="ASSETS\DATA\LEVEL\player.yaml">
+      <Filter>Resource Files\DATA</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\libyaml-cppmdd.lib">
