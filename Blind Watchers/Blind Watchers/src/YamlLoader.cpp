@@ -56,6 +56,16 @@ void operator >> (const YAML::Node& t_node, npcData& t_npc)
 
 	// npc speed
 	t_npc.speed = t_node["speed"].as<float>();
+
+	// patrol points
+	for (unsigned i = 0; i < t_node["paths"].size(); ++i)
+	{
+		sf::Vector2f newPoint;
+		newPoint.x = t_node["paths"][i]["point"]["x"].as<float>();
+		newPoint.y = t_node["paths"][i]["point"]["y"].as<float>();
+
+		t_npc.patrolPoints.push_back(newPoint);
+	}
 }
 
 // read level data

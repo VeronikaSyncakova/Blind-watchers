@@ -17,10 +17,13 @@ GamePlay::GamePlay()
 	{
 		std::shared_ptr<blindNpc> newNpc;
 		newNpc = std::make_shared<blindNpc>(m_level.m_npcs.at(i));
-		StateManager::changeCommand(State::Wander, newNpc);
 
 		m_pawns.push_back(newNpc);
 	}
+	StateManager::changeCommand(State::Wander, m_pawns.at(0));
+	StateManager::changeCommand(State::Patrol, m_pawns.at(1));
+
+
 	// loads player, done after so player would be on top
 	std::shared_ptr<Player> player;
 	player = std::make_shared<Player>();
