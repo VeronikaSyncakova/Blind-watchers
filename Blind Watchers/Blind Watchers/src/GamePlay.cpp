@@ -23,6 +23,8 @@ GamePlay::GamePlay()
 	StateManager::changeCommand(State::Wander, m_pawns.at(0));
 	StateManager::changeCommand(State::Patrol, m_pawns.at(1));
 
+	//creates room plan
+	RoomPlan::getInstance().init(m_level);
 
 	// loads player, done after so player would be on top
 	std::shared_ptr<Player> player;
@@ -30,8 +32,6 @@ GamePlay::GamePlay()
 	StateManager::changeCommand(State::PlayerInput, player);
 
 	m_pawns.push_back(player);
-
-	m_roomPlan.init(m_level);
 
 }
 

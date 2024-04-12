@@ -22,6 +22,8 @@ Player::Player()
 	m_sprintTimeLeft = m_maxSprintTime;
 
 	RenderObject::getInstance().add(m_body);
+
+	m_roomNumber = RoomPlan::getInstance().getRoomNumber(m_position);
 }
 
 Player::~Player()
@@ -60,7 +62,9 @@ void Player::moveBody(sf::Vector2f const& t_moveVector)
 	{
 		m_sprinting = false;
 	}
-	m_body->move(t_moveVector * ((m_moveSpeed + ExtraSpeed) * Game::deltaTime));
+	
+	if(!RoomPlan::getInstance().collides(*m_body, m_roomNumber))
+		m_body->move(t_moveVector * ((m_moveSpeed + ExtraSpeed) * Game::deltaTime));
 
 	RenderObject::getInstance().updateCamera(t_moveVector);
 }

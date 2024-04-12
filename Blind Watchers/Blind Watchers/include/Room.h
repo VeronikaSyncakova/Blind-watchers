@@ -14,6 +14,9 @@ public:
 
 	Room();
 	void init(RoomData& data);
+	bool inside(sf::Vector2f t_position);
+	bool checkCollision(sf::RectangleShape& t_object);
+	sf::Vector2f deflectVector(sf::RectangleShape& t_object);
 
 private:
 	std::shared_ptr<sf::RectangleShape> m_roomWalls; //body of the room

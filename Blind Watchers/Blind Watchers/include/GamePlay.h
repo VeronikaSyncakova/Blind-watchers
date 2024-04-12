@@ -25,7 +25,6 @@ private:
 
 	std::vector<std::shared_ptr<Pawn>> m_pawns;
 	levelData m_level;
-	RoomPlan m_roomPlan;
 };
 
 #endif // !GAMEPLAY_H
