@@ -16,6 +16,8 @@ public:
 	virtual void moveBody(sf::Vector2f const& t_moveVector) = 0;
 
 	bool getActive() { return m_active; }
+	sf::Vector2f getPosition() { return m_position; }
+	std::vector<sf::Vector2f> getPatrolPoints() { return m_patrolPoints; }
 private:
 
 protected:
@@ -26,4 +28,5 @@ protected:
 	std::shared_ptr<AbstractState> m_state;
 
 	bool m_active{ false };
+	std::vector<sf::Vector2f> m_patrolPoints;
 };

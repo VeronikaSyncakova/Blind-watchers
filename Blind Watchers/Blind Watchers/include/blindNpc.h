@@ -3,6 +3,10 @@
 #include "Pawn.h"
 #include "levelData.h"
 
+/// <summary>
+/// struct holding the visible part of the npc,
+/// will contain sprite also
+/// </summary>
 struct body
 {
 	void initialiseBody(npcData& t_data);
@@ -21,6 +25,8 @@ public:
 	// normalised vector that the pawn will move along
 	virtual void moveBody(sf::Vector2f const& t_moveVector)override;
 private:
+	void setPatrolPoints(npcData& t_characterData);
+
 	std::shared_ptr<body> m_body;
-	float m_maxSpeed{ 0.f };
+	float m_maxSpeed{ 100.f };
 };
