@@ -39,5 +39,5 @@ bool RoomPlan::collides(sf::RectangleShape& t_object, int& t_roomNum)
 
 sf::Vector2f RoomPlan::deflectVector(sf::RectangleShape& t_object, int& t_roomNum)
 {
-	return sf::Vector2f();
+	return m_rooms.at(t_roomNum).deflectVector(t_object);
 }

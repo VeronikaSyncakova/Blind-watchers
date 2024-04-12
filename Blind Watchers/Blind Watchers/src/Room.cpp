@@ -58,5 +58,22 @@ bool Room::checkCollision(sf::RectangleShape& t_object)
 
 sf::Vector2f Room::deflectVector(sf::RectangleShape& t_object)
 {
-	return sf::Vector2f();
+	sf::Vector2f pos = t_object.getPosition();
+	sf::Vector2f size = t_object.getSize();
+	if (m_position.x >= pos.x)//left
+	{
+		return sf::Vector2f(1.f,0.f);
+	}
+	else if (m_position.x + m_roomSize.x <= pos.x + size.x)//right
+	{
+		return sf::Vector2f(-1.f, 0.f);
+	}
+	else if (m_position.y >= pos.y)//up
+	{
+		return sf::Vector2f(0.f, 1.f);
+	}
+	else if (m_position.y + m_roomSize.y <= pos.y + size.y)//down
+	{
+		return sf::Vector2f(0.f, -1.f);
+	}
 }

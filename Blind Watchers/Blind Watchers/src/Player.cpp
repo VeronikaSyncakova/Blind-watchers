@@ -63,8 +63,16 @@ void Player::moveBody(sf::Vector2f const& t_moveVector)
 		m_sprinting = false;
 	}
 	
-	if(!RoomPlan::getInstance().collides(*m_body, m_roomNumber))
+	//collision with room walls
+	if (RoomPlan::getInstance().collides(*m_body, m_roomNumber))
+	{
+		sf::Vector2f deflectVector = RoomPlan::getInstance().deflectVector(*m_body, m_roomNumber);
+		m_body->move( deflectVector* ((m_moveSpeed + ExtraSpeed) * Game::deltaTime));
+		RenderObject::getInstance().updateCamera(deflectVector);
+	}
+	else
+	{
 		m_body->move(t_moveVector * ((m_moveSpeed + ExtraSpeed) * Game::deltaTime));
-
-	RenderObject::getInstance().updateCamera(t_moveVector);
+		RenderObject::getInstance().updateCamera(t_moveVector);
+	}
 }

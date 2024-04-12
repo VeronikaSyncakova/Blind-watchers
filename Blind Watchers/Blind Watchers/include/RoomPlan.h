@@ -15,8 +15,8 @@ public:
 
 	void init(levelData& t_data);
 	int getRoomNumber(sf::Vector2f t_position); //returns in which room the position (object) is
-	bool collides(sf::RectangleShape& t_object, int& t_roomNum);
-	sf::Vector2f deflectVector(sf::RectangleShape& t_object, int& t_roomNum);
+	bool collides(sf::RectangleShape& t_object, int& t_roomNum); //collision check with room walls
+	sf::Vector2f deflectVector(sf::RectangleShape& t_object, int& t_roomNum); //returns deflect vector for the colliding object
 
 	//deleted functions
 	RoomPlan(RoomPlan const&) = delete;
