@@ -11,6 +11,7 @@ struct body
 {
 	void initialiseBody(npcData& t_data);
 	void moveBody(sf::Vector2f const& t_newPos);
+	sf::RectangleShape getBody();
 	std::shared_ptr<sf::RectangleShape> m_rectangle;
 };
 

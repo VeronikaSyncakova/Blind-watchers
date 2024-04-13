@@ -13,6 +13,7 @@ blindNpc::blindNpc(npcData& t_characterData)
 	m_position = t_characterData.position;
 
 	setPatrolPoints(t_characterData);
+	m_roomNumber = RoomPlan::getInstance().getRoomNumber(m_position);
 }
 
 blindNpc::~blindNpc()
@@ -25,7 +26,15 @@ void blindNpc::update()
 
 void blindNpc::moveBody(sf::Vector2f const& t_moveVector)
 {
-	m_position += t_moveVector * m_maxSpeed * Game::deltaTime;
+	if (RoomPlan::getInstance().collides(m_body->getBody(), m_roomNumber))
+	{
+		sf::Vector2f deflection = RoomPlan::getInstance().deflectVector(m_body->getBody(), m_roomNumber);
+		m_position += deflection * m_maxSpeed * Game::deltaTime;
+	}
+	else
+	{
+		m_position += t_moveVector * m_maxSpeed * Game::deltaTime;
+	}
 	m_body->moveBody(m_position);
 }
 
@@ -48,6 +57,7 @@ void body::initialiseBody(npcData& t_data)
 	m_rectangle->setPosition(t_data.position);
 
 	m_rectangle->setSize(t_data.size);
+	m_rectangle->setOrigin(t_data.size / 2.f);
 
 	RenderObject::getInstance().add(m_rectangle);
 }
@@ -55,4 +65,9 @@ void body::initialiseBody(npcData& t_data)
 void body::moveBody(sf::Vector2f const& t_newPos)
 {
 	m_rectangle->setPosition(t_newPos);
+}
+
+sf::RectangleShape body::getBody()
+{
+	return *m_rectangle;
 }
