@@ -129,6 +129,12 @@
     <ClCompile Include="src\RoomPlan.cpp">
       <Filter>Source Files\GamePlay\Level</Filter>
     </ClCompile>
+    <ClCompile Include="src\Medication.cpp">
+      <Filter>Source Files\GamePlay\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="include\AnimatedSprite.cpp">
+      <Filter>Source Files\Gloabals</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameMode.h">
@@ -315,6 +321,12 @@
       <Filter>Header Files\GamePlay\Level</Filter>
     </ClInclude>
     <ClInclude Include="include\simpleMaths.h">
+      <Filter>Header Files\Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Medication.h">
+      <Filter>Header Files\GamePlay\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AnimatedSprite.h">
       <Filter>Header Files\Globals</Filter>
     </ClInclude>
   </ItemGroup>

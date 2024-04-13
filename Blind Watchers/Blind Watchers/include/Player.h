@@ -11,6 +11,7 @@ public:
 	void update()override;
 
 	void moveBody(sf::Vector2f const& t_moveVector)override;
+	virtual sf::FloatRect getBounds()override { return m_body->getGlobalBounds(); }
 private:
 	std::shared_ptr<sf::RectangleShape> m_body;
 

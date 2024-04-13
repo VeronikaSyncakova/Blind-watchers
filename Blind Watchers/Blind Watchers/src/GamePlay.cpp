@@ -33,6 +33,7 @@ GamePlay::GamePlay()
 
 	m_roomPlan.init(m_level);
 
+	m_meds.initialise(m_level.m_meds);
 }
 
 /// <summary>
@@ -81,10 +82,15 @@ void GamePlay::processKeys(sf::Event& t_event)
 /// <param name="t_deltaTime">delta time passed from game</param>
 void GamePlay::update()
 {
+	m_meds.update();
 	for(std::shared_ptr<Pawn>& p : m_pawns)
 	{
 		p->update();
 		StateManager::update(p);
+		if (typeid(*p) == typeid(Player))
+		{
+			m_meds.updatePlayerPosition(p->getBounds());
+		}
 	}
 }
 

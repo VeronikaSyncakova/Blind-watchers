@@ -5,6 +5,7 @@
 #include "Pawn.h"
 #include "levelData.h"
 #include "RoomPlan.h"
+#include "Medication.h"
 
 
 class GamePlay : public GameMode
@@ -26,6 +27,7 @@ private:
 	std::vector<std::shared_ptr<Pawn>> m_pawns;
 	levelData m_level;
 	RoomPlan m_roomPlan;
+	Medication m_meds;
 };
 
 #endif // !GAMEPLAY_H
