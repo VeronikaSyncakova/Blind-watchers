@@ -15,6 +15,7 @@ Player::Player()
 	m_position = { 100.f,100.f };
 	m_body->setPosition(m_position);
 	m_body->setSize(tempData.m_size);
+	m_body->setOrigin(tempData.m_size / 2.f);
 	m_body->setFillColor(tempData.m_color);
 	m_moveSpeed = tempData.m_speed;
 	m_sprintSpeed = tempData.m_sprintSpeed;
@@ -63,9 +64,9 @@ void Player::moveBody(sf::Vector2f const& t_moveVector)
 		m_sprinting = false;
 	}
 	
-	//collision with room walls
-	if (RoomPlan::getInstance().collides(*m_body, m_roomNumber))
-	{
+	//collision with room walls and doors
+	if (RoomPlan::getInstance().collides(*m_body, m_roomNumber) && !RoomPlan::getInstance().usesDoor(*m_body, m_roomNumber))
+	{//collision with walls 
 		sf::Vector2f deflectVector = RoomPlan::getInstance().deflectVector(*m_body, m_roomNumber);
 		m_body->move( deflectVector* ((m_moveSpeed + ExtraSpeed) * Game::deltaTime));
 		RenderObject::getInstance().updateCamera(deflectVector);
@@ -74,5 +75,7 @@ void Player::moveBody(sf::Vector2f const& t_moveVector)
 	{
 		m_body->move(t_moveVector * ((m_moveSpeed + ExtraSpeed) * Game::deltaTime));
 		RenderObject::getInstance().updateCamera(t_moveVector);
+		if (RoomPlan::getInstance().usesDoor(*m_body, m_roomNumber)) //using doors
+			m_roomNumber = RoomPlan::getInstance().getRoomNumber(m_body->getPosition()); //update room number
 	}
 }

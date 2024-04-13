@@ -6,18 +6,29 @@ RoomPlan::RoomPlan()
 
 void RoomPlan::init(levelData& t_data)
 {
+	//temporary door vector where I load the door data
+	std::vector<Door> doors;
+	for (unsigned i = 0; i < t_data.m_doors.size(); i++)
+	{
+		Door newDoor;
+		newDoor.init(t_data.m_doors.at(i));
+		doors.push_back(newDoor);
+	}
+
+	//loading the rooms and creating doors
 	for (unsigned i = 0; i < t_data.m_rooms.size(); i++)
 	{
 		Room newRoom;
 		newRoom.init(t_data.m_rooms.at(i));
 		m_rooms[i]=newRoom;
+		//assigning doors to rooms
+		for (Door door : doors)
+		{
+			if (m_rooms[i].inside(door.getPosition())) //check if the door is in the room
+				m_doors[i].push_back(door);
+		}
 	}
-	for (unsigned i = 0; i < t_data.m_doors.size(); i++)
-	{
-		Door newDoor;
-		newDoor.init(t_data.m_doors.at(i));
-		m_doors.push_back(newDoor);
-	}
+	
 }
 
 int RoomPlan::getRoomNumber(sf::Vector2f t_position)
@@ -40,4 +51,14 @@ bool RoomPlan::collides(sf::RectangleShape& t_object, int& t_roomNum)
 sf::Vector2f RoomPlan::deflectVector(sf::RectangleShape& t_object, int& t_roomNum)
 {
 	return m_rooms.at(t_roomNum).deflectVector(t_object);
+}
+
+bool RoomPlan::usesDoor(sf::RectangleShape& t_object, int& t_roomNum)
+{
+	for (Door& door : m_doors[t_roomNum])
+	{
+		if (door.collides(t_object))
+			return true;
+	}
+	return false;
 }
