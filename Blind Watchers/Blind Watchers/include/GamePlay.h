@@ -6,6 +6,7 @@
 #include "levelData.h"
 #include "RoomPlan.h"
 #include "Medication.h"
+#include "statusBar.h"
 
 
 class GamePlay : public GameMode
@@ -28,6 +29,8 @@ private:
 	levelData m_level;
 	RoomPlan m_roomPlan;
 	Medication m_meds;
+
+	std::shared_ptr<bar> m_medProgress;
 };
 
 #endif // !GAMEPLAY_H

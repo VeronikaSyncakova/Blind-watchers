@@ -34,6 +34,8 @@ GamePlay::GamePlay()
 	m_roomPlan.init(m_level);
 
 	m_meds.initialise(m_level.m_meds);
+
+	resetLevel();
 }
 
 /// <summary>
@@ -48,6 +50,10 @@ GamePlay::~GamePlay()
 /// </summary>
 void GamePlay::resetLevel()
 {
+	barData newBar;
+	newBar.position = sf::Vector2f(20.f, 50.f);
+	newBar.size= sf::Vector2f(300.f, 10.f);
+	m_medProgress = StatusBar::addNewBar(FillType::FillUp, newBar);
 }
 
 /// <summary>
@@ -73,7 +79,15 @@ void GamePlay::events(sf::Event& t_event)
 /// <param name="t_event">use this for the key press</param>
 void GamePlay::processKeys(sf::Event& t_event)
 {
-
+	if (sf::Keyboard::F == t_event.key.code)
+	{
+		if (m_meds.checkInteract())
+		{
+			float newPercent = 1.f / m_level.m_meds.size();
+			DEBUG_MSG(newPercent);
+			m_medProgress->changePercent(newPercent);
+		}
+	}
 }
 
 /// <summary>
@@ -91,6 +105,10 @@ void GamePlay::update()
 		{
 			m_meds.updatePlayerPosition(p->getBounds());
 		}
+	}
+	if (m_medProgress->checkEmpty())
+	{
+		DEBUG_MSG("READY");
 	}
 }
 

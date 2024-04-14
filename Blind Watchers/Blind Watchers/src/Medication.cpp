@@ -10,6 +10,7 @@ Medication::~Medication()
 {
 }
 
+// setup sprites, animations, and bounding boxes for the meds
 void Medication::initialise(std::vector<MedData>& t_medData)
 {
 	if (!m_pressButtonT.loadFromFile("ASSETS\\IMAGES\\Buttons\\FButtonAnim.png"))
@@ -79,11 +80,13 @@ void Medication::initialise(std::vector<MedData>& t_medData)
 	m_pressButton->setActive(false);
 }
 
+// update the animations
 void Medication::update()
 {
 	m_pressButton->update();
 }
 
+// set the new player positions, used for collision checking
 void Medication::updatePlayerPosition(sf::FloatRect t_playerBounds)
 {
 	bool inMeds = false;
@@ -98,6 +101,10 @@ void Medication::updatePlayerPosition(sf::FloatRect t_playerBounds)
 
 			m_meds.at(i).m_inBounds = true;
 		}
+		else
+		{
+			m_meds.at(i).m_inBounds = false;
+		}
 	}
 	if (!inMeds)
 	{
@@ -105,13 +112,17 @@ void Medication::updatePlayerPosition(sf::FloatRect t_playerBounds)
 	}
 }
 
-void Medication::checkInteract()
+// check if the player picked up an item
+bool Medication::checkInteract()
 {
 	for (unsigned int i = 0; i < m_meds.size(); i++)
 	{
 		if (m_meds.at(i).m_inBounds)
 		{
 			DEBUG_MSG("picked up item");
+			m_meds.at(i).uninitialise();
+			return true;
 		}
 	}
+	return false;
 }

@@ -8,6 +8,7 @@ struct medBody
 {
 	sf::Vector2f pos() { return sprite->getPosition(); }
 	sf::FloatRect bounds() { return interactionBounds->getGlobalBounds(); }
+	void uninitialise() { sprite->setPosition(-100000.f, -100000.f); interactionBounds->setPosition(-10000.f, -1000000.f); m_inBounds = false; }
 
 	std::shared_ptr<sf::Sprite> sprite;
 
@@ -24,7 +25,7 @@ public:
 	void initialise(std::vector<MedData>& t_medData);
 	void update();
 	void updatePlayerPosition(sf::FloatRect t_playerBounds);
-	void checkInteract();
+	bool checkInteract();
 private:
 	std::vector<medBody> m_meds;
 	sf::Texture m_medTexture;

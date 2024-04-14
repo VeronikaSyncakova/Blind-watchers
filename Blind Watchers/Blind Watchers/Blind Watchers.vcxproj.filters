@@ -135,6 +135,9 @@
     <ClCompile Include="include\AnimatedSprite.cpp">
       <Filter>Source Files\Gloabals</Filter>
     </ClCompile>
+    <ClCompile Include="src\statusBar.cpp">
+      <Filter>Source Files\GamePlay\Level</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameMode.h">
@@ -328,6 +331,9 @@
     </ClInclude>
     <ClInclude Include="include\AnimatedSprite.h">
       <Filter>Header Files\Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="include\statusBar.h">
+      <Filter>Header Files\GamePlay\Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
