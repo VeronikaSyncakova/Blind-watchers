@@ -49,3 +49,10 @@ doors:
   - type: North
     position: {x: 2100, y: 900}
     rotation: 0
+medication:
+  - type: Normal
+    position: {x: 300, y: 100}
+  - type: Normal
+    position: {x: 600, y: 100}
+  - type: Normal
+    position: {x: 550, y: 400}

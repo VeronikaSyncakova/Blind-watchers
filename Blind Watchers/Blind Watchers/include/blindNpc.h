@@ -25,6 +25,8 @@ public:
 
 	// normalised vector that the pawn will move along
 	virtual void moveBody(sf::Vector2f const& t_moveVector)override;
+
+	virtual sf::FloatRect getBounds()override { return m_body->m_rectangle->getGlobalBounds(); }
 private:
 	void setPatrolPoints(npcData& t_characterData);
 

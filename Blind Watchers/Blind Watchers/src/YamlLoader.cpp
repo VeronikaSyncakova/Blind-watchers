@@ -87,6 +87,14 @@ void operator >> (const YAML::Node& t_node, DoorData& t_door)
 	t_door.m_rotation = t_node["rotation"].as<float>();
 }
 
+//read the Medication data
+void operator >> (const YAML::Node& t_node, MedData& t_med)
+{
+	t_med.type = t_node["type"].as<std::string>();
+	t_med.position.x = t_node["position"]["x"].as<float>();
+	t_med.position.y = t_node["position"]["y"].as<float>();
+}
+
 // read level data
 void operator >> (const YAML::Node& t_node, levelData& t_data)
 {
@@ -114,6 +122,14 @@ void operator >> (const YAML::Node& t_node, levelData& t_data)
 		DoorData newDoor;
 		doorNode[i] >> newDoor;
 		t_data.m_doors.push_back(newDoor);
+	}
+
+	const YAML::Node& medNode = t_node["medication"].as<YAML::Node>();
+	for (unsigned i = 0; i < medNode.size(); i++)
+	{
+		MedData newMed;
+		medNode[i] >> newMed;
+		t_data.m_meds.push_back(newMed);
 	}
 }
 

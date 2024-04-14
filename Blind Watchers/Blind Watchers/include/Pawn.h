@@ -17,6 +17,7 @@ public:
 	virtual void moveBody(sf::Vector2f const& t_moveVector) = 0;
 
 	bool getActive() { return m_active; }
+	virtual sf::FloatRect getBounds() = 0;
 	sf::Vector2f getPosition() { return m_position; }
 	std::vector<sf::Vector2f> getPatrolPoints() { return m_patrolPoints; }
 private:

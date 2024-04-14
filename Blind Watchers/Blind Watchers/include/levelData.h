@@ -30,9 +30,16 @@ struct DoorData
 	float m_rotation;
 };
 
+struct MedData
+{
+	std::string type;
+	sf::Vector2f position;
+};
+
 struct levelData
 {
 	std::vector<npcData> m_npcs;
 	std::vector<RoomData> m_rooms;
 	std::vector<DoorData> m_doors;
+	std::vector<MedData> m_meds;
 };

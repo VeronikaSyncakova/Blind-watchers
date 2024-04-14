@@ -131,6 +131,17 @@
     </ClCompile>
     <ClCompile Include="src\LevelEditor.cpp">
       <Filter>Source Files\GameMode</Filter>
+    <ClCompile Include="src\Medication.cpp">
+      <Filter>Source Files\GamePlay\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="include\AnimatedSprite.cpp">
+      <Filter>Source Files\Gloabals</Filter>
+    </ClCompile>
+    <ClCompile Include="src\statusBar.cpp">
+      <Filter>Source Files\GamePlay\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Particles.cpp">
+      <Filter>Source Files\GamePlay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -322,6 +333,17 @@
     </ClInclude>
     <ClInclude Include="include\LevelEditor.h">
       <Filter>Header Files\GameMode</Filter>
+    <ClInclude Include="include\Medication.h">
+      <Filter>Header Files\GamePlay\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AnimatedSprite.h">
+      <Filter>Header Files\Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="include\statusBar.h">
+      <Filter>Header Files\GamePlay\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Particles.h">
+      <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 #include "YamlLoader.h"
 #include "Player.h"
 #include "blindNpc.h"
+#include "Particles.h"
 
 /// <summary>
 /// default constructor
@@ -32,7 +33,9 @@ GamePlay::GamePlay()
 	StateManager::changeCommand(State::PlayerInput, player);
 
 	m_pawns.push_back(player);
-
+	m_meds.initialise(m_level.m_meds);
+	
+	resetLevel();
 }
 
 /// <summary>
@@ -47,6 +50,10 @@ GamePlay::~GamePlay()
 /// </summary>
 void GamePlay::resetLevel()
 {
+	barData newBar;
+	newBar.position = sf::Vector2f(20.f, 50.f);
+	newBar.size= sf::Vector2f(300.f, 10.f);
+	m_medProgress = StatusBar::addNewBar(FillType::FillUp, newBar);
 }
 
 /// <summary>
@@ -72,7 +79,15 @@ void GamePlay::events(sf::Event& t_event)
 /// <param name="t_event">use this for the key press</param>
 void GamePlay::processKeys(sf::Event& t_event)
 {
-
+	if (sf::Keyboard::F == t_event.key.code)
+	{
+		if (m_meds.checkInteract())
+		{
+			float newPercent = 1.f / m_level.m_meds.size();
+			DEBUG_MSG(newPercent);
+			m_medProgress->changePercent(newPercent);
+		}
+	}
 }
 
 /// <summary>
@@ -81,10 +96,20 @@ void GamePlay::processKeys(sf::Event& t_event)
 /// <param name="t_deltaTime">delta time passed from game</param>
 void GamePlay::update()
 {
+	ParticleSystem::getInstance().update();
+	m_meds.update();
 	for(std::shared_ptr<Pawn>& p : m_pawns)
 	{
 		p->update();
 		StateManager::update(p);
+		if (typeid(*p) == typeid(Player))
+		{
+			m_meds.updatePlayerPosition(p->getBounds());
+		}
+	}
+	if (m_medProgress->checkEmpty())
+	{
+		DEBUG_MSG("READY");
 	}
 }
 

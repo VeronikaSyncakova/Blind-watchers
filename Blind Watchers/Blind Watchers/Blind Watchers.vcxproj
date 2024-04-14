@@ -19,11 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="include\AnimatedSprite.cpp" />
     <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\CharacterSelection.cpp" />
     <ClCompile Include="src\Door.cpp" />
     <ClCompile Include="src\blindNpc.cpp" />
     <ClCompile Include="src\LevelEditor.cpp" />
+    <ClCompile Include="src\Medication.cpp" />
+    <ClCompile Include="src\Particles.cpp" />
     <ClCompile Include="src\Room.cpp" />
     <ClCompile Include="src\RoomPlan.cpp" />
     <ClCompile Include="src\States.cpp" />
@@ -36,16 +39,20 @@
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\RenderObject.cpp" />
     <ClCompile Include="src\Settings.cpp" />
+    <ClCompile Include="src\statusBar.cpp" />
     <ClCompile Include="src\YamlLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\AbstractState.h" />
+    <ClInclude Include="include\AnimatedSprite.h" />
     <ClInclude Include="include\Button.h" />
     <ClInclude Include="include\CharacterSelection.h" />
     <ClInclude Include="include\Door.h" />
     <ClInclude Include="include\blindNpc.h" />
     <ClInclude Include="include\levelData.h" />
     <ClInclude Include="include\LevelEditor.h" />
+    <ClInclude Include="include\Medication.h" />
+    <ClInclude Include="include\Particles.h" />
     <ClInclude Include="include\Room.h" />
     <ClInclude Include="include\simpleMaths.h" />
     <ClInclude Include="include\RoomPlan.h" />
@@ -64,6 +71,7 @@
     <ClInclude Include="include\Settings.h" />
     <ClInclude Include="include\SettingsStorage.h" />
     <ClInclude Include="include\SimpleButton.h" />
+    <ClInclude Include="include\statusBar.h" />
     <ClInclude Include="include\yaml-cpp\anchor.h" />
     <ClInclude Include="include\yaml-cpp\binary.h" />
     <ClInclude Include="include\yaml-cpp\contrib\anchordict.h" />
