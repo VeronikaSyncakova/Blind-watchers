@@ -3,7 +3,7 @@
 LevelEditor::LevelEditor()
 {
 	loadData();
-	RenderObject::getInstance().zoomCamera(2.f);
+	zoomOut();
 }
 
 LevelEditor::~LevelEditor()
@@ -28,7 +28,49 @@ void LevelEditor::events(sf::Event& t_event)
 
 void LevelEditor::update()
 {
-	buttonCollision();
+	switch (m_viewType)
+	{
+	case ViewType::ZoomOut:
+		if (m_zoomAmount < 2.f)
+		{
+			m_zoomAmount += 0.01f;
+			RenderObject::getInstance().zoomCamera(m_zoomAmount, sf::Vector2f(1700.f,900.f));
+		}
+		break;
+	case ViewType::ZoomIn:
+		if (m_zoomAmount > 1.f)
+		{
+			m_zoomAmount -= 0.01f;
+			RenderObject::getInstance().zoomCamera(m_zoomAmount, m_selectedRoomCenter);
+		}
+		buttonCollision();
+		break;
+	default:
+		break;
+	}
+	
+}
+
+void LevelEditor::zoomIn(int& t_roomNum)
+{
+	m_viewType = ViewType::ZoomIn;
+	for (unsigned int i = 0; i < m_pawnButtons.size(); i++)
+	{
+		m_pawnButtons.at(i).m_bounds->setOutlineColor(sf::Color::White);
+		m_pawnButtons.at(i).m_bounds->setFillColor(sf::Color(255, 255, 255, 80));
+	}
+	RoomPlan::getInstance().hovering(-1);
+	m_selectedRoomCenter= RoomPlan::getInstance().getRoomCenter(t_roomNum);
+}
+
+void LevelEditor::zoomOut()
+{
+	m_viewType = ViewType::ZoomOut;
+	for (unsigned int i = 0; i < m_pawnButtons.size(); i++)
+	{
+		m_pawnButtons.at(i).m_bounds->setOutlineColor(sf::Color::Transparent);
+		m_pawnButtons.at(i).m_bounds->setFillColor(sf::Color::Transparent);
+	}
 }
 
 void LevelEditor::processKeys(sf::Event& t_event)
@@ -58,6 +100,9 @@ void LevelEditor::processMouse(sf::Event& t_event)
 	if (sf::Event::MouseMoved == t_event.type)
 	{
 		findMousePos(t_event);
+		findMousePosView(t_event);
+		if(m_viewType==ViewType::ZoomOut)
+			RoomPlan::getInstance().hovering(RoomPlan::getInstance().getRoomNumber(m_mousePosView));
 	}
 	else if (sf::Event::MouseButtonPressed == t_event.type)
 	{
@@ -65,24 +110,28 @@ void LevelEditor::processMouse(sf::Event& t_event)
 	}
 	else if (sf::Event::MouseButtonReleased == t_event.type)
 	{
-		bool buttonPressed = false;
-		for (unsigned int i = 0; i < m_pawnButtons.size(); i++)
-		{
-			// set the outline to yellow if selected
-			if (m_pawnButtons.at(i).m_highlighted)
-			{
-				m_pawnButtons.at(i).m_bounds->setOutlineColor(sf::Color::Yellow);
-				buttonPressed = true;
-			}
-			else
-			{
-				m_pawnButtons.at(i).m_bounds->setOutlineColor(sf::Color::White);
-			}
-		}
 		
-		if (!buttonPressed)
+		if (m_viewType==ViewType::ZoomOut)
 		{
-			RoomPlan::getInstance().selectedRoom(RoomPlan::getInstance().getRoomNumber(m_mousePos));
+			//RoomPlan::getInstance().selectedRoom(RoomPlan::getInstance().getRoomNumber(m_mousePosView));
+			int roomNum = RoomPlan::getInstance().getRoomNumber(m_mousePosView);
+			zoomIn(roomNum);
+		}
+		else if(m_viewType == ViewType::ZoomIn)
+		{
+			for (unsigned int i = 0; i < m_pawnButtons.size(); i++)
+			{
+				// set the outline to yellow if selected
+				if (m_pawnButtons.at(i).m_highlighted)
+				{
+					m_pawnButtons.at(i).m_bounds->setOutlineColor(sf::Color::Yellow);
+					buttonAction(i);
+				}
+				else
+				{
+					m_pawnButtons.at(i).m_bounds->setOutlineColor(sf::Color::White);
+				}
+			}
 		}
 
 	}
@@ -113,28 +162,27 @@ void LevelEditor::loadData()
 
 	m_pawns.push_back(player);
 
+	//button size and spacing
+	float width = 100.f;
+	float height = 200.f / (PAWN_BUTTONS);
+	float spacing = (SCREEN_HEIGHT / 2.f) / (PAWN_BUTTONS + 1);
+
 	for (int i=0; i<PAWN_BUTTONS; i++)
 	{
 		std::shared_ptr<sf::RectangleShape> pawnBox;
 		pawnBox = std::make_shared<sf::RectangleShape>();
 
-		float width = 100.f;
-		float height = 200.f/PAWN_BUTTONS;
 		pawnBox->setSize(sf::Vector2f(width, height));
-
-		float spacing = (SCREEN_HEIGHT/3.f) / (PAWN_BUTTONS + 1);
 		pawnBox->setPosition(width,(i + 1) * spacing);
-
 		pawnBox->setOrigin(pawnBox->getGlobalBounds().width / 2.f, pawnBox->getGlobalBounds().height / 2.f);
 		pawnBox->setFillColor(sf::Color(255, 255, 255, 80));
 		pawnBox->setOutlineColor(sf::Color::White);
-		pawnBox->setOutlineThickness(1u);
+		pawnBox->setOutlineThickness(2u);
 
 		RenderObject::getInstance().addHUD(pawnBox);
 
 		pawnButton newPawnButton;
 		newPawnButton.m_bounds = pawnBox;
-		//newPawnButton.m_pawn = ;
 		m_pawnButtons.push_back(newPawnButton);
 	}
 	m_pawnButtons.at(0).m_pawn = std::make_shared<Player>();
@@ -188,5 +236,25 @@ void LevelEditor::buttonCollision()
 		// set highlight based off highlight percentage
 		int highlight = static_cast<int>(pawnBox.m_highlightAmt * 190 + 30);
 		box->setFillColor(sf::Color(255, 255, 255, highlight));
+	}
+}
+
+void LevelEditor::buttonAction(int t_buttonNum)
+{
+	if (t_buttonNum == 0)
+	{
+
+	}
+	else if (t_buttonNum == 1)
+	{
+
+	}
+	else if (t_buttonNum == 2)
+	{
+
+	}
+	else if (t_buttonNum == 3)
+	{
+		zoomOut();
 	}
 }

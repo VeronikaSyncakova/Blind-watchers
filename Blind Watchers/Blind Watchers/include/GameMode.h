@@ -24,12 +24,20 @@ private:
 
 protected:
 	sf::Vector2f m_mousePos{ 0.0f,0.0f }; // the mouses position
+	sf::Vector2f m_mousePosView{ 0.0f,0.0f }; // the mouses position
 
 	// this just sets the mouse position based off the movement
 	inline void findMousePos(sf::Event& t_event) { 
 		m_mousePos = RenderObject::getInstance().getWindow().mapPixelToCoords(sf::Vector2i(
 			static_cast<int>(t_event.mouseMove.x),
 			static_cast<int>(t_event.mouseMove.y)));
+	}
+
+	inline void findMousePosView(sf::Event& t_event) {
+		m_mousePosView = RenderObject::getInstance().getWindow().mapPixelToCoords(sf::Vector2i(
+			static_cast<int>(t_event.mouseMove.x),
+			static_cast<int>(t_event.mouseMove.y)), 
+			RenderObject::getInstance().getCameraView());
 	}
 
 };

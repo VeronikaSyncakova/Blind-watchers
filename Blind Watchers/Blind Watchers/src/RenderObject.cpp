@@ -36,9 +36,20 @@ void RenderObject::updateCamera(sf::Vector2f t_move)
 	m_cameraView.move(t_move);
 	m_window.setView(m_cameraView);
 }
-void RenderObject::zoomCamera(float t_zoom)
+
+void RenderObject::zoomCamera(float t_zoom, sf::Vector2f& t_centerPoint)
 {
-	m_cameraView.zoom(t_zoom);
+	/*
+	sf::Vector2f currentCenter = m_cameraView.getCenter();
+	if (t_centerPoint != currentCenter)
+	{
+		sf::Vector2f centeringVec = displacement(m_cameraView.getCenter(), t_centerPoint);
+		m_cameraView.setCenter(currentCenter.x+centeringVec.x,currentCenter.y+centeringVec.y);
+	}
+	*/
+	m_cameraView.setCenter(t_centerPoint);
+	m_cameraView.setSize(sf::Vector2f(SCREEN_WIDTH,SCREEN_HEIGHT)* t_zoom);
+	//m_cameraView.zoom(t_zoom);
 }
 void RenderObject::loadsettings()
 {

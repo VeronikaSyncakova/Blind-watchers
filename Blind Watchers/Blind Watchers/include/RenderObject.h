@@ -75,11 +75,12 @@ public:
 
     sf::RenderWindow& getWindow() { return m_window; }
     void closeWindow() { m_window.close(); }
+    sf::View& getCameraView() { return m_cameraView; }
 
     //updates camera view
     void updateCamera(sf::Vector2f t_move);
     //zoom camera
-    void zoomCamera(float t_zoom);
+    void zoomCamera(float t_zoom, sf::Vector2f& t_centerPoint);
 
     void loadsettings();
 

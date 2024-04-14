@@ -14,6 +14,13 @@ struct pawnButton
 	std::shared_ptr<Pawn> m_pawn;
 };
 
+struct button
+{
+	std::shared_ptr<sf::RectangleShape> m_bounds;
+	float m_highlightAmt = 0.0f;
+	bool m_highlighted = false;
+};
+
 class LevelEditor : public GameMode
 {
 public:
@@ -24,6 +31,14 @@ public:
 	virtual void events(sf::Event& t_event) override;           // used to handle all new events outside key presses
 	virtual void update() override;         // all update events
 
+	enum class ViewType {
+		ZoomIn,
+		ZoomOut
+	};
+
+	void zoomIn(int& t_roomNum);
+	void zoomOut();
+
 private:
 	virtual void processKeys(sf::Event& t_event) override;      // handles all key inputs
 	virtual void processMouse(sf::Event& t_event) override;     // handles all mouse events
@@ -32,10 +47,13 @@ private:
 	void saveData();
 
 	void buttonCollision();
+	void buttonAction(int t_buttonNum);
 
 	std::vector<std::shared_ptr<Pawn>> m_pawns;
 	levelData m_level;
 	std::vector<pawnButton> m_pawnButtons;
-	const int PAWN_BUTTONS{ 3 };
-
+	const int PAWN_BUTTONS{ 4 };
+	ViewType m_viewType;
+	float m_zoomAmount{ 1.f };
+	sf::Vector2f m_selectedRoomCenter;
 };

@@ -82,3 +82,13 @@ void Room::changeHighlite(sf::Color t_color)
 {
 	m_roomWalls->setOutlineColor(t_color);
 }
+
+void Room::changeColor(sf::Color t_color)
+{
+	m_roomWalls->setFillColor(t_color);
+}
+
+sf::Vector2f Room::getCenter()
+{
+	return sf::Vector2f(m_position.x+(m_roomSize.x/2.f), m_position.y+(m_roomSize.y/2.f));
+}

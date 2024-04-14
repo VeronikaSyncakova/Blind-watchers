@@ -18,6 +18,8 @@ public:
 	bool checkCollision(sf::RectangleShape& t_object); //collision check with the walls
 	sf::Vector2f deflectVector(sf::RectangleShape& t_object); //returns deflect vector for the colliding object
 	void changeHighlite(sf::Color t_color);
+	void changeColor(sf::Color t_color);
+	sf::Vector2f getCenter();
 
 private:
 	std::shared_ptr<sf::RectangleShape> m_roomWalls; //body of the room

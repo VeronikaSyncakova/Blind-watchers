@@ -43,6 +43,11 @@ int RoomPlan::getRoomNumber(sf::Vector2f t_position)
 	return -1;
 }
 
+sf::Vector2f RoomPlan::getRoomCenter(int t_roomNum)
+{
+	return m_rooms[t_roomNum].getCenter();
+}
+
 bool RoomPlan::collides(sf::RectangleShape& t_object, int& t_roomNum)
 {
 	return m_rooms.at(t_roomNum).checkCollision(t_object);
@@ -70,7 +75,18 @@ void RoomPlan::selectedRoom(int t_num)
 		if(i==t_num)
 			m_rooms[t_num].changeHighlite(sf::Color::Yellow);
 		else
-			m_rooms[t_num].changeHighlite(sf::Color::White);
+			m_rooms[i].changeHighlite(sf::Color::White);
 	}
 	
+}
+
+void RoomPlan::hovering(int t_roomNum)
+{
+	for (int i = 0; i < m_rooms.size(); i++)
+	{
+		if (i == t_roomNum)
+			m_rooms[t_roomNum].changeColor(sf::Color(255,255,255,30));
+		else
+			m_rooms[i].changeColor(sf::Color::Transparent);
+	}
 }
