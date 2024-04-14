@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "States.h"
+#include "RoomPlan.h"
 
 class Pawn
 {
@@ -30,4 +31,6 @@ protected:
 
 	bool m_active{ false };
 	std::vector<sf::Vector2f> m_patrolPoints;
+	
+	int m_roomNumber{ 0 }; //number of the room where the pawn currently is
 };

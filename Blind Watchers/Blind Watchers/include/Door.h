@@ -14,6 +14,8 @@ public:
 
 	Door();
 	void init(DoorData& data);
+	sf::Vector2f getPosition();
+	bool collides(sf::RectangleShape& t_object);
 
 private:
 	sf::Vector2f m_position;

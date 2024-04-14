@@ -32,3 +32,15 @@ void Door::init(DoorData& data)
 	m_body->setRotation(m_rotation);
 	RenderObject::getInstance().add(m_body);
 }
+
+sf::Vector2f Door::getPosition()
+{
+	return m_position;
+}
+
+bool Door::collides(sf::RectangleShape& t_object)
+{
+	if (m_body->getGlobalBounds().intersects(t_object.getGlobalBounds()))
+		return true;
+	return false;
+}

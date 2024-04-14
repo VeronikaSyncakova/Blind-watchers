@@ -37,3 +37,43 @@ void Room::init(RoomData& data)
 	m_roomWalls->setPosition(m_position);
 	RenderObject::getInstance().add(m_roomWalls);
 }
+
+bool Room::inside(sf::Vector2f t_position)
+{
+	if (m_position.x <= t_position.x && m_position.x + m_roomSize.x >= t_position.x &&
+		m_position.y <= t_position.y && m_position.y + m_roomSize.y >= t_position.y)
+		return true;
+	return false;
+}
+
+bool Room::checkCollision(sf::RectangleShape& t_object)
+{
+	sf::Vector2f pos = t_object.getPosition();
+	sf::Vector2f size = t_object.getSize()/2.f;
+	if (m_position.x >= pos.x-size.x || m_position.x + m_roomSize.x <= pos.x + size.x ||
+		m_position.y >= pos.y-size.x || m_position.y + m_roomSize.y <= pos.y + size.y)
+		return true;
+	return false;
+}
+
+sf::Vector2f Room::deflectVector(sf::RectangleShape& t_object)
+{
+	sf::Vector2f pos = t_object.getPosition();
+	sf::Vector2f size = t_object.getSize()/2.f;
+	if (m_position.x >= pos.x-size.x)//left
+	{
+		return sf::Vector2f(1.f,0.f);
+	}
+	else if (m_position.x + m_roomSize.x <= pos.x + size.x)//right
+	{
+		return sf::Vector2f(-1.f, 0.f);
+	}
+	else if (m_position.y >= pos.y-size.y)//up
+	{
+		return sf::Vector2f(0.f, 1.f);
+	}
+	else if (m_position.y + m_roomSize.y <= pos.y + size.y)//down
+	{
+		return sf::Vector2f(0.f, -1.f);
+	}
+}
