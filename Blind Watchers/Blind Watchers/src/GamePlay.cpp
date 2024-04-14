@@ -96,6 +96,11 @@ void GamePlay::processKeys(sf::Event& t_event)
 /// <param name="t_deltaTime">delta time passed from game</param>
 void GamePlay::update()
 {
+	if (m_currentGameMode == GameType::Shoot)
+	{
+		m_bulletManager.update();
+	}
+
 	ParticleSystem::getInstance().update();
 	m_meds.update();
 	for(std::shared_ptr<Pawn>& p : m_pawns)
@@ -105,11 +110,15 @@ void GamePlay::update()
 		if (typeid(*p) == typeid(Player))
 		{
 			m_meds.updatePlayerPosition(p->getBounds());
+
+			if(m_shooting)
+				m_bulletManager.spawnNewBullet(p->getPosition(), m_mousePos);
 		}
 	}
 	if (m_medProgress->checkEmpty())
 	{
 		DEBUG_MSG("READY");
+		m_currentGameMode = GameType::Shoot;
 	}
 }
 
@@ -124,10 +133,23 @@ void GamePlay::processMouse(sf::Event& t_event)
 	}
 	else if (sf::Event::MouseButtonPressed == t_event.type)
 	{
+		if (m_currentGameMode == GameType::Shoot)
+		{
+			m_shooting = true;
+			for (std::shared_ptr<Pawn>& p : m_pawns)
+			{
+				if (typeid(*p) == typeid(Player))
+				{
+					m_bulletManager.spawnNewBullet(p->getPosition(), m_mousePos);
+					break;
+				}
+			}
+		}
 		//mouseButtonDown();
 	}
 	else if (sf::Event::MouseButtonReleased == t_event.type)
 	{
+		m_shooting = false;
 		//mouseButtonUp();
 	}
 }

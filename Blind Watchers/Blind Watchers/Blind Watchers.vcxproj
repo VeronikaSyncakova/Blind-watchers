@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\AnimatedSprite.cpp" />
+    <ClCompile Include="src\Bullet.cpp" />
     <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\CharacterSelection.cpp" />
     <ClCompile Include="src\Door.cpp" />
@@ -44,6 +45,7 @@
   <ItemGroup>
     <ClInclude Include="include\AbstractState.h" />
     <ClInclude Include="include\AnimatedSprite.h" />
+    <ClInclude Include="include\Bullet.h" />
     <ClInclude Include="include\Button.h" />
     <ClInclude Include="include\CharacterSelection.h" />
     <ClInclude Include="include\Door.h" />

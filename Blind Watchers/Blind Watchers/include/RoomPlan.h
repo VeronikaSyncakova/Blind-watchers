@@ -5,7 +5,7 @@
 #include <list>
 
 //Holds all rooms and doors, manages communication between rooms and doors and player
-static class RoomPlan
+class RoomPlan
 {
 public:
 	static RoomPlan& getInstance()

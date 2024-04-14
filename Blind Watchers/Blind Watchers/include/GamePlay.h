@@ -7,6 +7,12 @@
 #include "RoomPlan.h"
 #include "Medication.h"
 #include "statusBar.h"
+#include "Bullet.h"
+
+enum class GameType
+{
+	Sneak, Shoot
+};
 
 
 class GamePlay : public GameMode
@@ -30,6 +36,10 @@ private:
 	Medication m_meds;
 
 	std::shared_ptr<bar> m_medProgress;
+	GameType m_currentGameMode{ GameType::Sneak };
+
+	BulletHolder m_bulletManager;
+	bool m_shooting{ false };
 };
 
 #endif // !GAMEPLAY_H
