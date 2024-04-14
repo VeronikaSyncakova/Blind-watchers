@@ -96,6 +96,7 @@ void Medication::updatePlayerPosition(sf::FloatRect t_playerBounds)
 		if (m_meds.at(i).bounds().intersects(t_playerBounds)) 
 		{
 			inMeds = true;
+
 			//float playerMid = t_playerBounds.getSize().x / 2.f;
 			float playerMid = t_playerBounds.width / 2.f;
 			//m_pressButton->setPosition(t_playerBounds.getPosition() + sf::Vector2f(playerMid, -50.f));

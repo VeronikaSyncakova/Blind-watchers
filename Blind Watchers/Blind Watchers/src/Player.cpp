@@ -78,4 +78,6 @@ void Player::moveBody(sf::Vector2f const& t_moveVector)
 		if (RoomPlan::getInstance().usesDoor(*m_body, m_roomNumber)) //using doors
 			m_roomNumber = RoomPlan::getInstance().getRoomNumber(m_body->getPosition()); //update room number
 	}
+
+	m_position = m_body->getPosition();
 }

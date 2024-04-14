@@ -143,6 +143,9 @@
     <ClCompile Include="src\Particles.cpp">
       <Filter>Source Files\GamePlay</Filter>
     </ClCompile>
+    <ClCompile Include="src\Bullet.cpp">
+      <Filter>Source Files\GamePlay\Pawn</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameMode.h">
@@ -344,6 +347,9 @@
     </ClInclude>
     <ClInclude Include="include\Particles.h">
       <Filter>Header Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Bullet.h">
+      <Filter>Header Files\GamePlay\Pawn</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
