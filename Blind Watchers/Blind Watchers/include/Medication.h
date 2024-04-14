@@ -6,13 +6,12 @@
 
 struct medBody
 {
-	sf::Vector2f pos() { return sprite.getPosition(); }
-	sf::FloatRect bounds() { return interactionBounds.getGlobalBounds(); }
+	sf::Vector2f pos() { return sprite->getPosition(); }
+	sf::FloatRect bounds() { return interactionBounds->getGlobalBounds(); }
 
-	sf::Texture texture;
-	sf::Sprite sprite;
+	std::shared_ptr<sf::Sprite> sprite;
 
-	sf::RectangleShape interactionBounds;
+	std::shared_ptr<sf::RectangleShape> interactionBounds;
 	bool m_inBounds;
 };
 
@@ -28,6 +27,7 @@ public:
 	void checkInteract();
 private:
 	std::vector<medBody> m_meds;
+	sf::Texture m_medTexture;
 
 	sf::Texture m_pressButtonT;
 	std::shared_ptr<AnimatedSprite> m_pressButton;

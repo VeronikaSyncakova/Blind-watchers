@@ -53,4 +53,4 @@ medication:
   - type: Normal
     position: {x: 300, y: 100}
   - type: Normal
-    position: {x: 300, y: 100}
+    position: {x: 600, y: 100}
