@@ -1,6 +1,7 @@
 #include "statusBar.h"
 #include "Game.h"
 
+// return if the bar is empty or not
 bool bar::checkEmpty()
 {
     if (FillType::Empty == type)
@@ -20,11 +21,19 @@ bool bar::checkEmpty()
     return false;
 }
 
+// apply modifications
 void bar::update()
 {
-    fillPercent = mods->update();
+    //float newPercent = 1.0f * ((top->getScale().x / top->getScale().x) / fillPercent);
+    //top->setScale(fillPercent, 1.f);
+
+    // fillPercent = mods->update();
 }
 
+/// <summary>
+/// change how much of the bar is filled in
+/// </summary>
+/// <param name="t_change">how much the bar should increase / decrease by</param>
 void bar::changePercent(float t_change)
 {
     if (FillType::Empty == type)
@@ -44,6 +53,13 @@ float continuous::update()
     return Game::deltaTime * m_percent;
 }
 
+/// <summary>
+/// spawn a new bar that will work as declared
+/// </summary>
+/// <param name="t_barType">fill up, or empty</param>
+/// <param name="t_newBar">data such as size and position</param>
+/// <param name="t_startPercent">from 0.0f to 1.0f</param>
+/// <returns></returns>
 std::shared_ptr<bar> StatusBar::addNewBar(FillType t_barType, barData t_newBar, float t_startPercent)
 {
     if (t_startPercent < 0.f)

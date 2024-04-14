@@ -49,7 +49,7 @@ class StatusBar
 {
 public:
 	static std::shared_ptr<bar> addNewBar(FillType t_barType, barData t_newBar, float t_startPercent = -1.f);
-	static void update();
+	//static void update();
 };
 
 #endif // !STATUS_BAR_H

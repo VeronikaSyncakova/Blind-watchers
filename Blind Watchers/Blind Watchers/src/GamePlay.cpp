@@ -2,6 +2,7 @@
 #include "YamlLoader.h"
 #include "Player.h"
 #include "blindNpc.h"
+#include "Particles.h"
 
 /// <summary>
 /// default constructor
@@ -96,6 +97,7 @@ void GamePlay::processKeys(sf::Event& t_event)
 /// <param name="t_deltaTime">delta time passed from game</param>
 void GamePlay::update()
 {
+	ParticleSystem::getInstance().update();
 	m_meds.update();
 	for(std::shared_ptr<Pawn>& p : m_pawns)
 	{

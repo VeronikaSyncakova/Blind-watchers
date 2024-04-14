@@ -1,6 +1,7 @@
 #include "Medication.h"
 #include "RenderObject.h"
 #include "DEBUG.h"
+#include "Particles.h"
 
 Medication::Medication()
 {
@@ -120,6 +121,8 @@ bool Medication::checkInteract()
 		if (m_meds.at(i).m_inBounds)
 		{
 			DEBUG_MSG("picked up item");
+			ParticleSystem::getInstance().spawnNewParticle(std::string("+++ Medication"), m_meds.at(i).pos(), 24u, sf::Vector2f(0.f, -1.0f), 100.f);
+
 			m_meds.at(i).uninitialise();
 			return true;
 		}

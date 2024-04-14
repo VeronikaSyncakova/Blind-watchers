@@ -25,6 +25,7 @@
     <ClCompile Include="src\Door.cpp" />
     <ClCompile Include="src\blindNpc.cpp" />
     <ClCompile Include="src\Medication.cpp" />
+    <ClCompile Include="src\Particles.cpp" />
     <ClCompile Include="src\Room.cpp" />
     <ClCompile Include="src\RoomPlan.cpp" />
     <ClCompile Include="src\States.cpp" />
@@ -49,6 +50,7 @@
     <ClInclude Include="include\blindNpc.h" />
     <ClInclude Include="include\levelData.h" />
     <ClInclude Include="include\Medication.h" />
+    <ClInclude Include="include\Particles.h" />
     <ClInclude Include="include\Room.h" />
     <ClInclude Include="include\simpleMaths.h" />
     <ClInclude Include="include\RoomPlan.h" />

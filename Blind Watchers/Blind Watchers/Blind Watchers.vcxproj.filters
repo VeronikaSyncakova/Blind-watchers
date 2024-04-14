@@ -138,6 +138,9 @@
     <ClCompile Include="src\statusBar.cpp">
       <Filter>Source Files\GamePlay\Level</Filter>
     </ClCompile>
+    <ClCompile Include="src\Particles.cpp">
+      <Filter>Source Files\GamePlay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameMode.h">
@@ -334,6 +337,9 @@
     </ClInclude>
     <ClInclude Include="include\statusBar.h">
       <Filter>Header Files\GamePlay\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Particles.h">
+      <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
