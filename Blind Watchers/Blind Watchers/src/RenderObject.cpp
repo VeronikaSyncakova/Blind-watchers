@@ -36,6 +36,10 @@ void RenderObject::updateCamera(sf::Vector2f t_move)
 	m_cameraView.move(t_move);
 	m_window.setView(m_cameraView);
 }
+void RenderObject::zoomCamera(float t_zoom)
+{
+	m_cameraView.zoom(t_zoom);
+}
 void RenderObject::loadsettings()
 {
 	SettingsStorage::getInstance().initSettings();

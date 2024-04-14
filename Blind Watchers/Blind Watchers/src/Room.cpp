@@ -77,3 +77,8 @@ sf::Vector2f Room::deflectVector(sf::RectangleShape& t_object)
 		return sf::Vector2f(0.f, -1.f);
 	}
 }
+
+void Room::changeHighlite(sf::Color t_color)
+{
+	m_roomWalls->setOutlineColor(t_color);
+}

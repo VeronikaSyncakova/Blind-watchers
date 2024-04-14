@@ -25,7 +25,7 @@ private:
 
 	sf::Texture m_buttonTexture;
 	std::vector<Button> m_buttons;
-	static const int BUTTON_AMOUNT = 3;
+	static const int BUTTON_AMOUNT = 4;
 
 	std::shared_ptr<sf::Font> m_globalFont;
 	std::shared_ptr<sf::Text> m_hudText;

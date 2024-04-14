@@ -129,6 +129,9 @@
     <ClCompile Include="src\RoomPlan.cpp">
       <Filter>Source Files\GamePlay\Level</Filter>
     </ClCompile>
+    <ClCompile Include="src\LevelEditor.cpp">
+      <Filter>Source Files\GameMode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameMode.h">
@@ -316,6 +319,9 @@
     </ClInclude>
     <ClInclude Include="include\simpleMaths.h">
       <Filter>Header Files\Globals</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LevelEditor.h">
+      <Filter>Header Files\GameMode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

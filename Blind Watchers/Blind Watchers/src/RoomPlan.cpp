@@ -62,3 +62,15 @@ bool RoomPlan::usesDoor(sf::RectangleShape& t_object, int& t_roomNum)
 	}
 	return false;
 }
+
+void RoomPlan::selectedRoom(int t_num)
+{
+	for (int i = 0; i < m_rooms.size(); i++)
+	{
+		if(i==t_num)
+			m_rooms[t_num].changeHighlite(sf::Color::Yellow);
+		else
+			m_rooms[t_num].changeHighlite(sf::Color::White);
+	}
+	
+}

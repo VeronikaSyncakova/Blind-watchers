@@ -20,6 +20,7 @@ public:
 	sf::Vector2f deflectVector(sf::RectangleShape& t_object, int& t_roomNum); //returns deflect vector for the colliding object
 	bool usesDoor(sf::RectangleShape& t_object, int& t_roomNum); //checks if the object crosses through the door
 
+	void selectedRoom(int t_num);
 	//deleted functions
 	RoomPlan(RoomPlan const&) = delete;
 	void operator=(RoomPlan const&) = delete;

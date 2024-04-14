@@ -78,6 +78,8 @@ public:
 
     //updates camera view
     void updateCamera(sf::Vector2f t_move);
+    //zoom camera
+    void zoomCamera(float t_zoom);
 
     void loadsettings();
 
