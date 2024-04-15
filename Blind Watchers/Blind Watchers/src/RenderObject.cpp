@@ -54,6 +54,11 @@ void RenderObject::zoomCamera(float t_zoom, sf::Vector2f& t_centerPoint)
 	m_cameraView.setSize(sf::Vector2f(SCREEN_WIDTH,SCREEN_HEIGHT)* t_zoom);
 	//m_cameraView.zoom(t_zoom);
 }
+void RenderObject::centerView(float t_zoom, sf::Vector2f& t_centerPoint)
+{
+	m_cameraView.setCenter(t_centerPoint);
+	m_cameraView.setSize(sf::Vector2f(SCREEN_WIDTH, SCREEN_HEIGHT) * t_zoom);
+}
 void RenderObject::loadsettings()
 {
 	SettingsStorage::getInstance().initSettings();

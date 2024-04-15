@@ -8,7 +8,7 @@ Menu::Menu()
 {
 	//m_simpleButton = SimpleButtonHolder::getInstance().spawnNewButton("<EMPTY>");
 	resetLevel();
-	RenderObject::getInstance().zoomCamera(1.f, sf::Vector2f(SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f));
+	RenderObject::getInstance().centerView(1.f, sf::Vector2f(SCREEN_WIDTH / 2.f, SCREEN_HEIGHT / 2.f));
 }
 
 Menu::~Menu()
