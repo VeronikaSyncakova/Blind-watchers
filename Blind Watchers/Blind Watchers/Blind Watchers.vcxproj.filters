@@ -131,6 +131,7 @@
     </ClCompile>
     <ClCompile Include="src\LevelEditor.cpp">
       <Filter>Source Files\GameMode</Filter>
+    </ClCompile>
     <ClCompile Include="src\Medication.cpp">
       <Filter>Source Files\GamePlay\Level</Filter>
     </ClCompile>
@@ -336,6 +337,7 @@
     </ClInclude>
     <ClInclude Include="include\LevelEditor.h">
       <Filter>Header Files\GameMode</Filter>
+    </ClInclude>
     <ClInclude Include="include\Medication.h">
       <Filter>Header Files\GamePlay\Level</Filter>
     </ClInclude>
