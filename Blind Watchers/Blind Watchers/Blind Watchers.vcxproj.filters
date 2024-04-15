@@ -76,6 +76,18 @@
     <Filter Include="Header Files\GamePlay\Level">
       <UniqueIdentifier>{15f0f76f-5a0f-4f5c-a183-e181636ca9cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GamePlay\Particles">
+      <UniqueIdentifier>{09f17a3e-f225-4a49-8f36-5c7d1883ba4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GamePlay\Particles">
+      <UniqueIdentifier>{74b7eb6e-6ab2-4b8c-9ba2-70fea4c7551d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GamePlay\Pawn\Weapons">
+      <UniqueIdentifier>{478358ed-3532-40ea-b910-e360d9699e5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GamePlay\Pawn\Weapons">
+      <UniqueIdentifier>{188d6bb2-056b-4d6a-aef8-b2a9654caa9e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Button.cpp">
@@ -142,10 +154,10 @@
       <Filter>Source Files\GamePlay\Level</Filter>
     </ClCompile>
     <ClCompile Include="src\Particles.cpp">
-      <Filter>Source Files\GamePlay</Filter>
+      <Filter>Source Files\GamePlay\Particles</Filter>
     </ClCompile>
     <ClCompile Include="src\Bullet.cpp">
-      <Filter>Source Files\GamePlay\Pawn</Filter>
+      <Filter>Source Files\GamePlay\Pawn\Weapons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -347,11 +359,20 @@
     <ClInclude Include="include\statusBar.h">
       <Filter>Header Files\GamePlay\Level</Filter>
     </ClInclude>
+    <ClInclude Include="include\ParticleSpawner.hpp">
+      <Filter>Header Files\GamePlay\Particles</Filter>
+    </ClInclude>
     <ClInclude Include="include\Particles.h">
-      <Filter>Header Files\GamePlay</Filter>
+      <Filter>Header Files\GamePlay\Particles</Filter>
     </ClInclude>
     <ClInclude Include="include\Bullet.h">
-      <Filter>Header Files\GamePlay\Pawn</Filter>
+      <Filter>Header Files\GamePlay\Pawn\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CollisionObserver.hpp">
+      <Filter>Header Files\GamePlay\Pawn\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Observer.h">
+      <Filter>Header Files\Globals</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

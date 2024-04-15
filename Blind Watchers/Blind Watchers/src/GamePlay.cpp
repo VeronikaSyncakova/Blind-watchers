@@ -24,6 +24,7 @@ GamePlay::GamePlay()
 
 		m_pawns.push_back(newNpc);
 	}
+	// TO DO : change state to be read from file
 	StateManager::changeCommand(State::Wander, m_pawns.at(0));
 	StateManager::changeCommand(State::Patrol, m_pawns.at(1));
 
@@ -99,6 +100,12 @@ void GamePlay::update()
 	if (m_currentGameMode == GameType::Shoot)
 	{
 		m_bulletManager.update();
+		for (std::shared_ptr<Pawn>& p : m_pawns)
+		{
+			if (typeid(*p) == typeid(Player))
+				continue;
+			m_bulletManager.checkCollisions(p->getBounds());
+		}
 	}
 
 	ParticleSystem::getInstance().update();
@@ -111,13 +118,13 @@ void GamePlay::update()
 		{
 			m_meds.updatePlayerPosition(p->getBounds());
 
-			if(m_shooting)
-				m_bulletManager.spawnNewBullet(p->getPosition(), m_mousePosView);
+			//if(m_shooting)
+			//	m_bulletManager.spawnNewBullet(p->getPosition(), m_mousePosView);
 		}
 	}
 	if (m_medProgress->checkEmpty())
 	{
-		DEBUG_MSG("READY");
+		// DEBUG_MSG("READY");
 		m_currentGameMode = GameType::Shoot;
 	}
 }

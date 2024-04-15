@@ -30,6 +30,10 @@ void blindNpc::moveBody(sf::Vector2f const& t_moveVector)
 	{
 		sf::Vector2f deflection = RoomPlan::getInstance().deflectVector(m_body->getBody(), m_roomNumber);
 		m_position += deflection * m_maxSpeed * Game::deltaTime;
+		if (auto t = std::dynamic_pointer_cast<PatrolState>(m_state))
+		{
+			t->skipPoint(std::make_shared<blindNpc>(*this));
+		}
 	}
 	else
 	{

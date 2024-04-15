@@ -1,5 +1,6 @@
-#include"RenderObject.h"
+#include "RenderObject.h"
 #include "SettingsStorage.h"
+#include "simpleMaths.h"
 
 RenderObject::RenderObject() :
 	m_window{ sf::VideoMode{ SCREEN_WIDTH, SCREEN_HEIGHT, 32U }, "Epsilon" }
@@ -41,15 +42,15 @@ void RenderObject::updateCamera(sf::Vector2f t_move)
 
 void RenderObject::zoomCamera(float t_zoom, sf::Vector2f& t_centerPoint)
 {
-	/*
 	sf::Vector2f currentCenter = m_cameraView.getCenter();
-	if (t_centerPoint != currentCenter)
+	if (!math::circleIntersects(t_centerPoint, currentCenter,1.f,1.f))
 	{
-		sf::Vector2f centeringVec = displacement(m_cameraView.getCenter(), t_centerPoint);
+		sf::Vector2f centeringVec = math::displacement(m_cameraView.getCenter(), t_centerPoint);
+		centeringVec *= 100.f;
 		m_cameraView.setCenter(currentCenter.x+centeringVec.x,currentCenter.y+centeringVec.y);
 	}
-	*/
-	m_cameraView.setCenter(t_centerPoint);
+	
+	//m_cameraView.setCenter(t_centerPoint);
 	m_cameraView.setSize(sf::Vector2f(SCREEN_WIDTH,SCREEN_HEIGHT)* t_zoom);
 	//m_cameraView.zoom(t_zoom);
 }

@@ -33,14 +33,14 @@ void LevelEditor::update()
 	case ViewType::ZoomOut:
 		if (m_zoomAmount < 2.f)
 		{
-			m_zoomAmount += 0.01f;
+			m_zoomAmount += 0.1f;
 			RenderObject::getInstance().zoomCamera(m_zoomAmount, sf::Vector2f(1700.f,900.f));
 		}
 		break;
 	case ViewType::ZoomIn:
 		if (m_zoomAmount > 1.f)
 		{
-			m_zoomAmount -= 0.01f;
+			m_zoomAmount -= 0.1f;
 			RenderObject::getInstance().zoomCamera(m_zoomAmount, m_selectedRoomCenter);
 		}
 		buttonCollision();

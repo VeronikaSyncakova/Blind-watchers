@@ -46,6 +46,8 @@ public:
 	virtual void enter(std::shared_ptr<Pawn> t_pawn);
 	virtual void update(std::shared_ptr<Pawn> t_pawn);
 	virtual void exit(std::shared_ptr<Pawn> t_pawn);
+
+	void skipPoint(std::shared_ptr<Pawn> t_pawn);
 private:
 	int m_nextPoint{ 0 };
 };

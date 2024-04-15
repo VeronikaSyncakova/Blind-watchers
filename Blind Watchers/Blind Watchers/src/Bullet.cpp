@@ -1,16 +1,13 @@
 #include "Bullet.h"
 #include "Game.h"
 #include "RenderObject.h"
-
-sf::Vector2f displacement(sf::Vector2f t_loaction, sf::Vector2f t_aim)
-{
-	sf::Vector2f displacement = t_aim - t_loaction;
-	displacement /= std::sqrtf(displacement.x * displacement.x + displacement.y * displacement.y);
-	return displacement;
-}
+#include "simpleMaths.h"
 
 BulletHolder::BulletHolder()
 {
+	std::shared_ptr<ParticleSpawnerObserver> t;
+	t = std::make_shared< ParticleSpawnerObserver>();
+	AddObserver(t);
 }
 
 BulletHolder::~BulletHolder()
@@ -45,7 +42,7 @@ void BulletHolder::spawnNewBullet(sf::Vector2f t_loc, sf::Vector2f t_target)
 
 			m_bullets.at(i).m_active = true;
 
-			m_bullets.at(i).m_displacement = displacement(t_loc, t_target);
+			m_bullets.at(i).m_displacement = math::displacement(t_loc, t_target);
 			m_bullets.at(i).m_displacement *= bulletSpeed;
 		}
 	}
@@ -62,7 +59,7 @@ void BulletHolder::spawnNewBullet(sf::Vector2f t_loc, sf::Vector2f t_target)
 
 		newBullet.m_active = true;
 
-		newBullet.m_displacement = displacement(t_loc, t_target);
+		newBullet.m_displacement = math::displacement(t_loc, t_target);
 		newBullet.m_displacement *= bulletSpeed;
 
 
@@ -70,7 +67,24 @@ void BulletHolder::spawnNewBullet(sf::Vector2f t_loc, sf::Vector2f t_target)
 	}
 }
 
+void BulletHolder::checkCollisions(sf::FloatRect t_bounds)
+{
+	for (auto i : m_bullets)
+	{
+		if(i.m_active)
+		{
+			if (i.m_bullet->getGlobalBounds().intersects(t_bounds))
+			{
+				notifyAll(i);
+				i.m_active = false;
+				i.m_bullet->setPosition(-500000.f, -5000000.f);
+			}
+		}
+	}
+}
+
 void Bullet::update()
 {
-	m_bullet->move(m_displacement * Game::deltaTime);
+	if(m_active)
+		m_bullet->move(m_displacement * Game::deltaTime);
 }
