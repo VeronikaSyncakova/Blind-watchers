@@ -23,7 +23,6 @@ public:
 	State getState() { return m_currentState; }
 
 	virtual void position(sf::Vector2f& t_position)=0; //position the character to a specific location
-	virtual npcData getData() = 0;
 private:
 
 protected:

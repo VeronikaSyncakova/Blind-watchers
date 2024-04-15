@@ -14,7 +14,6 @@ public:
 	virtual sf::FloatRect getBounds()override { return m_body->getGlobalBounds(); }
 
 	void position(sf::Vector2f& t_position) override;
-	npcData getData() override { return npcData(); }
 private:
 	std::shared_ptr<sf::RectangleShape> m_body;
 

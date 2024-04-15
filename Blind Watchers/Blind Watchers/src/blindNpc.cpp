@@ -53,6 +53,7 @@ void blindNpc::position(sf::Vector2f& t_position)
 {
 	m_position = t_position;
 	m_body->m_rectangle->setPosition(m_position);
+	m_roomNumber = RoomPlan::getInstance().getRoomNumber(m_position);
 }
 
 void blindNpc::setPatrolPoints(npcData& t_characterData)

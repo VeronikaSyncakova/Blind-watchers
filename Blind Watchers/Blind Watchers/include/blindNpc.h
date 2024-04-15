@@ -28,7 +28,7 @@ public:
 
 	virtual sf::FloatRect getBounds()override { return m_body->m_rectangle->getGlobalBounds(); }
 
-	npcData getData() override;
+	npcData getData(); 
 
 	void position(sf::Vector2f& t_position) override;
 private:

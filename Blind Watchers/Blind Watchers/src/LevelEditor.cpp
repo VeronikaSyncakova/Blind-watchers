@@ -119,14 +119,10 @@ void LevelEditor::processMouse(sf::Event& t_event)
 		}
 		else if(m_viewType == ViewType::ZoomIn)
 		{
+			performButtonAction();
+
 			for (unsigned int i = 0; i < m_pawnButtons.size(); i++)
 			{
-				if (m_pawnButtons.at(i).m_selected)
-				{
-					m_pawns.at(m_pawns.size() - 1)->position(m_mousePosView);
-					m_pawnButtons.at(i).m_selected = false;
-				}
-
 				// set the outline to yellow if selected
 				if (m_pawnButtons.at(i).m_highlighted)
 				{
@@ -153,6 +149,13 @@ void LevelEditor::loadData()
 	//creates room plan
 	RoomPlan::getInstance().init(m_level);
 
+	// loads player
+	std::shared_ptr<Player> player;
+	player = std::make_shared<Player>();
+	StateManager::changeCommand(State::PlayerInput, player);
+
+	m_pawns.push_back(player);
+
 	for (unsigned int i = 0; i < m_level.m_npcs.size(); i++)
 	{
 		std::shared_ptr<blindNpc> newNpc;
@@ -162,13 +165,6 @@ void LevelEditor::loadData()
 	}
 	StateManager::changeCommand(State::Wander, m_pawns.at(0));
 	StateManager::changeCommand(State::Patrol, m_pawns.at(1));
-
-	// loads player, done after so player would be on top
-	std::shared_ptr<Player> player;
-	player = std::make_shared<Player>();
-	StateManager::changeCommand(State::PlayerInput, player);
-
-	m_pawns.push_back(player);
 
 	//button size and spacing
 	float width = 100.f;
@@ -193,9 +189,9 @@ void LevelEditor::loadData()
 		newPawnButton.m_bounds = pawnBox;
 		m_pawnButtons.push_back(newPawnButton);
 	}
-	m_pawnButtons.at(0).m_pawn = std::make_shared<Player>();
-	m_pawnButtons.at(1).m_pawn = std::make_shared<blindNpc>(m_level.m_npcs.at(0));
-	m_pawnButtons.at(2).m_pawn = std::make_shared<blindNpc>(m_level.m_npcs.at(1));
+	m_pawnButtons.at(0).m_pawn = player; //std::make_shared<Player>();
+	m_pawnButtons.at(1).m_pawn = m_pawns.at(1); //std::make_shared<blindNpc>(m_level.m_npcs.at(0));
+	m_pawnButtons.at(2).m_pawn = m_pawns.at(2); //std::make_shared<blindNpc>(m_level.m_npcs.at(1));
 
 }
 
@@ -251,24 +247,66 @@ void LevelEditor::buttonAction(int t_buttonNum)
 {
 	if (t_buttonNum == 0) //player
 	{
-		
+		m_pawnButtons.at(0).m_selected = true;
 	}
-	else if (t_buttonNum == 1)
+	else if (t_buttonNum == 1) //npc1
 	{
-		npcData data = m_pawnButtons.at(1).m_pawn->getData(); //std::dynamic_pointer_cast<blindNpc>(m_pawnButtons.at(0).m_pawn)->getData();
-		//m_pawnButtons.at(1).m_pawn->getState();
-
+		//getnpcData from the npcthat is sored in the button
+		npcData data = std::dynamic_pointer_cast<blindNpc>(m_pawnButtons.at(1).m_pawn)->getData();
+		//make new npc 
 		std::shared_ptr<Pawn> newNpc = std::make_shared<blindNpc>(data);
 		StateManager::changeCommand(m_pawnButtons.at(1).m_pawn->getState(), newNpc);
 		m_pawns.push_back(newNpc);
 		m_pawnButtons.at(1).m_selected = true;
 	}
-	else if (t_buttonNum == 2)
+	else if (t_buttonNum == 2) //npc2
 	{
+		npcData data = std::dynamic_pointer_cast<blindNpc>(m_pawnButtons.at(2).m_pawn)->getData();
 
+		std::shared_ptr<Pawn> newNpc = std::make_shared<blindNpc>(data);
+		StateManager::changeCommand(m_pawnButtons.at(2).m_pawn->getState(), newNpc);
+		m_pawns.push_back(newNpc);
+		m_pawnButtons.at(2).m_selected = true;
 	}
-	else if (t_buttonNum == 3)
+	else if(t_buttonNum==3) //delete objects
+	{
+		m_pawnButtons.at(3).m_selected = true;
+	}
+	else if (t_buttonNum == PAWN_BUTTONS-1) //zoom out
 	{
 		zoomOut();
+	}
+}
+
+void LevelEditor::performButtonAction()
+{
+	//place the objects to the level
+	if (m_pawnButtons.at(0).m_selected) //place player
+	{
+		m_pawns.at(0)->position(m_mousePosView);
+		m_pawnButtons.at(0).m_selected = false;
+	}
+	else if (m_pawnButtons.at(1).m_selected) //npc1
+	{
+		m_pawns.at(m_pawns.size() - 1)->position(m_mousePosView);
+		m_pawnButtons.at(1).m_selected = false;
+	}
+	else if (m_pawnButtons.at(2).m_selected) //npc2
+	{
+		m_pawns.at(m_pawns.size() - 1)->position(m_mousePosView);
+		m_pawnButtons.at(2).m_selected = false;
+	}
+	else if (m_pawnButtons.at(3).m_selected) //delete objects
+	{
+		for (unsigned i = 1; i < m_pawns.size(); i++) //starting at 1 because 0 is a player and you can not delete player
+		{
+			//delete the chosen onject
+			if (m_pawns.at(i)->getBounds().contains(m_mousePosView))
+			{
+				m_pawns.erase(m_pawns.begin()+i);
+				m_pawnButtons.at(3).m_selected = false;
+				break;
+			}
+		}
 	}
 }

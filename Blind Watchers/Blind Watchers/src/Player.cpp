@@ -86,4 +86,5 @@ void Player::position(sf::Vector2f& t_position)
 {
 	m_position = t_position;
 	m_body->setPosition(m_position);
+	m_roomNumber = RoomPlan::getInstance().getRoomNumber(m_position);
 }
