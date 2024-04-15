@@ -38,6 +38,23 @@ void blindNpc::moveBody(sf::Vector2f const& t_moveVector)
 	m_body->moveBody(m_position);
 }
 
+npcData blindNpc::getData()
+{
+	npcData currentData;
+	currentData.position = m_body->getBody().getPosition();
+	currentData.color = m_body->getBody().getFillColor();
+	currentData.size = m_body->getBody().getSize();
+	currentData.speed = m_moveSpeed;
+	currentData.patrolPoints = m_patrolPoints;
+	return currentData;
+}
+
+void blindNpc::position(sf::Vector2f& t_position)
+{
+	m_position = t_position;
+	m_body->m_rectangle->setPosition(m_position);
+}
+
 void blindNpc::setPatrolPoints(npcData& t_characterData)
 {
 	m_patrolPoints = t_characterData.patrolPoints;

@@ -81,3 +81,9 @@ void Player::moveBody(sf::Vector2f const& t_moveVector)
 
 	m_position = m_body->getPosition();
 }
+
+void Player::position(sf::Vector2f& t_position)
+{
+	m_position = t_position;
+	m_body->setPosition(m_position);
+}

@@ -20,6 +20,10 @@ public:
 	virtual sf::FloatRect getBounds() = 0;
 	sf::Vector2f getPosition() { return m_position; }
 	std::vector<sf::Vector2f> getPatrolPoints() { return m_patrolPoints; }
+	State getState() { return m_currentState; }
+
+	virtual void position(sf::Vector2f& t_position)=0; //position the character to a specific location
+	virtual npcData getData() = 0;
 private:
 
 protected:

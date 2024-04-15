@@ -11,6 +11,7 @@ struct pawnButton
 	std::shared_ptr<sf::RectangleShape> m_bounds;
 	float m_highlightAmt = 0.0f;
 	bool m_highlighted = false;
+	bool m_selected{ false };
 	std::shared_ptr<Pawn> m_pawn;
 };
 

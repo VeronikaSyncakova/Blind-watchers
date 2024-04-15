@@ -76,7 +76,6 @@ public:
     sf::RenderWindow& getWindow() { return m_window; }
     void closeWindow() { m_window.close(); }
     sf::View& getCameraView() { return m_cameraView; }
-    void setCameraView(sf::View& t_view);
 
     //updates camera view
     void updateCamera(sf::Vector2f t_move);

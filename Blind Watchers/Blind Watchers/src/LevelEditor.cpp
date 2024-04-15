@@ -121,6 +121,12 @@ void LevelEditor::processMouse(sf::Event& t_event)
 		{
 			for (unsigned int i = 0; i < m_pawnButtons.size(); i++)
 			{
+				if (m_pawnButtons.at(i).m_selected)
+				{
+					m_pawns.at(m_pawns.size() - 1)->position(m_mousePosView);
+					m_pawnButtons.at(i).m_selected = false;
+				}
+
 				// set the outline to yellow if selected
 				if (m_pawnButtons.at(i).m_highlighted)
 				{
@@ -131,7 +137,9 @@ void LevelEditor::processMouse(sf::Event& t_event)
 				{
 					m_pawnButtons.at(i).m_bounds->setOutlineColor(sf::Color::White);
 				}
+
 			}
+			
 		}
 
 	}
@@ -241,13 +249,19 @@ void LevelEditor::buttonCollision()
 
 void LevelEditor::buttonAction(int t_buttonNum)
 {
-	if (t_buttonNum == 0)
+	if (t_buttonNum == 0) //player
 	{
-
+		
 	}
 	else if (t_buttonNum == 1)
 	{
+		npcData data = m_pawnButtons.at(1).m_pawn->getData(); //std::dynamic_pointer_cast<blindNpc>(m_pawnButtons.at(0).m_pawn)->getData();
+		//m_pawnButtons.at(1).m_pawn->getState();
 
+		std::shared_ptr<Pawn> newNpc = std::make_shared<blindNpc>(data);
+		StateManager::changeCommand(m_pawnButtons.at(1).m_pawn->getState(), newNpc);
+		m_pawns.push_back(newNpc);
+		m_pawnButtons.at(1).m_selected = true;
 	}
 	else if (t_buttonNum == 2)
 	{
