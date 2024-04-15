@@ -76,6 +76,12 @@
     <Filter Include="Header Files\GamePlay\Level">
       <UniqueIdentifier>{15f0f76f-5a0f-4f5c-a183-e181636ca9cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GamePlay\Particles">
+      <UniqueIdentifier>{09f17a3e-f225-4a49-8f36-5c7d1883ba4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GamePlay\Particles">
+      <UniqueIdentifier>{74b7eb6e-6ab2-4b8c-9ba2-70fea4c7551d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Button.cpp">
@@ -141,11 +147,11 @@
     <ClCompile Include="src\statusBar.cpp">
       <Filter>Source Files\GamePlay\Level</Filter>
     </ClCompile>
-    <ClCompile Include="src\Particles.cpp">
-      <Filter>Source Files\GamePlay</Filter>
-    </ClCompile>
     <ClCompile Include="src\Bullet.cpp">
       <Filter>Source Files\GamePlay\Pawn</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Particles.cpp">
+      <Filter>Source Files\GamePlay\Particles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -347,11 +353,14 @@
     <ClInclude Include="include\statusBar.h">
       <Filter>Header Files\GamePlay\Level</Filter>
     </ClInclude>
-    <ClInclude Include="include\Particles.h">
-      <Filter>Header Files\GamePlay</Filter>
-    </ClInclude>
     <ClInclude Include="include\Bullet.h">
       <Filter>Header Files\GamePlay\Pawn</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ParticleSpawner.hpp">
+      <Filter>Header Files\GamePlay\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Particles.h">
+      <Filter>Header Files\GamePlay\Particles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

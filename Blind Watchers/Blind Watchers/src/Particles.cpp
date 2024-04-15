@@ -28,7 +28,7 @@ Particle::Particle(std::shared_ptr<sf::Shape> t_body, sf::Vector2f t_direction, 
 	m_maxTime = t_lifeTime;
 	m_alpha = t_body->getFillColor().a;
 
-	RenderObject::getInstance().add(m_body);
+	RenderObject::getInstance().addBG(m_body);
 }
 
 // update the text particle
@@ -56,7 +56,7 @@ TextParticle::TextParticle(std::shared_ptr<sf::Text> t_body, sf::Vector2f t_dire
 	m_maxTime = t_lifeTime;
 	m_active = true;
 
-	RenderObject::getInstance().add(m_body);
+	RenderObject::getInstance().addBG(m_body);
 }
 
 
@@ -87,7 +87,7 @@ void ParticleSystem::spawnNewParticle(std::string t_displayed, sf::Vector2f t_sp
 	shown->setOrigin(sf::Vector2f(shown->getGlobalBounds().width / 2.f, shown->getGlobalBounds().height / 2.f));
 	
 	std::shared_ptr<TextParticle> newParticle;
-	newParticle = std::make_shared<TextParticle>(shown, t_direction, 100.f, 2.f);
+	newParticle = std::make_shared<TextParticle>(shown, t_direction, t_speed, t_lifeTime);
 
 	bool created = false;
 	for (unsigned int i = 0; i < m_textParticles.size(); i++)
@@ -124,7 +124,7 @@ void ParticleSystem::spawnNewParticle(float t_radius, sf::Vector2f t_spawnPos, s
 	shown->setOrigin(sf::Vector2f(shown->getGlobalBounds().width / 2.f, shown->getGlobalBounds().height / 2.f));
 
 	std::shared_ptr<Particle> newParticle;
-	newParticle = std::make_shared<Particle>(shown, t_direction, 100.f, 2.f);
+	newParticle = std::make_shared<Particle>(shown, t_direction, t_speed, t_lifeTime);
 
 	bool created = false;
 	for (unsigned int i = 0; i < m_particles.size(); i++)
@@ -160,7 +160,7 @@ void ParticleSystem::spawnNewParticle(sf::Vector2f t_size, sf::Vector2f t_spawnP
 	shown->setOrigin(sf::Vector2f(shown->getGlobalBounds().width / 2.f, shown->getGlobalBounds().height / 2.f));
 
 	std::shared_ptr<Particle> newParticle;
-	newParticle = std::make_shared<Particle>(shown, t_direction, 100.f, 2.f);
+	newParticle = std::make_shared<Particle>(shown, t_direction, t_speed, t_lifeTime);
 
 	bool created = false;
 	for (unsigned int i = 0; i < m_particles.size(); i++)

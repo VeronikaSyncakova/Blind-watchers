@@ -55,6 +55,7 @@
     <ClInclude Include="include\LevelEditor.h" />
     <ClInclude Include="include\Medication.h" />
     <ClInclude Include="include\Particles.h" />
+    <ClInclude Include="include\ParticleSpawner.hpp" />
     <ClInclude Include="include\Room.h" />
     <ClInclude Include="include\simpleMaths.h" />
     <ClInclude Include="include\RoomPlan.h" />

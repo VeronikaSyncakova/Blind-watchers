@@ -2,6 +2,9 @@
 #define SIMPLE_MATHS_H
 
 #include <SFML/Graphics.hpp>
+#include "DEBUG.h"
+
+#define PI 3.1415926535897932384626433
 
 class math
 {
@@ -23,6 +26,16 @@ public:
 		sf::Vector2f displacement = t_aim - t_loaction;
 		displacement /= std::sqrtf(displacement.x * displacement.x + displacement.y * displacement.y);
 		return displacement;
+	}
+	static float degreesToRadians(float t_degrees)
+	{
+		float radians = t_degrees * (PI / 180.0f);
+		return radians;
+	}
+	static float radiansToDegrees(float t_radians)
+	{
+		float degrees = t_radians * 180.f / PI;
+		return degrees;
 	}
 };
 

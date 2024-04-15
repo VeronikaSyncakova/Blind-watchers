@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "RenderObject.h"
 #include "simpleMaths.h"
+#include "ParticleSpawner.hpp"
 
 BulletHolder::BulletHolder()
 {
@@ -64,7 +65,24 @@ void BulletHolder::spawnNewBullet(sf::Vector2f t_loc, sf::Vector2f t_target)
 	}
 }
 
+void BulletHolder::checkCollisions(sf::FloatRect t_bounds)
+{
+	for (auto i : m_bullets)
+	{
+		if(i.m_active)
+		{
+			if (i.m_bullet->getGlobalBounds().intersects(t_bounds))
+			{
+				ParticleSpawner::spawnBlood(i.m_displacement, i.m_bullet->getPosition());
+				i.m_active = false;
+				i.m_bullet->setPosition(-500000.f, -5000000.f);
+			}
+		}
+	}
+}
+
 void Bullet::update()
 {
-	m_bullet->move(m_displacement * Game::deltaTime);
+	if(m_active)
+		m_bullet->move(m_displacement * Game::deltaTime);
 }
