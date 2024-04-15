@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "DEBUG.h"
 
-#define PI 3.1415926535897932384626433
+#define PI 3.1415926535897932384626433f
 
 class math
 {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "CollisionObserver.hpp"
 
 struct Bullet
 {
@@ -11,7 +12,18 @@ struct Bullet
 	bool m_active;
 };
 
-class BulletHolder
+#include "ParticleSpawner.hpp"
+
+class ParticleSpawnerObserver : public npcCollisionObserver
+{
+public:
+	void listen(Bullet& t_bullet)override
+	{
+		ParticleSpawner::spawnBlood(t_bullet.m_displacement, t_bullet.m_bullet->getPosition());
+	}
+};
+
+class BulletHolder : public ObserverSubjectTemplate<npcCollisionObserver>
 {
 public:
 	BulletHolder();

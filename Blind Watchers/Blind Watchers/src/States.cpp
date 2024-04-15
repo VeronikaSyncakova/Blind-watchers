@@ -136,7 +136,7 @@ void WanderState::update(std::shared_ptr<Pawn> t_pawn)
 			}
 			else
 			{
-				m_chosenDirection = sf::Vector2f((rand() % 3) - 1, (rand() % 3) - 1);
+				m_chosenDirection = sf::Vector2f(static_cast<float>((rand() % 3) - 1), static_cast<float>((rand() % 3) - 1));
 			}
 		}
 		m_wanderTimeLeft -= Game::deltaTime;
@@ -166,7 +166,7 @@ void PatrolState::update(std::shared_ptr<Pawn> t_pawn)
 	if (math::circleIntersects(t_pawn->getPosition(), t_pawn->getPatrolPoints().at(m_nextPoint), 1.f, 1.f))
 	{
 		m_nextPoint++;
-		if (m_nextPoint >= t_pawn->getPatrolPoints().size())
+		if (m_nextPoint >= static_cast<int>(t_pawn->getPatrolPoints().size()))
 			m_nextPoint = 0;
 	}
 	sf::Vector2f nextPoint = t_pawn->getPatrolPoints().at(m_nextPoint);
@@ -177,4 +177,11 @@ void PatrolState::update(std::shared_ptr<Pawn> t_pawn)
 
 void PatrolState::exit(std::shared_ptr<Pawn> t_pawn)
 {
+}
+
+void PatrolState::skipPoint(std::shared_ptr<Pawn> t_pawn)
+{
+	m_nextPoint++;
+	if (m_nextPoint >= static_cast<int>(t_pawn->getPatrolPoints().size()))
+		m_nextPoint = 0;
 }

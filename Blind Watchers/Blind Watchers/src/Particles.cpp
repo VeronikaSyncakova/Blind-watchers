@@ -14,7 +14,7 @@ void Particle::update()
 		m_active = false;
 	}
 	sf::Color color = m_body->getFillColor();
-	color.a = m_alpha * (m_lifeTime / m_maxTime);
+	color.a = static_cast<int>(m_alpha * (m_lifeTime / m_maxTime));
 	m_body->setFillColor(color);
 }
 
@@ -42,7 +42,7 @@ void TextParticle::update()
 		m_active = false;
 	}
 	sf::Color color = m_body->getFillColor();
-	color.a = m_alpha * (m_lifeTime / m_maxTime);
+	color.a = static_cast<int>(m_alpha * (m_lifeTime / m_maxTime));
 	m_body->setFillColor(color);
 }
 

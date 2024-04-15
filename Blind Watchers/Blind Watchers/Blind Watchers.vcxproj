@@ -49,11 +49,13 @@
     <ClInclude Include="include\Bullet.h" />
     <ClInclude Include="include\Button.h" />
     <ClInclude Include="include\CharacterSelection.h" />
+    <ClInclude Include="include\CollisionObserver.hpp" />
     <ClInclude Include="include\Door.h" />
     <ClInclude Include="include\blindNpc.h" />
     <ClInclude Include="include\levelData.h" />
     <ClInclude Include="include\LevelEditor.h" />
     <ClInclude Include="include\Medication.h" />
+    <ClInclude Include="include\Observer.h" />
     <ClInclude Include="include\Particles.h" />
     <ClInclude Include="include\ParticleSpawner.hpp" />
     <ClInclude Include="include\Room.h" />

@@ -9,7 +9,7 @@ void AnimatedSprite::update()
 	{
 		m_currentFrameTime = m_waitTimeBetweenFrames;
 		m_selectedRegion++;
-		if (m_selectedRegion >= m_renderRegions.size())
+		if (m_selectedRegion >= static_cast<int>(m_renderRegions.size()))
 		{
 			m_selectedRegion = 0;
 		}

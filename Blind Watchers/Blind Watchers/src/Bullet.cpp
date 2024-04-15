@@ -2,10 +2,12 @@
 #include "Game.h"
 #include "RenderObject.h"
 #include "simpleMaths.h"
-#include "ParticleSpawner.hpp"
 
 BulletHolder::BulletHolder()
 {
+	std::shared_ptr<ParticleSpawnerObserver> t;
+	t = std::make_shared< ParticleSpawnerObserver>();
+	AddObserver(t);
 }
 
 BulletHolder::~BulletHolder()
@@ -73,7 +75,7 @@ void BulletHolder::checkCollisions(sf::FloatRect t_bounds)
 		{
 			if (i.m_bullet->getGlobalBounds().intersects(t_bounds))
 			{
-				ParticleSpawner::spawnBlood(i.m_displacement, i.m_bullet->getPosition());
+				notifyAll(i);
 				i.m_active = false;
 				i.m_bullet->setPosition(-500000.f, -5000000.f);
 			}
