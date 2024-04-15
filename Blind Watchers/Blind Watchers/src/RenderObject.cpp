@@ -31,11 +31,16 @@ void RenderObject::appendToObject(std::vector<std::weak_ptr<sf::Drawable>>& t_ob
 
 	t_obj.push_back(t_new);
 }
+void RenderObject::setCameraView(sf::View& t_view)
+{
+	m_cameraView = t_view;
+}
 void RenderObject::updateCamera(sf::Vector2f t_move)
 {
 	m_cameraView.move(t_move);
 	m_window.setView(m_cameraView);
 }
+
 
 void RenderObject::zoomCamera(float t_zoom, sf::Vector2f& t_centerPoint)
 {
