@@ -112,7 +112,7 @@ void GamePlay::update()
 			m_meds.updatePlayerPosition(p->getBounds());
 
 			if(m_shooting)
-				m_bulletManager.spawnNewBullet(p->getPosition(), m_mousePos);
+				m_bulletManager.spawnNewBullet(p->getPosition(), m_mousePosView);
 		}
 	}
 	if (m_medProgress->checkEmpty())
@@ -130,6 +130,7 @@ void GamePlay::processMouse(sf::Event& t_event)
 	if(sf::Event::MouseMoved == t_event.type)
 	{
 		findMousePos(t_event);
+		findMousePosView(t_event);
 	}
 	else if (sf::Event::MouseButtonPressed == t_event.type)
 	{
@@ -140,7 +141,7 @@ void GamePlay::processMouse(sf::Event& t_event)
 			{
 				if (typeid(*p) == typeid(Player))
 				{
-					m_bulletManager.spawnNewBullet(p->getPosition(), m_mousePos);
+					m_bulletManager.spawnNewBullet(p->getPosition(), m_mousePosView);
 					break;
 				}
 			}
