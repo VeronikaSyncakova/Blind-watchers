@@ -1,0 +1,10 @@
+npc:
+  - position:
+      x: 1000
+      y: 500
+  - position:
+      x: 1300
+      y: 600
+  - position:
+      x: 561.9899
+      y: 348.3487
