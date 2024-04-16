@@ -7,7 +7,7 @@
 /// setup the shared pointer for the body
 /// </summary>
 /// <param name="t_characterData"></param>
-blindNpc::blindNpc(npcData& t_characterData)
+blindNpc::blindNpc(npcData& t_characterData) : m_visionCone(t_characterData.position, 100.f, 30.f)
 {
 	m_body = std::make_shared<body>();
 	m_body->initialiseBody(t_characterData);
@@ -48,6 +48,7 @@ void blindNpc::moveBody(sf::Vector2f const& t_moveVector)
 	{
 		m_position += t_moveVector * m_maxSpeed * Game::deltaTime;
 	}
+	m_visionCone.moveCone(m_position);
 	m_body->moveBody(m_position);
 }
 
@@ -65,6 +66,7 @@ npcData blindNpc::getData()
 void blindNpc::position(sf::Vector2f& t_position)
 {
 	m_position = t_position;
+	m_visionCone.moveCone(m_position);
 	m_body->m_rectangle->setPosition(m_position);
 	m_roomNumber = RoomPlan::getInstance().getRoomNumber(m_position);
 }

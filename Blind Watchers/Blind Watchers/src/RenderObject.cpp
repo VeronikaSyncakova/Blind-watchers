@@ -39,6 +39,12 @@ void RenderObject::updateCamera(sf::Vector2f t_move)
 	m_window.setView(m_cameraView);
 }
 
+void RenderObject::setCamera(sf::Vector2f t_newPosition)
+{
+	m_cameraView.setCenter(t_newPosition);
+	m_window.setView(m_cameraView);
+}
+
 
 void RenderObject::zoomCamera(float t_zoom, sf::Vector2f& t_centerPoint)
 {

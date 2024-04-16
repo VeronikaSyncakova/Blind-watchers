@@ -9,6 +9,17 @@
 class math
 {
 public:
+	static sf::Vector2f angleToPosition(float t_hypLen, float t_angle)
+	{
+		sf::Vector2f position;
+		position.x = std::cos(t_angle) * t_hypLen;
+		position.y = std::sin(t_angle) * t_hypLen;
+		return position;
+	}
+	static float distance(sf::Vector2f t_pos1, sf::Vector2f t_pos2)
+	{
+		return std::sqrt((t_pos1.x - t_pos2.x) * (t_pos1.x - t_pos2.x) + (t_pos1.y - t_pos2.y) * (t_pos1.y - t_pos2.y));
+	}
 	static float distancebetweenPoints(sf::Vector2f t_pos1, sf::Vector2f t_pos2)
 	{
 		return ((t_pos2.x - t_pos1.x) * (t_pos2.x - t_pos1.x) + (t_pos2.y - t_pos1.y) * (t_pos2.y - t_pos1.y));

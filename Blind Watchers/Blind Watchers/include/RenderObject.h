@@ -79,6 +79,8 @@ public:
 
     //updates camera view
     void updateCamera(sf::Vector2f t_move);
+    void setCamera(sf::Vector2f t_newPosition);
+
     //zoom camera
     void zoomCamera(float t_zoom, sf::Vector2f& t_centerPoint);
     void centerView(float t_zoom, sf::Vector2f& t_centerPoint);

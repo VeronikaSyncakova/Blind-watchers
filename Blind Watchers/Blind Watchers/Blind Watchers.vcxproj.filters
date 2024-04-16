@@ -159,6 +159,12 @@
     <ClCompile Include="src\Bullet.cpp">
       <Filter>Source Files\GamePlay\Pawn\Weapons</Filter>
     </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Source Files\GamePlay\Pawn</Filter>
+    </ClCompile>
+    <ClCompile Include="src\VisionCone.cpp">
+      <Filter>Source Files\GamePlay\Pawn</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameMode.h">
@@ -376,6 +382,12 @@
     </ClInclude>
     <ClInclude Include="include\DamageApplicator.hpp">
       <Filter>Header Files\GamePlay\Pawn\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Camera.h">
+      <Filter>Header Files\GamePlay\Pawn</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VisionCone.h">
+      <Filter>Header Files\GamePlay\Pawn</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

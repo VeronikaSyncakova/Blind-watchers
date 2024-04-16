@@ -6,6 +6,8 @@
 
 Player::Player()
 {
+	m_followCam.setCameraType(CameraTracker::CameraType::Delayed_Follow);
+
 	m_body = std::make_shared<sf::RectangleShape>();
 	
 	m_active = true;
@@ -74,17 +76,17 @@ void Player::moveBody(sf::Vector2f const& t_moveVector)
 	{//collision with walls 
 		sf::Vector2f deflectVector = RoomPlan::getInstance().deflectVector(*m_body, m_roomNumber);
 		m_body->move( deflectVector* ((m_moveSpeed + ExtraSpeed) * Game::deltaTime));
-		RenderObject::getInstance().updateCamera(deflectVector);
+		//RenderObject::getInstance().updateCamera(deflectVector * ((m_moveSpeed + ExtraSpeed) * Game::deltaTime));
 	}
 	else
 	{
 		m_body->move(t_moveVector * ((m_moveSpeed + ExtraSpeed) * Game::deltaTime));
-		RenderObject::getInstance().updateCamera(t_moveVector);
+		//RenderObject::getInstance().updateCamera(t_moveVector * ((m_moveSpeed + ExtraSpeed) * Game::deltaTime));
 		if (RoomPlan::getInstance().usesDoor(*m_body, m_roomNumber)) //using doors
 			m_roomNumber = RoomPlan::getInstance().getRoomNumber(m_body->getPosition()); //update room number
 	}
-
 	m_position = m_body->getPosition();
+	m_followCam.update(m_position);
 }
 
 void Player::position(sf::Vector2f& t_position)

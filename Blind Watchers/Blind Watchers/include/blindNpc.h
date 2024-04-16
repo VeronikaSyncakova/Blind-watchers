@@ -2,6 +2,7 @@
 
 #include "Pawn.h"
 #include "levelData.h"
+#include "VisionCone.h"
 
 /// <summary>
 /// struct holding the visible part of the npc,
@@ -38,4 +39,6 @@ private:
 
 	std::shared_ptr<body> m_body;
 	float m_maxSpeed{ 100.f };
+
+	visionCone m_visionCone;
 };

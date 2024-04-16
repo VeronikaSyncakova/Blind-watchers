@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Pawn.h"
+#include "Camera.h"
 
 class Player : public Pawn
 {
@@ -18,6 +19,8 @@ public:
 	void position(sf::Vector2f& t_position) override;
 private:
 	std::shared_ptr<sf::RectangleShape> m_body;
+
+	CameraTracker m_followCam;
 
 	bool m_sprinting{ false };
 	float m_sprintTimeLeft{ 2.f };
