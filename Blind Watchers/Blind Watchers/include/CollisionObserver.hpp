@@ -2,10 +2,10 @@
 
 #include "Observer.h"
 
-struct Bullet;
+struct collisionInfo;
 
 class npcCollisionObserver : public ObserverTemplate
 {
 public:
-    virtual void listen(Bullet& t_bullet) = 0;
+    virtual void listen(collisionInfo& t_bullet) = 0;
 };

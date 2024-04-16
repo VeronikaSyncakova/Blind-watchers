@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "RenderObject.h"
 #include "simpleMaths.h"
+#include "DamageApplicator.hpp"
 
 BulletHolder::BulletHolder()
 {
@@ -12,6 +13,11 @@ BulletHolder::BulletHolder()
 
 BulletHolder::~BulletHolder()
 {
+}
+
+void BulletHolder::assignDamageApplicator(std::shared_ptr<damageApplicator> t_newObserver)
+{
+	AddObserver(t_newObserver);
 }
 
 void BulletHolder::update()
@@ -75,7 +81,10 @@ void BulletHolder::checkCollisions(sf::FloatRect t_bounds)
 		{
 			if (i.m_bullet->getGlobalBounds().intersects(t_bounds))
 			{
-				notifyAll(i);
+				collisionInfo info;
+				info.collidingBullet = i;
+				info.collidedNPC = t_bounds;
+				notifyAll(info);
 				i.m_active = false;
 				i.m_bullet->setPosition(-500000.f, -5000000.f);
 			}

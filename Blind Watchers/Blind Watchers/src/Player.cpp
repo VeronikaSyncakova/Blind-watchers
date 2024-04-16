@@ -50,6 +50,11 @@ void Player::update()
 	}
 }
 
+void Player::expire()
+{
+	DEBUG_MSG("DEAD");
+}
+
 void Player::moveBody(sf::Vector2f const& t_moveVector)
 {
 	float ExtraSpeed = 0.f;

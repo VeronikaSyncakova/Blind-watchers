@@ -50,6 +50,7 @@
     <ClInclude Include="include\Button.h" />
     <ClInclude Include="include\CharacterSelection.h" />
     <ClInclude Include="include\CollisionObserver.hpp" />
+    <ClInclude Include="include\DamageApplicator.hpp" />
     <ClInclude Include="include\Door.h" />
     <ClInclude Include="include\blindNpc.h" />
     <ClInclude Include="include\levelData.h" />
