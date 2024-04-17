@@ -1,4 +1,5 @@
 #include "RoomPlan.h"
+#include "DEBUG.h"
 
 RoomPlan::RoomPlan()
 {
@@ -6,12 +7,17 @@ RoomPlan::RoomPlan()
 
 void RoomPlan::init(levelData& t_data)
 {
+	if(!m_roomBackgroundTexture.loadFromFile("ASSETS\\IMAGES\\Misc\\background.png"))
+		DEBUG_MSG("COULDNT LOAD ROOM BACKGROUND");
+	if (!m_doorTexture.loadFromFile("ASSETS\\IMAGES\\Misc\\door.png"))
+		DEBUG_MSG("COULDNT LOAD DOOR");
+
 	//temporary door vector where I load the door data
 	std::vector<Door> doors;
 	for (unsigned i = 0; i < t_data.m_doors.size(); i++)
 	{
 		Door newDoor;
-		newDoor.init(t_data.m_doors.at(i));
+		newDoor.init(t_data.m_doors.at(i),m_doorTexture);
 		doors.push_back(newDoor);
 	}
 
@@ -19,7 +25,7 @@ void RoomPlan::init(levelData& t_data)
 	for (unsigned i = 0; i < t_data.m_rooms.size(); i++)
 	{
 		Room newRoom;
-		newRoom.init(t_data.m_rooms.at(i));
+		newRoom.init(t_data.m_rooms.at(i), m_roomBackgroundTexture);
 		m_rooms[i]=newRoom;
 		//assigning doors to rooms
 		for (Door door : doors)
@@ -46,6 +52,11 @@ int RoomPlan::getRoomNumber(sf::Vector2f t_position)
 sf::Vector2f RoomPlan::getRoomCenter(int t_roomNum)
 {
 	return m_rooms[t_roomNum].getCenter();
+}
+
+sf::Vector2f RoomPlan::getRoomPosition(int& t_roomNum)
+{
+	return m_rooms[t_roomNum].getPosition();;
 }
 
 bool RoomPlan::collides(sf::RectangleShape& t_object, int& t_roomNum)

@@ -26,6 +26,17 @@ Player::Player()
 
 	RenderObject::getInstance().add(m_body);
 
+	if (!m_bodyTexture.loadFromFile("ASSETS\\IMAGES\\Misc\\"+tempData.m_name+".png"))
+		DEBUG_MSG("COULDNT LOAD PLAYER");
+	m_bodySprite = std::make_shared<sf::Sprite>();
+	m_bodySprite->setTexture(m_bodyTexture);
+	sf::Vector2f size = sf::Vector2f(m_bodySprite->getGlobalBounds().width, m_bodySprite->getGlobalBounds().height);
+	size.x = size.x / 3.f;//amount of frames
+	m_bodySprite->setOrigin(size/2.f);
+	m_bodySprite->setPosition(m_position);
+	m_bodySprite->setTextureRect(sf::IntRect(0,0,size.x,size.y));
+	RenderObject::getInstance().add(m_bodySprite);
+
 	m_roomNumber = RoomPlan::getInstance().getRoomNumber(m_position);
 }
 
@@ -87,6 +98,7 @@ void Player::moveBody(sf::Vector2f const& t_moveVector)
 	}
 	m_position = m_body->getPosition();
 	m_followCam.update(m_position);
+	m_bodySprite->setPosition(m_position);
 }
 
 void Player::position(sf::Vector2f& t_position)
@@ -94,4 +106,9 @@ void Player::position(sf::Vector2f& t_position)
 	m_position = t_position;
 	m_body->setPosition(m_position);
 	m_roomNumber = RoomPlan::getInstance().getRoomNumber(m_position);
+	m_bodySprite->setPosition(m_position);
+}
+
+void Player::writeYAML(YAML::Emitter& t_out)
+{
 }

@@ -2,9 +2,144 @@ npc:
   - position:
       x: 1000
       y: 500
+    colour:
+      r: 255
+      g: 255
+      b: 255
+      a: 255
+    size:
+      x: 50
+      y: 50
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Patrol
+    paths:
+      - point:
+          x: 100
+          y: 250
+      - point:
+          x: 800
+          y: 600
+      - point:
+          x: 300
+          y: 900
   - position:
-      x: 1300
-      y: 600
+      x: 917.9899
+      y: 185.3487
+    colour:
+      r: 255
+      g: 0
+      b: 255
+      a: 255
+    size:
+      x: 80
+      y: 80
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Wander
+    paths:
+      - point:
+          x: 100
+          y: 250
+      - point:
+          x: 800
+          y: 600
+      - point:
+          x: 300
+          y: 900
   - position:
-      x: 561.9899
-      y: 348.3487
+      x: 406.9899
+      y: 351.3487
+    colour:
+      r: 255
+      g: 255
+      b: 255
+      a: 255
+    size:
+      x: 50
+      y: 50
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Wander
+    paths:
+      - point:
+          x: 100
+          y: 250
+      - point:
+          x: 800
+          y: 600
+      - point:
+          x: 300
+          y: 900
+  - position:
+      x: 758.9899
+      y: 670.3487
+    colour:
+      r: 255
+      g: 0
+      b: 255
+      a: 255
+    size:
+      x: 80
+      y: 80
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Wander
+    paths:
+      - point:
+          x: 100
+          y: 250
+      - point:
+          x: 800
+          y: 600
+      - point:
+          x: 300
+          y: 900
+  - position:
+      x: 581.9899
+      y: 175.3487
+    colour:
+      r: 255
+      g: 255
+      b: 255
+      a: 255
+    size:
+      x: 50
+      y: 50
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Patrol
+    paths:
+      - point:
+          x: 100
+          y: 250
+      - point:
+          x: 800
+          y: 600
+      - point:
+          x: 300
+          y: 900
+  - position:
+      x: 235.9898
+      y: 594.3487
+    colour:
+      r: 255
+      g: 0
+      b: 255
+      a: 255
+    size:
+      x: 80
+      y: 80
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Wander
+    paths:
+      - point:
+          x: 100
+          y: 250
+      - point:
+          x: 800
+          y: 600
+      - point:
+          x: 300
+          y: 900

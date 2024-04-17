@@ -424,6 +424,9 @@
     <None Include="ASSETS\DATA\LEVEL\player.yaml">
       <Filter>Resource Files\DATA</Filter>
     </None>
+    <None Include="ASSETS\DATA\LEVEL\level0.yaml">
+      <Filter>Resource Files\DATA</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\libyaml-cppmdd.lib">

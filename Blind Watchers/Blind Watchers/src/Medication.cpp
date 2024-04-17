@@ -132,3 +132,63 @@ bool Medication::checkInteract()
 	}
 	return false;
 }
+
+void Medication::addMedication(MedData& t_data)
+{
+	medBody newMed;
+	newMed.m_inBounds = false;
+
+	// setup the sprite
+	newMed.sprite = std::make_shared<sf::Sprite>();
+	newMed.sprite->setTexture(m_medTexture);
+	newMed.sprite->setPosition(t_data.position);
+	newMed.sprite->setOrigin(sf::Vector2f(newMed.sprite->getGlobalBounds().width / 2.f, newMed.sprite->getGlobalBounds().height / 2.f));
+	newMed.sprite->setScale(0.5f, 0.5f);
+
+
+	// setup the bounds
+	newMed.interactionBounds = std::make_shared<sf::RectangleShape>();
+	newMed.interactionBounds->setSize(sf::Vector2f(newMed.sprite->getGlobalBounds().width, newMed.sprite->getGlobalBounds().height) + sf::Vector2f(40.f, 40.f));
+	newMed.interactionBounds->setFillColor(sf::Color::Transparent);
+	newMed.interactionBounds->setOutlineColor(sf::Color::White);
+	newMed.interactionBounds->setOutlineThickness(1.f);
+	newMed.interactionBounds->setOrigin(sf::Vector2f(newMed.interactionBounds->getGlobalBounds().width / 2.f, newMed.interactionBounds->getGlobalBounds().height / 2.f));
+	newMed.interactionBounds->setPosition(t_data.position);
+
+
+	RenderObject::getInstance().addBG(newMed.interactionBounds);
+	RenderObject::getInstance().addBG(newMed.sprite);
+
+	m_meds.push_back(newMed);
+}
+
+void Medication::writeYAML(YAML::Emitter& t_out)
+{
+	for (unsigned i = 0; i < m_meds.size(); i++)
+	{
+		t_out << YAML::BeginMap;
+
+		//type
+		t_out << YAML::Key << "type" << YAML::Value << "normal";
+		//position
+		t_out << YAML::Key << "position" << YAML::Value << YAML::BeginMap;
+		t_out << YAML::Key << "x" << YAML::Value << m_meds.at(i).sprite->getPosition().x;
+		t_out << YAML::Key << "y" << YAML::Value << m_meds.at(i).sprite->getPosition().y;
+		t_out << YAML::EndMap;
+
+		t_out << YAML::EndMap;
+	}
+}
+
+bool Medication::erase(sf::Vector2f& t_mousePos)
+{
+	for (unsigned i = 0; i < m_meds.size(); i++)
+	{
+		if (m_meds.at(i).bounds().contains(t_mousePos))
+		{
+			m_meds.erase(m_meds.begin() + i);
+			return true;
+		}
+	}
+	return false;
+}

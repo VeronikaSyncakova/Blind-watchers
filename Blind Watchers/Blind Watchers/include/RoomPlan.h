@@ -17,6 +17,7 @@ public:
 	void init(levelData& t_data);
 	int getRoomNumber(sf::Vector2f t_position); //returns in which room the position (object) is
 	sf::Vector2f getRoomCenter(int t_roomNum); //returns center point of a room
+	sf::Vector2f getRoomPosition(int& t_roomNum); //returns a position of specific room
 	bool collides(sf::RectangleShape& t_object, int& t_roomNum); //collision check with room walls
 	sf::Vector2f deflectVector(sf::RectangleShape& t_object, int& t_roomNum); //returns deflect vector for the colliding object
 	bool usesDoor(sf::RectangleShape& t_object, int& t_roomNum); //checks if the object crosses through the door
@@ -33,4 +34,6 @@ private:
 	std::map<int, Room> m_rooms;
 	//std::vector<Door> m_doors;
 	std::map<int, std::list<Door>> m_doors;
+	sf::Texture m_roomBackgroundTexture;
+	sf::Texture m_doorTexture;
 };

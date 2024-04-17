@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include "levelData.h"
 #include "AnimatedSprite.h"
+#include "YamlLoader.h"
+
 
 struct medBody
 {
@@ -26,6 +28,10 @@ public:
 	void update();
 	void updatePlayerPosition(sf::FloatRect t_playerBounds);
 	bool checkInteract();
+	void addMedication(MedData& t_data);
+	void writeYAML(YAML::Emitter& t_out);
+	bool erase(sf::Vector2f& t_mousePos);
+
 private:
 	std::vector<medBody> m_meds;
 	sf::Texture m_medTexture;

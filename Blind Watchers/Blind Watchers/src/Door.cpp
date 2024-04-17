@@ -4,7 +4,7 @@ Door::Door()
 {
 }
 
-void Door::init(DoorData& data)
+void Door::init(DoorData& data, sf::Texture& t_texture)
 {
 	m_position = sf::Vector2f(data.m_positionX, data.m_positionY);
 	m_rotation = data.m_rotation;
@@ -30,7 +30,14 @@ void Door::init(DoorData& data)
 	m_body->setOrigin(m_size / 2.f);
 	m_body->setPosition(m_position);
 	m_body->setRotation(m_rotation);
-	RenderObject::getInstance().add(m_body);
+	//RenderObject::getInstance().add(m_body);
+
+	m_sprite = std::make_shared<sf::Sprite>();
+	m_sprite->setTexture(t_texture);
+	m_sprite->setOrigin(m_body->getOrigin());
+	m_sprite->setPosition(m_position);
+	m_sprite->setRotation(m_rotation);
+	RenderObject::getInstance().add(m_sprite);
 }
 
 sf::Vector2f Door::getPosition()

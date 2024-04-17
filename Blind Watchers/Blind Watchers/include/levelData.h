@@ -9,6 +9,7 @@ struct npcData
 	sf::Color color;
 	sf::Vector2f size;
 	float speed;
+	std::string state;
 
 	std::vector<sf::Vector2f> patrolPoints;
 };

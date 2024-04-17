@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include "States.h"
 #include "RoomPlan.h"
+#include "YamlLoader.h"
+
 
 class Pawn
 {
@@ -26,6 +28,9 @@ public:
 	std::shared_ptr<AbstractState> getAbstractState() { return m_state; }
 
 	virtual void position(sf::Vector2f& t_position)=0; //position the character to a specific location
+
+	virtual void writeYAML(YAML::Emitter& t_out) = 0; //writing data to yaml
+
 	void applyDamage(int t_damageAmt);
 	virtual void rotate(float t_angle) = 0;
 private:
@@ -44,4 +49,6 @@ protected:
 
 	int m_health{ 100 };
 	int m_maxHealth{ 100 };
+	sf::Texture m_bodyTexture;
+	std::shared_ptr<sf::Sprite> m_bodySprite;
 };
