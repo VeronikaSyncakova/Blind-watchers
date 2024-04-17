@@ -88,3 +88,7 @@ void Player::position(sf::Vector2f& t_position)
 	m_body->setPosition(m_position);
 	m_roomNumber = RoomPlan::getInstance().getRoomNumber(m_position);
 }
+
+void Player::writeYAML(YAML::Emitter& t_out)
+{
+}

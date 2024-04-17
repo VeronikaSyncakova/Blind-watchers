@@ -92,3 +92,8 @@ sf::Vector2f Room::getCenter()
 {
 	return sf::Vector2f(m_position.x+(m_roomSize.x/2.f), m_position.y+(m_roomSize.y/2.f));
 }
+
+sf::Vector2f Room::getPosition()
+{
+	return m_position;
+}

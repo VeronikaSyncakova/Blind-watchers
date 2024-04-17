@@ -14,6 +14,7 @@ public:
 	virtual sf::FloatRect getBounds()override { return m_body->getGlobalBounds(); }
 
 	void position(sf::Vector2f& t_position) override;
+	void writeYAML(YAML::Emitter& t_out) override;
 private:
 	std::shared_ptr<sf::RectangleShape> m_body;
 

@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include "States.h"
 #include "RoomPlan.h"
+#include "YamlLoader.h"
+
 
 class Pawn
 {
@@ -23,6 +25,9 @@ public:
 	State getState() { return m_currentState; }
 
 	virtual void position(sf::Vector2f& t_position)=0; //position the character to a specific location
+
+	virtual void writeYAML(YAML::Emitter& t_out) = 0; //writing data to yaml
+
 private:
 
 protected:

@@ -18,6 +18,7 @@ struct body
 class blindNpc : public Pawn
 {
 public:
+
 	blindNpc(npcData& t_characterData);
 	~blindNpc();
 
@@ -31,9 +32,13 @@ public:
 	npcData getData(); 
 
 	void position(sf::Vector2f& t_position) override;
+
+	void writeYAML(YAML::Emitter& t_out) override; 
+
 private:
 	void setPatrolPoints(npcData& t_characterData);
 
 	std::shared_ptr<body> m_body;
 	float m_maxSpeed{ 100.f };
+
 };

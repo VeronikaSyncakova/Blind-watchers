@@ -57,6 +57,8 @@ void operator >> (const YAML::Node& t_node, npcData& t_npc)
 	// npc speed
 	t_npc.speed = t_node["speed"].as<float>();
 
+	//state
+	t_npc.state = t_node["pathingType"].as<std::string>();
 	// patrol points
 	for (unsigned i = 0; i < t_node["paths"].size(); ++i)
 	{
@@ -97,7 +99,7 @@ void operator >> (const YAML::Node& t_node, MedData& t_med)
 
 // read level data
 void operator >> (const YAML::Node& t_node, levelData& t_data)
-{
+{/*
 	const YAML::Node& npcNode = t_node["npc"].as<YAML::Node>();
 	for (unsigned i = 0; i < npcNode.size(); ++i)
 	{
@@ -107,7 +109,7 @@ void operator >> (const YAML::Node& t_node, levelData& t_data)
 
 		t_data.m_npcs.push_back(newNpc);
 	}
-
+	*/
 	const YAML::Node& roomNode = t_node["rooms"].as<YAML::Node>();
 	for (unsigned i = 0; i < roomNode.size(); i++)
 	{
@@ -131,6 +133,7 @@ void operator >> (const YAML::Node& t_node, levelData& t_data)
 		medNode[i] >> newMed;
 		t_data.m_meds.push_back(newMed);
 	}
+	
 }
 
 /// <summary>
@@ -245,6 +248,7 @@ void yamlLoader::loadLevelData(levelData& t_levelData, int t_levelNum)
 			throw std::exception(message.c_str());
 		}
 		baseNode >> t_levelData;
+		loadNpcData(t_levelData,0);
 	}
 	catch (YAML::ParserException& e)
 	{
@@ -258,4 +262,43 @@ void yamlLoader::loadLevelData(levelData& t_levelData, int t_levelNum)
 		message = "Unexpected Error: " + message;
 		throw std::exception(message.c_str());
 	}
+	
+	
+}
+
+void yamlLoader::loadNpcData(levelData& t_levelData, int t_levelNum)
+{
+	std::string filenameNPC = ".\\ASSETS\\DATA\\LEVEL\\level" + std::to_string(t_levelNum) + ".yaml";
+
+	try
+	{
+		YAML::Node baseNodeNPC = YAML::LoadFile(filenameNPC);
+		if (baseNodeNPC.IsNull())
+		{
+			std::string message("File: " + filenameNPC + " not found");
+			throw std::exception(message.c_str());
+		}
+		const YAML::Node& npcNode = baseNodeNPC["npc"].as<YAML::Node>();
+		for (unsigned i = 0; i < npcNode.size(); ++i)
+		{
+			npcData newNpc;
+
+			npcNode[i] >> newNpc;
+
+			t_levelData.m_npcs.push_back(newNpc);
+		}
+	}
+	catch (YAML::ParserException& e)
+	{
+		std::string message(e.what());
+		message = "YAML Parser Error: " + message;
+		throw std::exception(message.c_str());
+	}
+	catch (std::exception& e)
+	{
+		std::string message(e.what());
+		message = "Unexpected Error: " + message;
+		throw std::exception(message.c_str());
+	}
+	
 }

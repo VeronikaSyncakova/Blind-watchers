@@ -22,11 +22,15 @@ GamePlay::GamePlay()
 		std::shared_ptr<blindNpc> newNpc;
 		newNpc = std::make_shared<blindNpc>(m_level.m_npcs.at(i));
 
+		if(m_level.m_npcs.at(i).state=="Wander")
+			StateManager::changeCommand(State::Wander, newNpc);
+		else if(m_level.m_npcs.at(i).state=="Patrol")
+			StateManager::changeCommand(State::Patrol, newNpc);
+		else if(m_level.m_npcs.at(i).state == "None")
+			StateManager::changeCommand(State::None, newNpc);
+
 		m_pawns.push_back(newNpc);
 	}
-	// TO DO : change state to be read from file
-	StateManager::changeCommand(State::Wander, m_pawns.at(0));
-	StateManager::changeCommand(State::Patrol, m_pawns.at(1));
 
 	// loads player, done after so player would be on top
 	std::shared_ptr<Player> player;

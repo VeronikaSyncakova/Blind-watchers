@@ -8,6 +8,7 @@ LevelEditor::LevelEditor()
 
 LevelEditor::~LevelEditor()
 {
+	saveData();
 }
 
 void LevelEditor::resetLevel()
@@ -143,7 +144,7 @@ void LevelEditor::processMouse(sf::Event& t_event)
 
 void LevelEditor::loadData()
 {
-	// loads the npc
+	// loads the level
 	yamlLoader::loadLevelData(m_level, 1);
 
 	//creates room plan
@@ -160,11 +161,19 @@ void LevelEditor::loadData()
 	{
 		std::shared_ptr<blindNpc> newNpc;
 		newNpc = std::make_shared<blindNpc>(m_level.m_npcs.at(i));
+		if (m_level.m_npcs.at(i).state == "Wander")
+			StateManager::changeCommand(State::Wander, newNpc);
+		else if (m_level.m_npcs.at(i).state == "Patrol")
+			StateManager::changeCommand(State::Patrol, newNpc);
+		else if (m_level.m_npcs.at(i).state == "None")
+			StateManager::changeCommand(State::None, newNpc);
 
 		m_pawns.push_back(newNpc);
 	}
-	StateManager::changeCommand(State::Wander, m_pawns.at(0));
-	StateManager::changeCommand(State::Patrol, m_pawns.at(1));
+
+	//loads sample npc types for buttons
+	levelData npcData;
+	yamlLoader::loadNpcData(npcData, 1);
 
 	//button size and spacing
 	float width = 100.f;
@@ -190,13 +199,40 @@ void LevelEditor::loadData()
 		m_pawnButtons.push_back(newPawnButton);
 	}
 	m_pawnButtons.at(0).m_pawn = player; //std::make_shared<Player>();
-	m_pawnButtons.at(1).m_pawn = m_pawns.at(1); //std::make_shared<blindNpc>(m_level.m_npcs.at(0));
-	m_pawnButtons.at(2).m_pawn = m_pawns.at(2); //std::make_shared<blindNpc>(m_level.m_npcs.at(1));
+	m_pawnButtons.at(1).m_pawn = std::make_shared<blindNpc>(npcData.m_npcs.at(0));//m_pawns.at(1); //std::make_shared<blindNpc>(m_level.m_npcs.at(0));
+	m_pawnButtons.at(2).m_pawn = std::make_shared<blindNpc>(npcData.m_npcs.at(1));//m_pawns.at(2); //std::make_shared<blindNpc>(m_level.m_npcs.at(1));
 
 }
 
 void LevelEditor::saveData()
 {
+	// A YAML::Emitter acts as a YAML output stream 	
+	YAML::Emitter out;
+	out << YAML::BeginMap;
+
+	// Highscores is the top level mapping
+	out << YAML::Key << "npc";
+
+	//out << YAML::BeginMap;
+	out << YAML::Key;
+	out << YAML::BeginSeq;
+	for (unsigned i = 1; i < m_pawns.size(); i++)
+	{
+		m_pawns.at(i)->writeYAML(out);
+	}
+	out << YAML::EndSeq;
+	//out << YAML::EndMap;
+
+	out << YAML::EndMap;
+	//std::cout << "Here's the raw YAML data:\n" << out.c_str() << "\n";
+
+	// Now write it to a file..
+	std::string file = "./ASSETS/DATA/LEVEL/level0.yaml";
+	std::ofstream fout(file); // This is the path to the YAML file
+
+	fout << out.c_str() << std::endl;
+	fout.close();
+	
 }
 
 void LevelEditor::buttonCollision()

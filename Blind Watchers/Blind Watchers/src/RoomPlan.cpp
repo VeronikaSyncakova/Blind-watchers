@@ -48,6 +48,11 @@ sf::Vector2f RoomPlan::getRoomCenter(int t_roomNum)
 	return m_rooms[t_roomNum].getCenter();
 }
 
+sf::Vector2f RoomPlan::getRoomPosition(int& t_roomNum)
+{
+	return m_rooms[t_roomNum].getPosition();;
+}
+
 bool RoomPlan::collides(sf::RectangleShape& t_object, int& t_roomNum)
 {
 	return m_rooms.at(t_roomNum).checkCollision(t_object);
