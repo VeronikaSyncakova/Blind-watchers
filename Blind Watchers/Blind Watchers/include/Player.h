@@ -10,6 +10,8 @@ public:
 
 	void update()override;
 
+	void expire()override;
+
 	void moveBody(sf::Vector2f const& t_moveVector)override;
 	virtual sf::FloatRect getBounds()override { return m_body->getGlobalBounds(); }
 

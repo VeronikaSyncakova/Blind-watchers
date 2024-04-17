@@ -374,6 +374,9 @@
     <ClInclude Include="include\Observer.h">
       <Filter>Header Files\Globals</Filter>
     </ClInclude>
+    <ClInclude Include="include\DamageApplicator.hpp">
+      <Filter>Header Files\GamePlay\Pawn\Weapons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="ASSETS\IMAGES\Buttons\rotate_button.png">

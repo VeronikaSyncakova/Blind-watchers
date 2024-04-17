@@ -24,6 +24,8 @@ public:
 
 	virtual void update()override;
 
+	void expire()override;
+
 	// normalised vector that the pawn will move along
 	virtual void moveBody(sf::Vector2f const& t_moveVector)override;
 

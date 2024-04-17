@@ -1,6 +1,7 @@
 #include "blindNpc.h"
 #include "RenderObject.h"
 #include "Game.h"
+#include "ParticleSpawner.hpp"
 
 /// <summary>
 /// setup the shared pointer for the body
@@ -29,6 +30,14 @@ blindNpc::~blindNpc()
 
 void blindNpc::update()
 {
+}
+
+void blindNpc::expire()
+{
+	m_active = false;
+	ParticleSpawner::explode(m_position);
+	m_position = sf::Vector2f(-10000.f, -10000.f);
+	m_body->m_rectangle->setPosition(m_position);
 }
 
 void blindNpc::moveBody(sf::Vector2f const& t_moveVector)

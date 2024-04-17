@@ -18,6 +18,8 @@ public:
 	// normalised vector that the pawn will move along
 	virtual void moveBody(sf::Vector2f const& t_moveVector) = 0;
 
+	virtual void expire() = 0;
+
 	bool getActive() { return m_active; }
 	virtual sf::FloatRect getBounds() = 0;
 	sf::Vector2f getPosition() { return m_position; }
@@ -28,6 +30,7 @@ public:
 
 	virtual void writeYAML(YAML::Emitter& t_out) = 0; //writing data to yaml
 
+	void applyDamage(int t_damageAmt);
 private:
 
 protected:
@@ -41,4 +44,7 @@ protected:
 	std::vector<sf::Vector2f> m_patrolPoints;
 	
 	int m_roomNumber{ 0 }; //number of the room where the pawn currently is
+
+	int m_health{ 100 };
+	int m_maxHealth{ 100 };
 };

@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "blindNpc.h"
 #include "Particles.h"
+#include "DamageApplicator.hpp"
 
 /// <summary>
 /// default constructor
@@ -41,6 +42,10 @@ GamePlay::GamePlay()
 	m_meds.initialise(m_level.m_meds);
 	
 	resetLevel();
+
+	std::shared_ptr<damageApplicator> newApplicator;
+	newApplicator = std::make_shared<damageApplicator>(m_pawns);
+	m_bulletManager.assignDamageApplicator(newApplicator);
 }
 
 /// <summary>

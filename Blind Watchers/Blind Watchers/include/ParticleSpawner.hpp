@@ -58,6 +58,24 @@ public:
 			ParticleSystem::getInstance().spawnNewParticle(2.f, t_spawnPos, direction, 1000.f, 0.5f, color);
 		}
 	}
+
+	static void explode(sf::Vector2f t_position)
+	{
+		int amt = rand() % 100;
+		for (int j = 0; j < amt; j++)
+		{
+			sf::Vector2f direction;
+			direction.x = (rand() / float(RAND_MAX) * 3.f) - 1.f;
+			direction.y = (rand() / float(RAND_MAX) * 3.f) - 1.f;
+			sf::Color col;
+			col.r = rand() % 255;
+			col.g = rand() % 255;
+			col.b = rand() % 255;
+			col.a = 255;
+
+			ParticleSystem::getInstance().spawnNewParticle(2.f, t_position, direction, 300.f, 0.5f, col);
+		}
+	}
 };
 
 #endif // !PARTICLE_SPAWNER_HPP
