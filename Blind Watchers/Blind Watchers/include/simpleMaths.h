@@ -13,14 +13,18 @@ public:
 	{
 		return std::sqrt((t_pos1.x - t_pos2.x) * (t_pos1.x - t_pos2.x) + (t_pos1.y - t_pos2.y) * (t_pos1.y - t_pos2.y));
 	}
-	static float distancebetweenPoints(sf::Vector2f t_pos1, sf::Vector2f t_pos2)
+	static float squareDistancebetweenPoints(sf::Vector2f t_pos1, sf::Vector2f t_pos2)
 	{
 		return ((t_pos2.x - t_pos1.x) * (t_pos2.x - t_pos1.x) + (t_pos2.y - t_pos1.y) * (t_pos2.y - t_pos1.y));
+	}
+	static float distancebetweenPoints(sf::Vector2f t_pos1, sf::Vector2f t_pos2)
+	{
+		return std::sqrtf((t_pos2.x - t_pos1.x) * (t_pos2.x - t_pos1.x) + (t_pos2.y - t_pos1.y) * (t_pos2.y - t_pos1.y));
 	}
 
 	static bool circleIntersects(sf::Vector2f t_pos1, sf::Vector2f t_pos2, float t_radius1, float t_radius2)
 	{
-		float distBetweenPoints = distancebetweenPoints(t_pos1, t_pos2);
+		float distBetweenPoints = squareDistancebetweenPoints(t_pos1, t_pos2);
 		float radSize = (t_radius1 + t_radius2) * (t_radius1 + t_radius2);
 		return (distBetweenPoints <= radSize);
 	}
@@ -67,7 +71,7 @@ public:
 	}
 	static bool containedInCone(sf::Vector2f t_pointA, sf::Vector2f t_pointB, sf::Vector2f t_pointC, sf::Vector2f t_checkPoint)
 	{
-		if (circleIntersects(t_pointA, t_checkPoint, distancebetweenPoints(t_pointA, t_pointB), 1.f))
+		if (circleIntersects(t_pointA, t_checkPoint, distancebetweenPoints(t_pointA, t_pointB) + 80.f, 0.f))
 			if (checkIsLeft(t_pointA, t_pointB, t_checkPoint) && checkIsLeft(t_pointC, t_pointA, t_checkPoint))
 				return true;
 		return false;

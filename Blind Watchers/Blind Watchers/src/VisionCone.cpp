@@ -47,5 +47,6 @@ bool visionCone::checkCollision(sf::FloatRect t_playerBounds)
 		DEBUG_MSG("COLLIDING");
 		return true;
 	}
+	DEBUG_MSG("no collision");
 	return false;
 }
