@@ -1,2 +1,62 @@
 npc:
-  []
+  - position:
+      x: 813.9898
+      y: 240.3487
+    colour:
+      r: 255
+      g: 255
+      b: 255
+      a: 255
+    size:
+      x: 50
+      y: 50
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Wander
+    paths:
+      - point:
+          x: 100
+          y: 250
+      - point:
+          x: 800
+          y: 600
+      - point:
+          x: 300
+          y: 900
+  - position:
+      x: 608.9899
+      y: 390.3488
+    colour:
+      r: 255
+      g: 0
+      b: 255
+      a: 255
+    size:
+      x: 80
+      y: 80
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Patrol
+    paths:
+      - point:
+          x: 100
+          y: 250
+      - point:
+          x: 800
+          y: 600
+      - point:
+          x: 300
+          y: 900
+medication:
+  - type: normal
+    position:
+      x: 300
+      y: 100
+  - type: normal
+    position:
+      x: 600
+      y: 100
+  - type: normal
+    position:
+      x: 424.9899
+      y: 405.3487

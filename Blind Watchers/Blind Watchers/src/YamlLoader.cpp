@@ -126,6 +126,7 @@ void operator >> (const YAML::Node& t_node, levelData& t_data)
 		t_data.m_doors.push_back(newDoor);
 	}
 
+	/*
 	const YAML::Node& medNode = t_node["medication"].as<YAML::Node>();
 	for (unsigned i = 0; i < medNode.size(); i++)
 	{
@@ -133,7 +134,7 @@ void operator >> (const YAML::Node& t_node, levelData& t_data)
 		medNode[i] >> newMed;
 		t_data.m_meds.push_back(newMed);
 	}
-	
+	*/
 }
 
 /// <summary>
@@ -249,6 +250,7 @@ void yamlLoader::loadLevelData(levelData& t_levelData, int t_levelNum)
 		}
 		baseNode >> t_levelData;
 		loadNpcData(t_levelData,0);
+		loadMedData(t_levelData, 0);
 	}
 	catch (YAML::ParserException& e)
 	{
@@ -301,4 +303,38 @@ void yamlLoader::loadNpcData(levelData& t_levelData, int t_levelNum)
 		throw std::exception(message.c_str());
 	}
 	
+}
+
+void yamlLoader::loadMedData(levelData& t_levelData, int t_levelNum)
+{
+	std::string filename = ".\\ASSETS\\DATA\\LEVEL\\level" + std::to_string(t_levelNum) + ".yaml";
+
+	try
+	{
+		YAML::Node baseNode = YAML::LoadFile(filename);
+		if (baseNode.IsNull())
+		{
+			std::string message("File: " + filename + " not found");
+			throw std::exception(message.c_str());
+		}
+		const YAML::Node& medNode = baseNode["medication"].as<YAML::Node>();
+		for (unsigned i = 0; i < medNode.size(); i++)
+		{
+			MedData newMed;
+			medNode[i] >> newMed;
+			t_levelData.m_meds.push_back(newMed);
+		}
+	}
+	catch (YAML::ParserException& e)
+	{
+		std::string message(e.what());
+		message = "YAML Parser Error: " + message;
+		throw std::exception(message.c_str());
+	}
+	catch (std::exception& e)
+	{
+		std::string message(e.what());
+		message = "Unexpected Error: " + message;
+		throw std::exception(message.c_str());
+	}
 }

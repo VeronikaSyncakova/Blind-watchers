@@ -150,6 +150,9 @@ void LevelEditor::loadData()
 	//creates room plan
 	RoomPlan::getInstance().init(m_level);
 
+	//load medication
+	m_medication.initialise(m_level.m_meds);
+
 	// loads player
 	std::shared_ptr<Player> player;
 	player = std::make_shared<Player>();
@@ -174,6 +177,11 @@ void LevelEditor::loadData()
 	//loads sample npc types for buttons
 	levelData npcData;
 	yamlLoader::loadNpcData(npcData, 1);
+
+	//sample medData
+	levelData medData;
+	yamlLoader::loadMedData(medData, 1);
+	m_medData = medData.m_meds.at(0);
 
 	//button size and spacing
 	float width = 100.f;
@@ -209,11 +217,8 @@ void LevelEditor::saveData()
 	// A YAML::Emitter acts as a YAML output stream 	
 	YAML::Emitter out;
 	out << YAML::BeginMap;
-
-	// Highscores is the top level mapping
+	//npcs
 	out << YAML::Key << "npc";
-
-	//out << YAML::BeginMap;
 	out << YAML::Key;
 	out << YAML::BeginSeq;
 	for (unsigned i = 1; i < m_pawns.size(); i++)
@@ -221,10 +226,14 @@ void LevelEditor::saveData()
 		m_pawns.at(i)->writeYAML(out);
 	}
 	out << YAML::EndSeq;
-	//out << YAML::EndMap;
+	//medication
+	out << YAML::Key << "medication";
+	out << YAML::Key;
+	out << YAML::BeginSeq;
+	m_medication.writeYAML(out);
+	out << YAML::EndSeq;
 
 	out << YAML::EndMap;
-	//std::cout << "Here's the raw YAML data:\n" << out.c_str() << "\n";
 
 	// Now write it to a file..
 	std::string file = "./ASSETS/DATA/LEVEL/level0.yaml";
@@ -308,6 +317,10 @@ void LevelEditor::buttonAction(int t_buttonNum)
 	{
 		m_pawnButtons.at(3).m_selected = true;
 	}
+	else if (t_buttonNum == 4) //medication
+	{
+		m_pawnButtons.at(4).m_selected = true;
+	}
 	else if (t_buttonNum == PAWN_BUTTONS-1) //zoom out
 	{
 		zoomOut();
@@ -344,5 +357,13 @@ void LevelEditor::performButtonAction()
 				break;
 			}
 		}
+		if(m_medication.erase(m_mousePosView))
+			m_pawnButtons.at(3).m_selected = false;
+	}
+	else if (m_pawnButtons.at(4).m_selected) //medication
+	{
+		m_medData.position = m_mousePosView;
+		m_medication.addMedication(m_medData);
+		m_pawnButtons.at(4).m_selected = false;
 	}
 }
