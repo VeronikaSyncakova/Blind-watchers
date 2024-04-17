@@ -4,18 +4,27 @@
 
 visionCone::visionCone(sf::Vector2f t_spawnPos, float t_len, float t_angle)
 {
-	m_cone = std::make_shared<sf::ConvexShape>(3);
+	int divides = 10;
+	m_cone = std::make_shared<sf::ConvexShape>(divides);
 
-	float useAngle = t_angle / 2.f;
+	float useAngle = t_angle / (divides - 1.f);
 	m_cone->setPoint(0, sf::Vector2f(0.f,0.f));
-	sf::Vector2f nextPoint = math::angleToPosition(t_len, useAngle);
+
+	sf::Vector2f nextPoint;
+	for (int i = -divides / 2.f; i < divides / 2.f; i++)
+	{
+		nextPoint = math::angleToPosition(t_len, useAngle * i);
+		m_cone->setPoint(i + divides / 2.f, nextPoint);
+	}
+
+	/*sf::Vector2f nextPoint = math::angleToPosition(t_len, useAngle * 2);
 	m_cone->setPoint(1, nextPoint);
-	nextPoint = math::angleToPosition(t_len, -useAngle);
+	nextPoint = math::angleToPosition(t_len, useAngle);
 	m_cone->setPoint(2, nextPoint);
-	//nextPoint = math::angleToPosition(t_len, -useAngle);
-	//m_cone->setPoint(3, nextPoint);
-	//nextPoint = math::angleToPosition(t_len, -useAngle * 2);
-	//m_cone->setPoint(4, nextPoint);
+	nextPoint = math::angleToPosition(t_len, -useAngle);
+	m_cone->setPoint(3, nextPoint);
+	nextPoint = math::angleToPosition(t_len, -useAngle * 2);
+	m_cone->setPoint(4, nextPoint);*/
 
 	m_cone->setFillColor(sf::Color::Transparent);
 	m_cone->setOutlineColor(sf::Color::White);
