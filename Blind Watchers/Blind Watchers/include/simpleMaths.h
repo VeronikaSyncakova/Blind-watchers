@@ -49,6 +49,10 @@ public:
 		position.y = std::sin(t_angle) * t_hypLen;
 		return position;
 	}
+	static float displacementToDegrees(sf::Vector2f t_displacement)
+	{
+		return degreesToRadians(std::atan2f(t_displacement.y, t_displacement.x)) + 180.f;
+	}
 };
 
 #endif // !SIMPLE_MATHS_H

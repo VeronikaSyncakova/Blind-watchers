@@ -72,7 +72,7 @@ void Medication::initialise(std::vector<MedData>& t_medData)
 		newMed.interactionBounds->setPosition(med.position);
 
 
-		RenderObject::getInstance().addBG(newMed.interactionBounds);
+		//RenderObject::getInstance().addBG(newMed.interactionBounds);
 		RenderObject::getInstance().addBG(newMed.sprite);
 
 		m_meds.push_back(newMed);

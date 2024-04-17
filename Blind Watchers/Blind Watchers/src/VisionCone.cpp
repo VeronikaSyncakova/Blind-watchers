@@ -4,17 +4,17 @@
 
 visionCone::visionCone(sf::Vector2f t_spawnPos, float t_len, float t_angle)
 {
-	int divides = 10;
+	int divides = 8;
 	m_cone = std::make_shared<sf::ConvexShape>(divides);
 
 	float useAngle = t_angle / (divides - 1.f);
 	m_cone->setPoint(0, sf::Vector2f(0.f,0.f));
 
 	sf::Vector2f nextPoint;
-	for (int i = -divides / 2.f; i < divides / 2.f; i++)
+	for (int i = -divides / 2.f + 1; i < divides / 2.f - 1; i++)
 	{
 		nextPoint = math::angleToPosition(t_len, useAngle * i);
-		m_cone->setPoint(i + divides / 2.f, nextPoint);
+		m_cone->setPoint(i + divides / 2.f + 1, nextPoint);
 	}
 
 	/*sf::Vector2f nextPoint = math::angleToPosition(t_len, useAngle * 2);
@@ -38,4 +38,9 @@ visionCone::visionCone(sf::Vector2f t_spawnPos, float t_len, float t_angle)
 void visionCone::moveCone(sf::Vector2f t_newPosition)
 {
 	m_cone->setPosition(t_newPosition);
+}
+
+void visionCone::setRotation(float t_angle)
+{
+	m_cone->setRotation(t_angle);
 }

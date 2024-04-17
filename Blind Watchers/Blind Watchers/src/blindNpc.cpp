@@ -2,12 +2,13 @@
 #include "RenderObject.h"
 #include "Game.h"
 #include "ParticleSpawner.hpp"
+#include "simpleMaths.h"
 
 /// <summary>
 /// setup the shared pointer for the body
 /// </summary>
 /// <param name="t_characterData"></param>
-blindNpc::blindNpc(npcData& t_characterData) : m_visionCone(t_characterData.position, 100.f, 30.f)
+blindNpc::blindNpc(npcData& t_characterData) : m_visionCone(t_characterData.position, 100.f, 45.f)
 {
 	m_body = std::make_shared<body>();
 	m_body->initialiseBody(t_characterData);
@@ -47,6 +48,23 @@ void blindNpc::moveBody(sf::Vector2f const& t_moveVector)
 	else
 	{
 		m_position += t_moveVector * m_maxSpeed * Game::deltaTime;
+	}
+	float travelDegrees = math::displacementToDegrees(t_moveVector);
+	if (travelDegrees < 45.f || travelDegrees >= 315.f)
+	{
+		m_visionCone.setRotation(0.f);
+	}
+	else if (travelDegrees >= 45.f && travelDegrees < 135.f)
+	{
+		m_visionCone.setRotation(90.f);
+	}
+	else if (travelDegrees >= 135.f && travelDegrees < 225.f)
+	{
+		m_visionCone.setRotation(180.f);
+	}
+	else if (travelDegrees >= 225.f && travelDegrees < 315.f)
+	{
+		m_visionCone.setRotation(270.f);
 	}
 	m_visionCone.moveCone(m_position);
 	m_body->moveBody(m_position);
