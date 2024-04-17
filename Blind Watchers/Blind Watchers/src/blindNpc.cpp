@@ -24,6 +24,27 @@ blindNpc::~blindNpc()
 
 void blindNpc::update()
 {
+	if (m_cantFindPlayer >= 0.f)
+	{
+		m_cantFindPlayer -= Game::deltaTime;
+		if (m_cantFindPlayer <= 0.f)
+		{
+			switch (m_currentState)
+			{
+			case State::None:
+				break;
+			case State::Wander:
+				m_state = std::make_shared<WanderState>();
+				break;
+			case State::Patrol:
+				m_state = std::make_shared<PatrolState>();
+				break;
+			default:
+				m_state = std::make_shared<NoneState>();
+				break;
+			}
+		}
+	}
 }
 
 void blindNpc::expire()
@@ -49,23 +70,29 @@ void blindNpc::moveBody(sf::Vector2f const& t_moveVector)
 	{
 		m_position += t_moveVector * m_maxSpeed * Game::deltaTime;
 	}
-	float travelDegrees = math::displacementToDegrees(t_moveVector);
-	if (travelDegrees < 45.f || travelDegrees >= 315.f)
+	if(!m_cantFindPlayer <= 0.f)
 	{
-		m_visionCone.setRotation(0.f);
+		float travelDegrees = math::displacementToDegrees(t_moveVector);
+		//DEBUG_MSG(travelDegrees);
+
+		if (travelDegrees >= 45.f && travelDegrees < 135.f)
+		{
+			m_visionCone.setRotation(90.f);
+		}
+		else if (travelDegrees >= 135.f && travelDegrees < 225.f)
+		{
+			m_visionCone.setRotation(180.f);
+		}
+		else if (travelDegrees >= 225.f && travelDegrees < 315.f)
+		{
+			m_visionCone.setRotation(270.f);
+		}
+		else
+		{
+			m_visionCone.setRotation(0.f);
+		}
 	}
-	else if (travelDegrees >= 45.f && travelDegrees < 135.f)
-	{
-		m_visionCone.setRotation(90.f);
-	}
-	else if (travelDegrees >= 135.f && travelDegrees < 225.f)
-	{
-		m_visionCone.setRotation(180.f);
-	}
-	else if (travelDegrees >= 225.f && travelDegrees < 315.f)
-	{
-		m_visionCone.setRotation(270.f);
-	}
+
 	m_visionCone.moveCone(m_position);
 	m_body->moveBody(m_position);
 }
@@ -79,6 +106,20 @@ npcData blindNpc::getData()
 	currentData.speed = m_moveSpeed;
 	currentData.patrolPoints = m_patrolPoints;
 	return currentData;
+}
+
+void blindNpc::checkFoundPlayer(sf::FloatRect t_playerBounds)
+{
+	if (m_visionCone.checkCollision(t_playerBounds))
+	{
+		m_cantFindPlayer = 2.f;
+		m_state = std::make_shared<SeekPlayer>();
+	}
+}
+
+void blindNpc::rotate(float t_angle)
+{
+	m_visionCone.setRotation(t_angle);
 }
 
 void blindNpc::position(sf::Vector2f& t_position)

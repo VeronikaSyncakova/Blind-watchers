@@ -7,24 +7,17 @@ visionCone::visionCone(sf::Vector2f t_spawnPos, float t_len, float t_angle)
 	int divides = 8;
 	m_cone = std::make_shared<sf::ConvexShape>(divides);
 
-	float useAngle = t_angle / (divides - 1.f);
+	int pointAmt = divides - 1;
+	float useAngle = t_angle / pointAmt;
 	m_cone->setPoint(0, sf::Vector2f(0.f,0.f));
 
+	int half = pointAmt / 2.f;
 	sf::Vector2f nextPoint;
-	for (int i = -divides / 2.f + 1; i < divides / 2.f - 1; i++)
+	for (int i = 0; i < pointAmt; i++)
 	{
-		nextPoint = math::angleToPosition(t_len, useAngle * i);
-		m_cone->setPoint(i + divides / 2.f + 1, nextPoint);
+		nextPoint = math::angleToPosition(t_len, useAngle * (i - half));
+		m_cone->setPoint(i, nextPoint);
 	}
-
-	/*sf::Vector2f nextPoint = math::angleToPosition(t_len, useAngle * 2);
-	m_cone->setPoint(1, nextPoint);
-	nextPoint = math::angleToPosition(t_len, useAngle);
-	m_cone->setPoint(2, nextPoint);
-	nextPoint = math::angleToPosition(t_len, -useAngle);
-	m_cone->setPoint(3, nextPoint);
-	nextPoint = math::angleToPosition(t_len, -useAngle * 2);
-	m_cone->setPoint(4, nextPoint);*/
 
 	m_cone->setFillColor(sf::Color::Transparent);
 	m_cone->setOutlineColor(sf::Color::White);
@@ -35,6 +28,8 @@ visionCone::visionCone(sf::Vector2f t_spawnPos, float t_len, float t_angle)
 	RenderObject::getInstance().add(m_cone);
 }
 
+
+
 void visionCone::moveCone(sf::Vector2f t_newPosition)
 {
 	m_cone->setPosition(t_newPosition);
@@ -43,4 +38,14 @@ void visionCone::moveCone(sf::Vector2f t_newPosition)
 void visionCone::setRotation(float t_angle)
 {
 	m_cone->setRotation(t_angle);
+}
+
+bool visionCone::checkCollision(sf::FloatRect t_playerBounds)
+{
+	if (math::coneIntersectsBox(*m_cone, t_playerBounds))
+	{
+		DEBUG_MSG("COLLIDING");
+		return true;
+	}
+	return false;
 }

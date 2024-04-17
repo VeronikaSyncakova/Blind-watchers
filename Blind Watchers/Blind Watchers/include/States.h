@@ -5,7 +5,7 @@
 
 enum class State
 {
-	None, PlayerInput, Wander, Patrol
+	None, PlayerInput, Wander, Patrol, seekPlayer
 };
 
 class NoneState : public AbstractState
@@ -50,6 +50,18 @@ public:
 	void skipPoint(std::shared_ptr<Pawn> t_pawn);
 private:
 	int m_nextPoint{ 0 };
+};
+
+class SeekPlayer : public AbstractState
+{
+public:
+	virtual void enter(std::shared_ptr<Pawn> t_pawn);
+	virtual void update(std::shared_ptr<Pawn> t_pawn);
+	virtual void exit(std::shared_ptr<Pawn> t_pawn);
+
+	void SetPlayer(sf::Vector2f t_playerPos);
+private:
+	sf::Vector2f m_playerPos{ 0.0f,0.0f };
 };
 
 class StateManager

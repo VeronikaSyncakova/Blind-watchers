@@ -32,6 +32,9 @@ public:
 	virtual sf::FloatRect getBounds()override { return m_body->m_rectangle->getGlobalBounds(); }
 
 	npcData getData(); 
+	void checkFoundPlayer(sf::FloatRect t_playerBounds);
+	void rotate(float t_angle)override;
+
 
 	void position(sf::Vector2f& t_position) override;
 private:
@@ -41,4 +44,5 @@ private:
 	float m_maxSpeed{ 100.f };
 
 	visionCone m_visionCone;
+	float m_cantFindPlayer{ 0.f };
 };

@@ -23,9 +23,11 @@ public:
 	sf::Vector2f getPosition() { return m_position; }
 	std::vector<sf::Vector2f> getPatrolPoints() { return m_patrolPoints; }
 	State getState() { return m_currentState; }
+	std::shared_ptr<AbstractState> getAbstractState() { return m_state; }
 
 	virtual void position(sf::Vector2f& t_position)=0; //position the character to a specific location
 	void applyDamage(int t_damageAmt);
+	virtual void rotate(float t_angle) = 0;
 private:
 
 protected:

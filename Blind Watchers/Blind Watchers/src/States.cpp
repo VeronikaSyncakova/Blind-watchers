@@ -185,3 +185,23 @@ void PatrolState::skipPoint(std::shared_ptr<Pawn> t_pawn)
 	if (m_nextPoint >= static_cast<int>(t_pawn->getPatrolPoints().size()))
 		m_nextPoint = 0;
 }
+
+void SeekPlayer::enter(std::shared_ptr<Pawn> t_pawn)
+{
+}
+
+void SeekPlayer::update(std::shared_ptr<Pawn> t_pawn)
+{
+	sf::Vector2f displacement = math::displacement(t_pawn->getPosition(), m_playerPos);
+	t_pawn->moveBody(displacement);
+	t_pawn->rotate(math::displacementToDegrees(displacement));
+}
+
+void SeekPlayer::exit(std::shared_ptr<Pawn> t_pawn)
+{
+}
+
+void SeekPlayer::SetPlayer(sf::Vector2f t_playerPos)
+{
+	m_playerPos = t_playerPos;
+}

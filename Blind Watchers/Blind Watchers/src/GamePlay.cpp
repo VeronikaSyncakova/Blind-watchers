@@ -122,9 +122,17 @@ void GamePlay::update()
 		if (typeid(*p) == typeid(Player))
 		{
 			m_meds.updatePlayerPosition(p->getBounds());
-
-			//if(m_shooting)
-			//	m_bulletManager.spawnNewBullet(p->getPosition(), m_mousePosView);
+			for (std::shared_ptr<Pawn>& c : m_pawns)
+			{
+				if (auto t = std::dynamic_pointer_cast<blindNpc>(c))
+				{
+					t->checkFoundPlayer(p->getBounds());
+				}
+				if (auto t = std::dynamic_pointer_cast<SeekPlayer>(c->getAbstractState()))
+				{
+					t->SetPlayer(p->getPosition());
+				}
+			}
 		}
 	}
 	if (m_medProgress->checkEmpty())
