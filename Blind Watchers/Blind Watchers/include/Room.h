@@ -13,7 +13,7 @@ public:
 	};
 
 	Room();
-	void init(RoomData& data);
+	void init(RoomData& data, sf::Texture& t_texture);
 	bool inside(sf::Vector2f t_position); //checks if the object is inside of this room
 	bool checkCollision(sf::RectangleShape& t_object); //collision check with the walls
 	sf::Vector2f deflectVector(sf::RectangleShape& t_object); //returns deflect vector for the colliding object
@@ -27,4 +27,6 @@ private:
 	RoomType m_roomType; //where it is positioned
 	sf::Vector2f m_roomSize;
 	sf::Vector2f m_position;
+
+	std::shared_ptr<sf::Sprite> m_backgroundSprite;
 };

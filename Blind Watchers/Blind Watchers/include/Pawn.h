@@ -47,4 +47,6 @@ protected:
 
 	int m_health{ 100 };
 	int m_maxHealth{ 100 };
+	sf::Texture m_bodyTexture;
+	std::shared_ptr<sf::Sprite> m_bodySprite;
 };

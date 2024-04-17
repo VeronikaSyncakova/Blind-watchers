@@ -1,10 +1,11 @@
 #include "Room.h"
 
+
 Room::Room()
 {
 }
 
-void Room::init(RoomData& data)
+void Room::init(RoomData& data, sf::Texture& t_texture)
 {
 	m_roomSize = sf::Vector2f(data.m_sizeX, data.m_sizeY);
 	m_position = sf::Vector2f(data.m_positionX, data.m_positionY);
@@ -33,9 +34,16 @@ void Room::init(RoomData& data)
 	m_roomWalls->setSize(m_roomSize);
 	m_roomWalls->setFillColor(sf::Color::Transparent);
 	m_roomWalls->setOutlineThickness(4.f);
-	m_roomWalls->setOutlineColor(sf::Color::White);
+	m_roomWalls->setOutlineColor(sf::Color(65,57,67));
 	m_roomWalls->setPosition(m_position);
-	RenderObject::getInstance().add(m_roomWalls);
+	//RenderObject::getInstance().addBG(m_roomWalls);
+
+	m_backgroundSprite = std::make_shared<sf::Sprite>();
+	m_backgroundSprite->setTexture(t_texture);
+	m_backgroundSprite->setPosition(m_position);
+	RenderObject::getInstance().addBG(m_backgroundSprite);
+	RenderObject::getInstance().addBG(m_roomWalls);
+
 }
 
 bool Room::inside(sf::Vector2f t_position)

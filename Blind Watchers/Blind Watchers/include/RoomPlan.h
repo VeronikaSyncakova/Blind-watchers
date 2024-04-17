@@ -34,4 +34,6 @@ private:
 	std::map<int, Room> m_rooms;
 	//std::vector<Door> m_doors;
 	std::map<int, std::list<Door>> m_doors;
+	sf::Texture m_roomBackgroundTexture;
+	sf::Texture m_doorTexture;
 };
