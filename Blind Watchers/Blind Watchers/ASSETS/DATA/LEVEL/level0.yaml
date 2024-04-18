@@ -1,7 +1,7 @@
 npc:
   - position:
-      x: 813.9898
-      y: 240.3487
+      x: 246.9899
+      y: 189.3487
     colour:
       r: 255
       g: 255
@@ -24,8 +24,8 @@ npc:
           x: 300
           y: 900
   - position:
-      x: 608.9899
-      y: 390.3488
+      x: 500.9898
+      y: 154.3487
     colour:
       r: 255
       g: 0
@@ -47,6 +47,222 @@ npc:
       - point:
           x: 300
           y: 900
+  - position:
+      x: 1004.99
+      y: 73.34872
+    colour:
+      r: 255
+      g: 255
+      b: 255
+      a: 255
+    size:
+      x: 50
+      y: 50
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Wander
+    paths:
+      - point:
+          x: 100
+          y: 250
+      - point:
+          x: 800
+          y: 600
+      - point:
+          x: 300
+          y: 900
+  - position:
+      x: 664.9899
+      y: 97.34872
+    colour:
+      r: 255
+      g: 0
+      b: 255
+      a: 255
+    size:
+      x: 80
+      y: 80
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Patrol
+    paths:
+      - point:
+          x: 100
+          y: 250
+      - point:
+          x: 800
+          y: 600
+      - point:
+          x: 300
+          y: 900
+  - position:
+      x: 726.9899
+      y: 146.3488
+    colour:
+      r: 255
+      g: 0
+      b: 255
+      a: 255
+    size:
+      x: 80
+      y: 80
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Patrol
+    paths:
+      - point:
+          x: 100
+          y: 250
+      - point:
+          x: 800
+          y: 600
+      - point:
+          x: 300
+          y: 900
+  - position:
+      x: 456.9899
+      y: 262.3487
+    colour:
+      r: 255
+      g: 0
+      b: 255
+      a: 255
+    size:
+      x: 80
+      y: 80
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Patrol
+    paths:
+      - point:
+          x: 100
+          y: 250
+      - point:
+          x: 800
+          y: 600
+      - point:
+          x: 300
+          y: 900
+  - position:
+      x: 253.9899
+      y: 339.3487
+    colour:
+      r: 255
+      g: 255
+      b: 255
+      a: 255
+    size:
+      x: 50
+      y: 50
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Wander
+    paths:
+      - point:
+          x: 100
+          y: 250
+      - point:
+          x: 800
+          y: 600
+      - point:
+          x: 300
+          y: 900
+  - position:
+      x: 838.4832
+      y: 1105.718
+    colour:
+      r: 255
+      g: 255
+      b: 255
+      a: 255
+    size:
+      x: 50
+      y: 50
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Wander
+    paths:
+      - point:
+          x: 100
+          y: 1150
+      - point:
+          x: 800
+          y: 1500
+      - point:
+          x: 300
+          y: 1800
+  - position:
+      x: 2466.583
+      y: 499.044
+    colour:
+      r: 255
+      g: 0
+      b: 255
+      a: 255
+    size:
+      x: 80
+      y: 80
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Patrol
+    paths:
+      - point:
+          x: 1800
+          y: 250
+      - point:
+          x: 2500
+          y: 600
+      - point:
+          x: 2000
+          y: 900
+  - position:
+      x: 2854.583
+      y: 154.044
+    colour:
+      r: 255
+      g: 255
+      b: 255
+      a: 255
+    size:
+      x: 50
+      y: 50
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Wander
+    paths:
+      - point:
+          x: 1800
+          y: 250
+      - point:
+          x: 2500
+          y: 600
+      - point:
+          x: 2000
+          y: 900
+  - position:
+      x: 2572.594
+      y: 1021.229
+    colour:
+      r: 255
+      g: 255
+      b: 255
+      a: 255
+    size:
+      x: 50
+      y: 50
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Wander
+    paths:
+      - point:
+          x: 1800
+          y: 1150
+      - point:
+          x: 2500
+          y: 1500
+      - point:
+          x: 2000
+          y: 1800
 medication:
   - type: normal
     position:
@@ -58,21 +274,25 @@ medication:
       y: 100
   - type: normal
     position:
-      x: 424.9899
-      y: 405.3487
+      x: 1113.99
+      y: 239.3487
   - type: normal
     position:
-      x: -39.01013
-      y: 340.3488
+      x: 1001.99
+      y: 119.3487
   - type: normal
     position:
-      x: 349.9661
-      y: 379.3938
+      x: 679.9899
+      y: 346.3487
   - type: normal
     position:
-      x: 532.9661
-      y: 623.3939
+      x: 232.4833
+      y: 1032.718
   - type: normal
     position:
-      x: 233.9661
-      y: 620.3938
+      x: 3027.583
+      y: 174.0441
+  - type: normal
+    position:
+      x: 2307.594
+      y: 1479.229

@@ -206,7 +206,6 @@ void LevelEditor::loadData()
 		newPawnButton.m_bounds = pawnBox;
 		m_pawnButtons.push_back(newPawnButton);
 	}
-	m_pawnButtons.at(0).m_pawn = player; //std::make_shared<Player>();
 	m_pawnButtons.at(1).m_pawn = std::make_shared<blindNpc>(npcData.m_npcs.at(0));//m_pawns.at(1); //std::make_shared<blindNpc>(m_level.m_npcs.at(0));
 	m_pawnButtons.at(2).m_pawn = std::make_shared<blindNpc>(npcData.m_npcs.at(1));//m_pawns.at(2); //std::make_shared<blindNpc>(m_level.m_npcs.at(1));
 
@@ -290,7 +289,7 @@ void LevelEditor::buttonCollision()
 
 void LevelEditor::buttonAction(int t_buttonNum)
 {
-	if (t_buttonNum == 0) //player
+	if (t_buttonNum == 0) //medication
 	{
 		m_pawnButtons.at(0).m_selected = true;
 	}
@@ -301,6 +300,7 @@ void LevelEditor::buttonAction(int t_buttonNum)
 		//make new npc 
 		std::shared_ptr<Pawn> newNpc = std::make_shared<blindNpc>(data);
 		StateManager::changeCommand(m_pawnButtons.at(1).m_pawn->getState(), newNpc);
+		//newNpc->position(m_mousePosView);
 		m_pawns.push_back(newNpc);
 		m_pawnButtons.at(1).m_selected = true;
 	}
@@ -310,6 +310,7 @@ void LevelEditor::buttonAction(int t_buttonNum)
 
 		std::shared_ptr<Pawn> newNpc = std::make_shared<blindNpc>(data);
 		StateManager::changeCommand(m_pawnButtons.at(2).m_pawn->getState(), newNpc);
+		//newNpc->position(m_mousePosView);
 		m_pawns.push_back(newNpc);
 		m_pawnButtons.at(2).m_selected = true;
 	}
@@ -317,10 +318,11 @@ void LevelEditor::buttonAction(int t_buttonNum)
 	{
 		m_pawnButtons.at(3).m_selected = true;
 	}
+	/*
 	else if (t_buttonNum == 4) //medication
 	{
 		m_pawnButtons.at(4).m_selected = true;
-	}
+	}*/
 	else if (t_buttonNum == PAWN_BUTTONS-1) //zoom out
 	{
 		zoomOut();
@@ -329,18 +331,23 @@ void LevelEditor::buttonAction(int t_buttonNum)
 
 void LevelEditor::performButtonAction()
 {
+	bool canPlace = false;
+	if (RoomPlan::getInstance().getRoomNumber(m_mousePosView) != -1)
+		canPlace = true;
+
 	//place the objects to the level
-	if (m_pawnButtons.at(0).m_selected) //place player
+	if (m_pawnButtons.at(0).m_selected && canPlace) //place medication
 	{
-		m_pawns.at(0)->position(m_mousePosView);
+		m_medData.position = m_mousePosView;
+		m_medication.addMedication(m_medData);
 		m_pawnButtons.at(0).m_selected = false;
 	}
-	else if (m_pawnButtons.at(1).m_selected) //npc1
+	else if (m_pawnButtons.at(1).m_selected && canPlace) //npc1
 	{
 		m_pawns.at(m_pawns.size() - 1)->position(m_mousePosView);
 		m_pawnButtons.at(1).m_selected = false;
 	}
-	else if (m_pawnButtons.at(2).m_selected) //npc2
+	else if (m_pawnButtons.at(2).m_selected && canPlace) //npc2
 	{
 		m_pawns.at(m_pawns.size() - 1)->position(m_mousePosView);
 		m_pawnButtons.at(2).m_selected = false;
@@ -360,10 +367,12 @@ void LevelEditor::performButtonAction()
 		if(m_medication.erase(m_mousePosView))
 			m_pawnButtons.at(3).m_selected = false;
 	}
-	else if (m_pawnButtons.at(4).m_selected) //medication
+	/*
+	else if (m_pawnButtons.at(4).m_selected && canPlace) //medication
 	{
 		m_medData.position = m_mousePosView;
 		m_medication.addMedication(m_medData);
 		m_pawnButtons.at(4).m_selected = false;
 	}
+	*/
 }

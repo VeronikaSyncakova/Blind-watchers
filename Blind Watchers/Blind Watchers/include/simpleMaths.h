@@ -93,7 +93,7 @@ public:
 		
 		coneStart = (rotatePoint(t_cone.getPoint(1), t_cone.getRotation()) + t_cone.getPosition());
 		coneEnd = (rotatePoint(t_cone.getPoint(t_cone.getPointCount() - 1), t_cone.getRotation())) + t_cone.getPosition();
-
+		/*
 		if (containedInCone(coneMid, coneStart, coneEnd, t_box.getPosition()))
 			intersects = true;
 		else if (containedInCone(coneMid, coneStart, coneEnd, t_box.getPosition() + t_box.getSize()))
@@ -101,6 +101,17 @@ public:
 		else if (containedInCone(coneMid, coneStart, coneEnd, t_box.getPosition() + sf::Vector2f(t_box.getSize().x, 0.f)))
 			intersects = true;
 		else if (containedInCone(coneMid, coneStart, coneEnd, t_box.getPosition() + sf::Vector2f(0.f, t_box.getSize().y)))
+			intersects = true;
+		*/
+		sf::Vector2f boxPos = sf::Vector2f(t_box.left, t_box.top);
+		sf::Vector2f boxSize = sf::Vector2f(t_box.width, t_box.height);
+		if (containedInCone(coneMid, coneStart, coneEnd, boxPos))
+			intersects = true;
+		else if (containedInCone(coneMid, coneStart, coneEnd, boxPos + boxSize))
+			intersects = true;
+		else if (containedInCone(coneMid, coneStart, coneEnd, boxPos + sf::Vector2f(boxSize.x, 0.f)))
+			intersects = true;
+		else if (containedInCone(coneMid, coneStart, coneEnd, boxPos + sf::Vector2f(0.f, boxSize.y)))
 			intersects = true;
 
 		return intersects;

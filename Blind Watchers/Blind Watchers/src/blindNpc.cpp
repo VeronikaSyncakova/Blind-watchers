@@ -23,6 +23,41 @@ blindNpc::blindNpc(npcData& t_characterData) : m_visionCone(t_characterData.posi
 
 	setPatrolPoints(t_characterData);
 	m_roomNumber = RoomPlan::getInstance().getRoomNumber(m_position);
+
+	const int npcSpriteTypeAmt = 2;
+	int pickedSprite = rand() % npcSpriteTypeAmt + 1;
+
+	if (!m_bodyTexture.loadFromFile("ASSETS\\IMAGES\\Misc\\blindNpc" + std::to_string(pickedSprite) + ".png"))
+		DEBUG_MSG("COULDNT LOAD PLAYER");
+
+
+	m_bodySprite = std::make_shared<AnimatedSprite>(0.2f, m_bodyTexture);
+	sf::Vector2f size = sf::Vector2f(m_bodyTexture.getSize().x, m_bodyTexture.getSize().y);
+	size.x = size.x / 3.f;//amount of frames
+	m_bodySprite->setOrigin(size / 2.f);
+
+	m_bodySprite->addFrame(sf::IntRect(0, 0, 30, 32));
+	m_bodySprite->addFrame(sf::IntRect(30, 0, 30, 32));
+	m_bodySprite->addFrame(sf::IntRect(0, 0, 30, 32));
+	m_bodySprite->addFrame(sf::IntRect(60, 0, 30, 32));
+
+	m_bodySprite->setPosition(m_position);
+
+	RenderObject::getInstance().add(m_bodySprite);
+
+	switch (m_currentState)
+	{
+	case State::None:
+		break;
+	case State::Wander:
+		m_bodySprite->setScale(sf::Vector2f(1.3f, 1.3f));
+		break;
+	case State::Patrol:
+		m_bodySprite->setScale(sf::Vector2f(1.8f, 1.8f));
+		break;
+	default:
+		break;
+	}
 }
 
 blindNpc::~blindNpc()
@@ -60,6 +95,8 @@ void blindNpc::expire()
 	ParticleSpawner::explode(m_position);
 	m_position = sf::Vector2f(-10000.f, -10000.f);
 	m_body->m_rectangle->setPosition(m_position);
+	m_bodySprite->setPosition(m_position);
+
 }
 
 void blindNpc::moveBody(sf::Vector2f const& t_moveVector)
@@ -99,6 +136,10 @@ void blindNpc::moveBody(sf::Vector2f const& t_moveVector)
 			m_visionCone.setRotation(0.f);
 		}
 	}
+	if (t_moveVector.x != 0.f || t_moveVector.y != 0.f)
+		m_bodySprite->update();
+	m_bodySprite->setRotation(m_visionCone.getRotation());
+	m_bodySprite->setPosition(m_position);
 
 	m_visionCone.moveCone(m_position);
 	m_body->moveBody(m_position);
@@ -134,6 +175,7 @@ void blindNpc::position(sf::Vector2f& t_position)
 	m_position = t_position;
 	m_visionCone.moveCone(m_position);
 	m_body->m_rectangle->setPosition(m_position);
+	m_bodySprite->setPosition(m_position);
 	m_roomNumber = RoomPlan::getInstance().getRoomNumber(m_position);
 }
 
@@ -218,7 +260,7 @@ void body::initialiseBody(npcData& t_data)
 	m_rectangle->setSize(t_data.size);
 	m_rectangle->setOrigin(t_data.size / 2.f);
 
-	RenderObject::getInstance().add(m_rectangle);
+	//RenderObject::getInstance().add(m_rectangle);
 }
 
 void body::moveBody(sf::Vector2f const& t_newPos)

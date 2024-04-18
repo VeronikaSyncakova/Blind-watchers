@@ -24,17 +24,24 @@ Player::Player()
 	m_maxSprintTime = tempData.m_sprintTime;
 	m_sprintTimeLeft = m_maxSprintTime;
 
-	RenderObject::getInstance().add(m_body);
+	//RenderObject::getInstance().add(m_body);
 
 	if (!m_bodyTexture.loadFromFile("ASSETS\\IMAGES\\Misc\\"+tempData.m_name+".png"))
 		DEBUG_MSG("COULDNT LOAD PLAYER");
-	m_bodySprite = std::make_shared<sf::Sprite>();
-	m_bodySprite->setTexture(m_bodyTexture);
-	sf::Vector2f size = sf::Vector2f(m_bodySprite->getGlobalBounds().width, m_bodySprite->getGlobalBounds().height);
+
+
+	m_bodySprite = std::make_shared<AnimatedSprite>(0.2f, m_bodyTexture);
+	sf::Vector2f size = sf::Vector2f(m_bodyTexture.getSize().x, m_bodyTexture.getSize().y);
 	size.x = size.x / 3.f;//amount of frames
 	m_bodySprite->setOrigin(size/2.f);
+
+	m_bodySprite->addFrame(sf::IntRect(0,0,35,35));
+	m_bodySprite->addFrame(sf::IntRect(35, 0, 35, 35));
+	m_bodySprite->addFrame(sf::IntRect(0, 0, 35, 35));
+	m_bodySprite->addFrame(sf::IntRect(70, 0, 35, 35));
+
 	m_bodySprite->setPosition(m_position);
-	m_bodySprite->setTextureRect(sf::IntRect(0,0,size.x,size.y));
+
 	RenderObject::getInstance().add(m_bodySprite);
 
 	m_roomNumber = RoomPlan::getInstance().getRoomNumber(m_position);
@@ -96,9 +103,16 @@ void Player::moveBody(sf::Vector2f const& t_moveVector)
 		if (RoomPlan::getInstance().usesDoor(*m_body, m_roomNumber)) //using doors
 			m_roomNumber = RoomPlan::getInstance().getRoomNumber(m_body->getPosition()); //update room number
 	}
+	if(t_moveVector.x != 0.f || t_moveVector.y != 0.f)
+		m_bodySprite->update();
 	m_position = m_body->getPosition();
 	m_followCam.update(m_position);
 	m_bodySprite->setPosition(m_position);
+}
+
+void Player::rotate(float t_angle)
+{
+	m_bodySprite->setRotation(t_angle);
 }
 
 void Player::position(sf::Vector2f& t_position)

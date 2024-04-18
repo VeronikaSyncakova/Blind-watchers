@@ -44,6 +44,7 @@ void playerInputState::update(std::shared_ptr<Pawn> t_pawn)
 	{
 		moveVector.x -= 1;
 	}
+	t_pawn->rotate(math::displacementToDegrees(moveVector));
 	t_pawn->moveBody(moveVector);
 }
 

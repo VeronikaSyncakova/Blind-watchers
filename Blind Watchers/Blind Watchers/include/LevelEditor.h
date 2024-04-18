@@ -55,7 +55,7 @@ private:
 	std::vector<std::shared_ptr<Pawn>> m_pawns;
 	levelData m_level;
 	std::vector<pawnButton> m_pawnButtons;
-	const int PAWN_BUTTONS{ 6 };
+	const int PAWN_BUTTONS{ 5 };
 	ViewType m_viewType;
 	float m_zoomAmount{ 1.f };
 	sf::Vector2f m_selectedRoomCenter;
