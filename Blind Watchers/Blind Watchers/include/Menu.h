@@ -20,8 +20,8 @@ private:
 	void mouseButtonUp();
 
 	// ! functions
-	sf::Texture m_sfmlLogoT;
-	std::shared_ptr<sf::Sprite> m_sfmlLogoS;
+	sf::Texture m_backgroundTexture;
+	std::shared_ptr<sf::Sprite> m_backgroundSprite;
 
 	sf::Texture m_buttonTexture;
 	std::vector<Button> m_buttons;

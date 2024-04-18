@@ -4,6 +4,13 @@ LevelEditor::LevelEditor()
 {
 	loadData();
 	zoomOut();
+	if (!m_medTexture.loadFromFile("ASSETS\\IMAGES\\Misc\\meds.png"))
+		DEBUG_MSG("COULDNT LOAD MEDS");
+	if (!m_deleteTexture.loadFromFile("ASSETS\\IMAGES\\Misc\\delete.png"))
+		DEBUG_MSG("COULDNT LOAD DELETE");
+	m_selectedSprite = std::make_shared<sf::Sprite>();
+	m_selectedSprite->setScale(0.5f,0.5f);
+	RenderObject::getInstance().add(m_selectedSprite);
 }
 
 LevelEditor::~LevelEditor()
@@ -45,6 +52,14 @@ void LevelEditor::update()
 			RenderObject::getInstance().zoomCamera(m_zoomAmount, m_selectedRoomCenter);
 		}
 		buttonCollision();
+		if (m_pawnButtons.at(0).m_selected || m_pawnButtons.at(3).m_selected)//medication
+		{
+			m_selectedSprite->setPosition(m_mousePosView);
+		}
+		else if (m_pawnButtons.at(1).m_selected || m_pawnButtons.at(2).m_selected) //npc
+		{
+			m_pawns.at(m_pawns.size() - 1)->position(m_mousePosView);
+		}
 		break;
 	default:
 		break;
@@ -116,9 +131,9 @@ void LevelEditor::processMouse(sf::Event& t_event)
 		
 		if (m_viewType==ViewType::ZoomOut)
 		{
-			//RoomPlan::getInstance().selectedRoom(RoomPlan::getInstance().getRoomNumber(m_mousePosView));
 			int roomNum = RoomPlan::getInstance().getRoomNumber(m_mousePosView);
-			zoomIn(roomNum);
+			if(roomNum>=0)
+				zoomIn(roomNum);
 		}
 		else if(m_viewType == ViewType::ZoomIn)
 		{
@@ -237,7 +252,8 @@ void LevelEditor::saveData()
 	out << YAML::BeginSeq;
 	for (unsigned i = 1; i < m_pawns.size(); i++)
 	{
-		m_pawns.at(i)->writeYAML(out);
+		if(m_pawns.at(i)->getPosition().x>=0.f&& m_pawns.at(i)->getPosition().y>=0.f)
+			m_pawns.at(i)->writeYAML(out);
 	}
 	out << YAML::EndSeq;
 	//medication
@@ -307,6 +323,8 @@ void LevelEditor::buttonAction(int t_buttonNum)
 	if (t_buttonNum == 0) //medication
 	{
 		m_pawnButtons.at(0).m_selected = true;
+		m_selectedSprite->setTexture(m_medTexture);
+		m_selectedSprite->setColor(sf::Color::White);
 	}
 	else if (t_buttonNum == 1) //npc1
 	{
@@ -332,12 +350,9 @@ void LevelEditor::buttonAction(int t_buttonNum)
 	else if(t_buttonNum==3) //delete objects
 	{
 		m_pawnButtons.at(3).m_selected = true;
+		m_selectedSprite->setTexture(m_deleteTexture);
+		m_selectedSprite->setColor(sf::Color::White);
 	}
-	/*
-	else if (t_buttonNum == 4) //medication
-	{
-		m_pawnButtons.at(4).m_selected = true;
-	}*/
 	else if (t_buttonNum == PAWN_BUTTONS-1) //zoom out
 	{
 		zoomOut();
@@ -356,6 +371,7 @@ void LevelEditor::performButtonAction()
 		m_medData.position = m_mousePosView;
 		m_medication.addMedication(m_medData);
 		m_pawnButtons.at(0).m_selected = false;
+		m_selectedSprite->setColor(sf::Color::Transparent);
 	}
 	else if (m_pawnButtons.at(1).m_selected && canPlace) //npc1
 	{
@@ -376,18 +392,14 @@ void LevelEditor::performButtonAction()
 			{
 				m_pawns.erase(m_pawns.begin()+i);
 				m_pawnButtons.at(3).m_selected = false;
+				m_selectedSprite->setColor(sf::Color::Transparent);
 				break;
 			}
 		}
-		if(m_medication.erase(m_mousePosView))
+		if (m_medication.erase(m_mousePosView))
+		{
 			m_pawnButtons.at(3).m_selected = false;
+			m_selectedSprite->setColor(sf::Color::Transparent);
+		}
 	}
-	/*
-	else if (m_pawnButtons.at(4).m_selected && canPlace) //medication
-	{
-		m_medData.position = m_mousePosView;
-		m_medication.addMedication(m_medData);
-		m_pawnButtons.at(4).m_selected = false;
-	}
-	*/
 }

@@ -20,19 +20,19 @@ Menu::~Menu()
 /// </summary>
 void Menu::resetLevel()
 {
-	m_sfmlLogoS = std::make_shared<sf::Sprite>();
+	m_backgroundSprite = std::make_shared<sf::Sprite>();
 	m_hudText = std::make_shared<sf::Text>();
 
-	if (!m_sfmlLogoT.loadFromFile("ASSETS\\IMAGES\\Misc\\SFML-LOGO.png"))
+	if (!m_backgroundTexture.loadFromFile("ASSETS\\IMAGES\\Misc\\menu.png"))
 	{
-		DEBUG_MSG("COULDNT FIND SFML LOGO");
+		DEBUG_MSG("COULDNT FIND MENU");
 	}
 	else
 	{
-		m_sfmlLogoS->setTexture(m_sfmlLogoT);
-		m_sfmlLogoS->setPosition(200.f, 200.f);
+		m_backgroundSprite->setTexture(m_backgroundTexture);
+		m_backgroundSprite->setPosition(0.f,0.f);
 
-		RenderObject::getInstance().add(m_sfmlLogoS);
+		RenderObject::getInstance().addBG(m_backgroundSprite);
 	}
 
 	// sample text initialising in the hud
@@ -42,14 +42,15 @@ void Menu::resetLevel()
 	m_hudText->setFillColor(sf::Color::White);
 	m_hudText->setOutlineColor(sf::Color::Black);
 	m_hudText->setOutlineThickness(0.5f);
-	m_hudText->setString("Sample_Text");
+	m_hudText->setString("BLIND WATCHERS");
 	m_hudText->setOrigin(m_hudText->getGlobalBounds().width / 2.f , m_hudText->getGlobalBounds().height / 2.f);
 	m_hudText->setPosition(SCREEN_WIDTH / 2.f, 200.f);
+	m_hudText->setCharacterSize(50U);
 
 	RenderObject::getInstance().addHUD(m_hudText);
 	// ! initialising
 
-	if (!m_buttonTexture.loadFromFile("ASSETS\\IMAGES\\Buttons\\SlideButton.png")) //rotate_button.png
+	if (!m_buttonTexture.loadFromFile("ASSETS\\IMAGES\\Buttons\\SlideButtonNew.png")) //rotate_button.png
 	{
 		DEBUG_MSG("COULDNT FIND BUTTON");
 	}
@@ -68,6 +69,13 @@ void Menu::resetLevel()
 		m_buttons.at(1).setFunction([]() -> void { Game::s_changeGameMode = true; Game::s_currentGameMode = GameModeClass::Settings; });
 		m_buttons.at(2).setFunction([]() -> void { Game::s_changeGameMode = true; Game::s_currentGameMode = GameModeClass::LevelEditor; });
 		m_buttons.at(3).setFunction([]() -> void { Game::s_gameActive = false; });
+
+		//m_buttons.at(1).setText("Settings");
+		//m_buttons.at(2).setText("Editor");
+		//m_buttons.at(3).setText("Quit");
+		m_buttons.at(1).changeFrameHeight(2);
+		m_buttons.at(2).changeFrameHeight(3);
+		m_buttons.at(3).changeFrameHeight(4);
 	}
 }
 

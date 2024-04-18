@@ -7,6 +7,7 @@
 #include "YamlLoader.h"
 #include "Medication.h"
 #include "GlobalFontStorage.h"
+#include "DEBUG.h"
 
 struct pawnButton
 {
@@ -69,4 +70,7 @@ private:
 	sf::Vector2f m_selectedRoomCenter;
 	Medication m_medication;
 	MedData m_medData;
+	sf::Texture m_medTexture;
+	sf::Texture m_deleteTexture;
+	std::shared_ptr<sf::Sprite> m_selectedSprite;
 };
