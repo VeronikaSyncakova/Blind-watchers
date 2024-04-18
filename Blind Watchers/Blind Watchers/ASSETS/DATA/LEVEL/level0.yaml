@@ -184,13 +184,13 @@ npc:
     paths:
       - point:
           x: 100
-          y: 1150
+          y: 2950
       - point:
           x: 800
-          y: 1500
+          y: 3300
       - point:
           x: 300
-          y: 1800
+          y: 3600
   - position:
       x: 2466.583
       y: 499.044
@@ -207,13 +207,13 @@ npc:
     pathingType: Patrol
     paths:
       - point:
-          x: 1800
+          x: 5200
           y: 250
       - point:
-          x: 2500
+          x: 5900
           y: 600
       - point:
-          x: 2000
+          x: 5400
           y: 900
   - position:
       x: 2854.583
@@ -231,13 +231,13 @@ npc:
     pathingType: Wander
     paths:
       - point:
-          x: 1800
+          x: 5200
           y: 250
       - point:
-          x: 2500
+          x: 5900
           y: 600
       - point:
-          x: 2000
+          x: 5400
           y: 900
   - position:
       x: 2572.594
@@ -255,14 +255,14 @@ npc:
     pathingType: Wander
     paths:
       - point:
-          x: 1800
-          y: 1150
+          x: 5200
+          y: 2950
       - point:
-          x: 2500
-          y: 1500
+          x: 5900
+          y: 3300
       - point:
-          x: 2000
-          y: 1800
+          x: 5400
+          y: 3600
 medication:
   - type: normal
     position:
