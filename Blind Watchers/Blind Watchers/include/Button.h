@@ -50,6 +50,7 @@ public:
 	void changeFrameHeight(int t_frameNumber);
 	bool releaseButton();
 	void setFunction(std::function<void()> t_executeFunction) { m_executeFunction = t_executeFunction; }
+	void setText(std::string t_string);
 
 private:
 	std::shared_ptr<sf::Sprite> m_buttonS;
@@ -66,6 +67,8 @@ private:
 	bool m_inBounds{ false };
 
 	std::function<void()> m_executeFunction = {};
+
+	std::shared_ptr<sf::Text> m_text;
 };
 
 #endif // !BUTTON_H

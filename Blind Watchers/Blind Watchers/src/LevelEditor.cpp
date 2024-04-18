@@ -371,7 +371,7 @@ void LevelEditor::performButtonAction()
 		m_medData.position = m_mousePosView;
 		m_medication.addMedication(m_medData);
 		m_pawnButtons.at(0).m_selected = false;
-		m_selectedSprite->setPosition(-100.f, -100.f);
+		m_selectedSprite->setColor(sf::Color::Transparent);
 	}
 	else if (m_pawnButtons.at(1).m_selected && canPlace) //npc1
 	{

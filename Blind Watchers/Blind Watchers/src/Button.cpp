@@ -1,5 +1,6 @@
 #include "Button.h"
 #include "Game.h"
+#include"GlobalFontStorage.h"
 
 
 // basic initialisation
@@ -18,6 +19,10 @@ void Button::init(sf::Texture& t_texture, sf::Vector2i t_frameSize, sf::Vector2f
 	RenderObject::getInstance().add(m_buttonS);
 	// !
 
+	m_text = std::make_shared<sf::Text>();
+	m_text->setFont(*GlobalFontStorage::getInstance().getFont());
+	m_text->setPosition(t_position);
+	RenderObject::getInstance().add(m_text);
 }
 
 Button::~Button()
@@ -93,4 +98,9 @@ bool Button::releaseButton()
 		return true;
 	}
 	return false;
+}
+
+void Button::setText(std::string t_string)
+{
+	m_text->setString(t_string);
 }
