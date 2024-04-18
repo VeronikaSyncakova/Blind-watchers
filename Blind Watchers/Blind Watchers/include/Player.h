@@ -2,6 +2,7 @@
 
 #include "Pawn.h"
 #include "Camera.h"
+#include "statusBar.h"
 
 class Player : public Pawn
 {
@@ -22,6 +23,7 @@ public:
 	void writeYAML(YAML::Emitter& t_out) override;
 private:
 	std::shared_ptr<sf::RectangleShape> m_body;
+	std::shared_ptr<bar> m_sprintBar;
 
 	CameraTracker m_followCam;
 

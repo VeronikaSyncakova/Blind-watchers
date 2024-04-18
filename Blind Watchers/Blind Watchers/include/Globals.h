@@ -23,7 +23,9 @@ enum class GameModeClass
 	Gameplay,
 	Settings,
 	CharacterSelection,
-	LevelEditor
+	LevelEditor,
+	GameWin,
+	GameLose
 };
 
 struct Vector2i

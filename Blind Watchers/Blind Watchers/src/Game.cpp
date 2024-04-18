@@ -12,6 +12,8 @@
 #include "GamePlay.h"
 #include "CharacterSelection.h"
 #include "LevelEditor.h"
+#include "GameLose.h"
+#include "gameWin.h"
 
 
 // setup of static variables
@@ -158,6 +160,10 @@ void Game::changeGameMode()
 			m_gameMode = std::make_shared<CharacterSelection>();
 		else if (s_currentGameMode == GameModeClass::LevelEditor)
 			m_gameMode = std::make_shared<LevelEditor>();
+		else if (s_currentGameMode == GameModeClass::GameLose)
+			m_gameMode = std::make_shared<GameLose>();
+		else if (s_currentGameMode == GameModeClass::GameWin)
+			m_gameMode = std::make_shared<GameWin>();
 
 		s_changeGameMode = false;
 	}

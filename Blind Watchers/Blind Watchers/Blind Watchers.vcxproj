@@ -26,6 +26,8 @@
     <ClCompile Include="src\CharacterSelection.cpp" />
     <ClCompile Include="src\Door.cpp" />
     <ClCompile Include="src\blindNpc.cpp" />
+    <ClCompile Include="src\GameLose.cpp" />
+    <ClCompile Include="src\gameWin.cpp" />
     <ClCompile Include="src\LevelEditor.cpp" />
     <ClCompile Include="src\Medication.cpp" />
     <ClCompile Include="src\Particles.cpp" />
@@ -56,6 +58,8 @@
     <ClInclude Include="include\DamageApplicator.hpp" />
     <ClInclude Include="include\Door.h" />
     <ClInclude Include="include\blindNpc.h" />
+    <ClInclude Include="include\GameLose.h" />
+    <ClInclude Include="include\gameWin.h" />
     <ClInclude Include="include\levelData.h" />
     <ClInclude Include="include\LevelEditor.h" />
     <ClInclude Include="include\Medication.h" />

@@ -59,9 +59,9 @@ public:
 		}
 	}
 
-	static void explode(sf::Vector2f t_position)
+	static void explode(sf::Vector2f t_position, int t_amt = 100)
 	{
-		int amt = rand() % 100;
+		int amt = rand() % t_amt;
 		for (int j = 0; j < amt; j++)
 		{
 			sf::Vector2f direction;

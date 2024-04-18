@@ -41,6 +41,7 @@ public:
 
 	void writeYAML(YAML::Emitter& t_out) override; 
 
+	void huntPlayer();
 private:
 	void setPatrolPoints(npcData& t_characterData);
 

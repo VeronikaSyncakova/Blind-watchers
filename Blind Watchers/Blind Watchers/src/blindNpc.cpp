@@ -23,6 +23,8 @@ blindNpc::blindNpc(npcData& t_characterData) : m_visionCone(t_characterData.posi
 
 	setPatrolPoints(t_characterData);
 	m_roomNumber = RoomPlan::getInstance().getRoomNumber(m_position);
+
+	m_active = true;
 }
 
 blindNpc::~blindNpc()
@@ -202,6 +204,12 @@ void blindNpc::writeYAML(YAML::Emitter& t_out)
 	t_out << YAML::EndSeq;
 
 	t_out << YAML::EndMap;
+}
+
+void blindNpc::huntPlayer()
+{
+	m_cantFindPlayer = 0.5f;
+	m_state = std::make_shared<SeekPlayer>();
 }
 
 void blindNpc::setPatrolPoints(npcData& t_characterData)
