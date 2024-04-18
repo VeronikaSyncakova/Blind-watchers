@@ -59,6 +59,7 @@ void LevelEditor::zoomIn(int& t_roomNum)
 	{
 		m_pawnButtons.at(i).m_bounds->setOutlineColor(sf::Color::White);
 		m_pawnButtons.at(i).m_bounds->setFillColor(sf::Color(255, 255, 255, 80));
+		m_pawnButtons.at(i).m_text->setFillColor(sf::Color::White);
 	}
 	RoomPlan::getInstance().hovering(-1);
 	m_selectedRoomCenter= RoomPlan::getInstance().getRoomCenter(t_roomNum);
@@ -71,6 +72,7 @@ void LevelEditor::zoomOut()
 	{
 		m_pawnButtons.at(i).m_bounds->setOutlineColor(sf::Color::Transparent);
 		m_pawnButtons.at(i).m_bounds->setFillColor(sf::Color::Transparent);
+		m_pawnButtons.at(i).m_text->setFillColor(sf::Color::Transparent);
 	}
 }
 
@@ -184,8 +186,8 @@ void LevelEditor::loadData()
 	m_medData = medData.m_meds.at(0);
 
 	//button size and spacing
-	float width = 100.f;
-	float height = 200.f / (PAWN_BUTTONS);
+	float width = 150.f;
+	float height = 300.f / (PAWN_BUTTONS);
 	float spacing = (SCREEN_HEIGHT / 2.f) / (PAWN_BUTTONS + 1);
 
 	for (int i=0; i<PAWN_BUTTONS; i++)
@@ -200,14 +202,27 @@ void LevelEditor::loadData()
 		pawnBox->setOutlineColor(sf::Color::White);
 		pawnBox->setOutlineThickness(2u);
 
+		std::shared_ptr<sf::Text> text;
+		text = std::make_shared<sf::Text>();
+		text->setFont(*GlobalFontStorage::getInstance().getFont());
+		text->setPosition(width, (i + 1) * spacing);
+		text->setFillColor(sf::Color::White);
+
 		RenderObject::getInstance().addHUD(pawnBox);
+		RenderObject::getInstance().addHUD(text);
 
 		pawnButton newPawnButton;
 		newPawnButton.m_bounds = pawnBox;
+		newPawnButton.m_text = text;
 		m_pawnButtons.push_back(newPawnButton);
 	}
-	m_pawnButtons.at(1).m_pawn = std::make_shared<blindNpc>(npcData.m_npcs.at(0));//m_pawns.at(1); //std::make_shared<blindNpc>(m_level.m_npcs.at(0));
-	m_pawnButtons.at(2).m_pawn = std::make_shared<blindNpc>(npcData.m_npcs.at(1));//m_pawns.at(2); //std::make_shared<blindNpc>(m_level.m_npcs.at(1));
+	m_pawnButtons.at(0).string("MEDS");
+	m_pawnButtons.at(1).m_pawn = std::make_shared<blindNpc>(npcData.m_npcs.at(0));
+	m_pawnButtons.at(1).string("WANDER");
+	m_pawnButtons.at(2).m_pawn = std::make_shared<blindNpc>(npcData.m_npcs.at(1));
+	m_pawnButtons.at(2).string("PATROL");
+	m_pawnButtons.at(3).string("DELETE");
+	m_pawnButtons.at(4).string("ZOOM");
 
 }
 

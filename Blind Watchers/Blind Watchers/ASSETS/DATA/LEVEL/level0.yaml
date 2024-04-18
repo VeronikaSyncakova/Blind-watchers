@@ -64,13 +64,13 @@ npc:
     paths:
       - point:
           x: 100
-          y: 1150
+          y: 2950
       - point:
           x: 800
-          y: 1500
+          y: 3300
       - point:
           x: 300
-          y: 1800
+          y: 3600
   - position:
       x: 957.8981
       y: 1121.016

@@ -6,6 +6,7 @@
 #include "RoomPlan.h"
 #include "YamlLoader.h"
 #include "Medication.h"
+#include "GlobalFontStorage.h"
 
 struct pawnButton
 {
@@ -14,6 +15,13 @@ struct pawnButton
 	bool m_highlighted = false;
 	bool m_selected{ false };
 	std::shared_ptr<Pawn> m_pawn;
+	std::shared_ptr<sf::Text> m_text;
+
+	void string(std::string t_string) {
+		m_text->setString(t_string);
+		sf::Vector2f size = sf::Vector2f(m_text->getGlobalBounds().width, m_text->getGlobalBounds().height);
+		m_text->setOrigin(size / 2.f);
+	}
 };
 
 struct button
