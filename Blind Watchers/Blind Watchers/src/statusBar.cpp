@@ -48,6 +48,12 @@ void bar::changePercent(float t_change)
     top->setScale(fillPercent, 1.f);
 }
 
+void bar::setPercent(float t_newPercent)
+{
+    fillPercent = t_newPercent;
+    top->setScale(fillPercent, 1.f);
+}
+
 float continuous::update()
 {
     return Game::deltaTime * m_percent;
@@ -60,7 +66,7 @@ float continuous::update()
 /// <param name="t_newBar">data such as size and position</param>
 /// <param name="t_startPercent">from 0.0f to 1.0f</param>
 /// <returns></returns>
-std::shared_ptr<bar> StatusBar::addNewBar(FillType t_barType, barData t_newBar, float t_startPercent)
+std::shared_ptr<bar> StatusBar::addNewBar(FillType t_barType, barData t_newBar, sf::Color t_fillColor, float t_startPercent)
 {
     if (t_startPercent < 0.f)
     {
@@ -86,7 +92,7 @@ std::shared_ptr<bar> StatusBar::addNewBar(FillType t_barType, barData t_newBar, 
     newBar->bottom->setSize(t_newBar.size);
 
     newBar->top = std::make_shared<sf::RectangleShape>();
-    newBar->top->setFillColor(sf::Color(255, 0, 0, 100));
+    newBar->top->setFillColor(t_fillColor);
     newBar->top->setPosition(t_newBar.position);
     newBar->top->setSize(t_newBar.size);
     newBar->top->setScale(1.f, t_startPercent);

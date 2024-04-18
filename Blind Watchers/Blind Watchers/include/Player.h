@@ -2,6 +2,7 @@
 
 #include "Pawn.h"
 #include "Camera.h"
+#include "statusBar.h"
 
 class Player : public Pawn
 {
@@ -15,12 +16,14 @@ public:
 
 	void moveBody(sf::Vector2f const& t_moveVector)override;
 	virtual sf::FloatRect getBounds()override { return m_body->getGlobalBounds(); }
+	int getCurrentRoom() override;
 	void rotate(float t_angle)override;
 
 	void position(sf::Vector2f& t_position) override;
 	void writeYAML(YAML::Emitter& t_out) override;
 private:
 	std::shared_ptr<sf::RectangleShape> m_body;
+	std::shared_ptr<bar> m_sprintBar;
 
 	CameraTracker m_followCam;
 

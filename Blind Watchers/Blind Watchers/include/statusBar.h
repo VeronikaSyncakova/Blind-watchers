@@ -37,6 +37,7 @@ struct bar
 	bool checkEmpty();
 	void update();
 	void changePercent(float t_change);
+	void setPercent(float t_newPercent);
 	std::shared_ptr<sf::RectangleShape> top;
 	std::shared_ptr<sf::RectangleShape> bottom;
 
@@ -48,7 +49,7 @@ struct bar
 class StatusBar
 {
 public:
-	static std::shared_ptr<bar> addNewBar(FillType t_barType, barData t_newBar, float t_startPercent = -1.f);
+	static std::shared_ptr<bar> addNewBar(FillType t_barType, barData t_newBar,sf::Color t_fillColor = sf::Color::Red , float t_startPercent = -1.f);
 	//static void update();
 };
 

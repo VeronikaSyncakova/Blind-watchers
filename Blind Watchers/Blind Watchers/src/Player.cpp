@@ -45,6 +45,11 @@ Player::Player()
 	RenderObject::getInstance().add(m_bodySprite);
 
 	m_roomNumber = RoomPlan::getInstance().getRoomNumber(m_position);
+
+	barData sprintBar;
+	sprintBar.position = sf::Vector2f(20.f, 110.f);
+	sprintBar.size = sf::Vector2f(300.f, 10.f);
+	m_sprintBar = StatusBar::addNewBar(FillType::Empty, sprintBar, sf::Color::Green);
 }
 
 Player::~Player()
@@ -56,6 +61,8 @@ void Player::update()
 	if (m_sprinting)
 	{
 		m_sprintTimeLeft -= Game::deltaTime;
+		m_sprintBar->setPercent(m_sprintTimeLeft / m_maxSprintTime);
+
 
 		if (m_sprintTimeLeft < 0.f)
 			m_sprintTimeLeft = 0.f;
@@ -63,6 +70,7 @@ void Player::update()
 	else
 	{
 		m_sprintTimeLeft += Game::deltaTime;
+		m_sprintBar->setPercent(m_sprintTimeLeft / m_maxSprintTime);
 		if (m_sprintTimeLeft > m_maxSprintTime)
 		{
 			m_sprintTimeLeft = m_maxSprintTime;
@@ -110,6 +118,10 @@ void Player::moveBody(sf::Vector2f const& t_moveVector)
 	m_bodySprite->setPosition(m_position);
 }
 
+int Player::getCurrentRoom()
+{
+	return m_roomNumber;
+}
 void Player::rotate(float t_angle)
 {
 	m_bodySprite->setRotation(t_angle);

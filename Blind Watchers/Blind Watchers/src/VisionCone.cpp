@@ -44,9 +44,7 @@ bool visionCone::checkCollision(sf::FloatRect t_playerBounds)
 {
 	if (math::coneIntersectsBox(*m_cone, t_playerBounds))
 	{
-		DEBUG_MSG("COLLIDING");
 		return true;
 	}
-	DEBUG_MSG("no collision");
 	return false;
 }

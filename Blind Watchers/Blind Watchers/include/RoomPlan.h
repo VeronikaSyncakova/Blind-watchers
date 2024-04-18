@@ -21,6 +21,7 @@ public:
 	bool collides(sf::RectangleShape& t_object, int& t_roomNum); //collision check with room walls
 	sf::Vector2f deflectVector(sf::RectangleShape& t_object, int& t_roomNum); //returns deflect vector for the colliding object
 	bool usesDoor(sf::RectangleShape& t_object, int& t_roomNum); //checks if the object crosses through the door
+	sf::FloatRect getRoom(int& t_roomNum);
 
 	void selectedRoom(int t_num);
 	void hovering(int t_roomNum);

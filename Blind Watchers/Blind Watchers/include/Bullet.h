@@ -10,7 +10,7 @@ struct Bullet
 	std::shared_ptr<sf::CircleShape> m_bullet;
 	sf::Vector2f m_displacement;
 	bool m_active;
-	int m_damage{ 50 };
+	int m_damage{ 20 };
 };
 
 struct collisionInfo
@@ -43,6 +43,7 @@ public:
 	void update();
 	void spawnNewBullet(sf::Vector2f t_loc, sf::Vector2f t_target);
 	void checkCollisions(sf::FloatRect t_bounds);
+	void checkWallCollision(int t_roomNum);
 private:
 	std::vector<Bullet> m_bullets;
 };

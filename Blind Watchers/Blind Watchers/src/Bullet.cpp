@@ -92,6 +92,24 @@ void BulletHolder::checkCollisions(sf::FloatRect t_bounds)
 	}
 }
 
+void BulletHolder::checkWallCollision(int t_roomNum)
+{
+	for (auto i : m_bullets)
+	{
+		if (i.m_active)
+		{
+			sf::RectangleShape body;
+			body.setSize(sf::Vector2f(i.m_bullet->getGlobalBounds().width, i.m_bullet->getGlobalBounds().width));
+			body.setPosition(i.m_bullet->getPosition());
+			if (RoomPlan::getInstance().collides(body, t_roomNum))
+			{
+				i.m_active = false;
+				i.m_bullet->setPosition(-500000.f, -5000000.f);
+			}
+		}
+	}
+}
+
 void Bullet::update()
 {
 	if(m_active)

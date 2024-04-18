@@ -36,6 +36,7 @@ private:
 	Medication m_meds;
 
 	std::shared_ptr<bar> m_medProgress;
+	std::shared_ptr<bar> m_stressMeter;
 	GameType m_currentGameMode{ GameType::Sneak };
 
 	BulletHolder m_bulletManager;

@@ -153,6 +153,11 @@ void WanderState::exit(std::shared_ptr<Pawn> t_pawn)
 {
 }
 
+void WanderState::resetWanderPoint(std::shared_ptr<Pawn> t_pawn)
+{
+	m_startPosition = RoomPlan::getInstance().getRoomCenter(t_pawn->getCurrentRoom());
+}
+
 void PatrolState::enter(std::shared_ptr<Pawn> t_pawn)
 {
 }

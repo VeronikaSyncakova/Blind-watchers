@@ -21,6 +21,7 @@ public:
 	void changeColor(sf::Color t_color);
 	sf::Vector2f getCenter();
 	sf::Vector2f getPosition();
+	sf::FloatRect getRoomBounds();
 
 private:
 	std::shared_ptr<sf::RectangleShape> m_roomWalls; //body of the room

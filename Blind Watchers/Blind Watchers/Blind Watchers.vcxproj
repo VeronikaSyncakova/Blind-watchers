@@ -26,6 +26,8 @@
     <ClCompile Include="src\CharacterSelection.cpp" />
     <ClCompile Include="src\Door.cpp" />
     <ClCompile Include="src\blindNpc.cpp" />
+    <ClCompile Include="src\GameLose.cpp" />
+    <ClCompile Include="src\gameWin.cpp" />
     <ClCompile Include="src\LevelEditor.cpp" />
     <ClCompile Include="src\Medication.cpp" />
     <ClCompile Include="src\Particles.cpp" />
@@ -43,6 +45,7 @@
     <ClCompile Include="src\Settings.cpp" />
     <ClCompile Include="src\statusBar.cpp" />
     <ClCompile Include="src\VisionCone.cpp" />
+    <ClCompile Include="src\WalkingStick.cpp" />
     <ClCompile Include="src\YamlLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +59,8 @@
     <ClInclude Include="include\DamageApplicator.hpp" />
     <ClInclude Include="include\Door.h" />
     <ClInclude Include="include\blindNpc.h" />
+    <ClInclude Include="include\GameLose.h" />
+    <ClInclude Include="include\gameWin.h" />
     <ClInclude Include="include\levelData.h" />
     <ClInclude Include="include\LevelEditor.h" />
     <ClInclude Include="include\Medication.h" />
@@ -82,6 +87,7 @@
     <ClInclude Include="include\SimpleButton.h" />
     <ClInclude Include="include\statusBar.h" />
     <ClInclude Include="include\VisionCone.h" />
+    <ClInclude Include="include\WalkingStick.h" />
     <ClInclude Include="include\yaml-cpp\anchor.h" />
     <ClInclude Include="include\yaml-cpp\binary.h" />
     <ClInclude Include="include\yaml-cpp\contrib\anchordict.h" />

@@ -4,6 +4,7 @@
 #include "blindNpc.h"
 #include "Particles.h"
 #include "DamageApplicator.hpp"
+#include "Game.h"
 
 /// <summary>
 /// default constructor
@@ -63,7 +64,14 @@ void GamePlay::resetLevel()
 	barData newBar;
 	newBar.position = sf::Vector2f(20.f, 50.f);
 	newBar.size= sf::Vector2f(300.f, 10.f);
-	m_medProgress = StatusBar::addNewBar(FillType::FillUp, newBar);
+	m_medProgress = StatusBar::addNewBar(FillType::FillUp, newBar, sf::Color::White);
+
+	barData newStress;
+	newStress.position = sf::Vector2f(20.f, 80.f);
+	newStress.size = sf::Vector2f(300.f, 10.f);
+	m_stressMeter = StatusBar::addNewBar(FillType::Empty, newStress);
+
+	
 }
 
 /// <summary>
@@ -106,15 +114,37 @@ void GamePlay::processKeys(sf::Event& t_event)
 /// <param name="t_deltaTime">delta time passed from game</param>
 void GamePlay::update()
 {
+	if (m_stressMeter->checkEmpty())
+	{
+		Game::s_currentGameMode = GameModeClass::GameLose;
+		Game::s_changeGameMode = true;
+	}
+	int activeRoom = 0;
+	bool gameWon = (m_pawns.size() > 1u) ? true : false;
+
 	if (m_currentGameMode == GameType::Shoot)
 	{
 		m_bulletManager.update();
 		for (std::shared_ptr<Pawn>& p : m_pawns)
 		{
 			if (typeid(*p) == typeid(Player))
-				continue;
-			m_bulletManager.checkCollisions(p->getBounds());
+			{
+				activeRoom = p->getCurrentRoom();
+				break;
+			}
 		}
+		for (std::shared_ptr<Pawn>& p : m_pawns)
+		{
+			if (typeid(*p) == typeid(Player))
+			{
+				continue;
+			}
+			if (p->getCurrentRoom() == activeRoom)
+			{
+				m_bulletManager.checkCollisions(p->getBounds());
+			}
+		}
+		m_bulletManager.checkWallCollision(activeRoom);
 	}
 
 	ParticleSystem::getInstance().update();
@@ -130,7 +160,12 @@ void GamePlay::update()
 			{
 				if (auto t = std::dynamic_pointer_cast<blindNpc>(c))
 				{
-					t->checkFoundPlayer(p->getBounds());
+					if (t->checkFoundPlayer(p->getBounds()))
+						m_stressMeter->changePercent(0.005f);
+					if (t->getCurrentRoom() == p->getCurrentRoom() && m_currentGameMode == GameType::Shoot)
+					{
+						t->huntPlayer();
+					}
 				}
 				if (auto t = std::dynamic_pointer_cast<SeekPlayer>(c->getAbstractState()))
 				{
@@ -138,11 +173,22 @@ void GamePlay::update()
 				}
 			}
 		}
+		else
+		{
+			if (p->getActive())
+			{
+				gameWon = false;
+			}
+		}
 	}
 	if (m_medProgress->checkEmpty())
 	{
-		// DEBUG_MSG("READY");
 		m_currentGameMode = GameType::Shoot;
+	}
+	if (gameWon)
+	{
+		Game::s_currentGameMode = GameModeClass::GameWin;
+		Game::s_changeGameMode = true;
 	}
 }
 

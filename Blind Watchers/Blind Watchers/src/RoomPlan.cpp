@@ -61,7 +61,10 @@ sf::Vector2f RoomPlan::getRoomPosition(int& t_roomNum)
 
 bool RoomPlan::collides(sf::RectangleShape& t_object, int& t_roomNum)
 {
-	return m_rooms.at(t_roomNum).checkCollision(t_object);
+	if (t_roomNum != -1)
+		return m_rooms.at(t_roomNum).checkCollision(t_object);
+	else
+		return false;
 }
 
 sf::Vector2f RoomPlan::deflectVector(sf::RectangleShape& t_object, int& t_roomNum)
@@ -77,6 +80,11 @@ bool RoomPlan::usesDoor(sf::RectangleShape& t_object, int& t_roomNum)
 			return true;
 	}
 	return false;
+}
+
+sf::FloatRect RoomPlan::getRoom(int& t_roomNum)
+{
+	return m_rooms[t_roomNum].getRoomBounds();
 }
 
 void RoomPlan::selectedRoom(int t_num)

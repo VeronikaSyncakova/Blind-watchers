@@ -3,6 +3,7 @@
 #include "Pawn.h"
 #include "levelData.h"
 #include "VisionCone.h"
+#include "WalkingStick.h"
 
 /// <summary>
 /// struct holding the visible part of the npc,
@@ -33,14 +34,15 @@ public:
 	virtual sf::FloatRect getBounds()override { return m_body->m_rectangle->getGlobalBounds(); }
 
 	npcData getData(); 
-	void checkFoundPlayer(sf::FloatRect t_playerBounds);
+	bool checkFoundPlayer(sf::FloatRect t_playerBounds);
 	void rotate(float t_angle)override;
-
+	int getCurrentRoom()override;
 
 	void position(sf::Vector2f& t_position) override;
 
 	void writeYAML(YAML::Emitter& t_out) override; 
 
+	void huntPlayer();
 private:
 	void setPatrolPoints(npcData& t_characterData);
 
@@ -49,4 +51,6 @@ private:
 
 	visionCone m_visionCone;
 	float m_cantFindPlayer{ 0.f };
+
+	WalkingStick m_stick;
 };

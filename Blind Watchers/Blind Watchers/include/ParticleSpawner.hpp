@@ -55,13 +55,13 @@ public:
 
 			color = sf::Color(0, (rand() % 80) + 175, 0, 255);
 
-			ParticleSystem::getInstance().spawnNewParticle(2.f, t_spawnPos, direction, 1000.f, 0.5f, color);
+			ParticleSystem::getInstance().spawnNewParticle(4.f, t_spawnPos, direction, 1000.f, 0.5f, color);
 		}
 	}
 
-	static void explode(sf::Vector2f t_position)
+	static void explode(sf::Vector2f t_position, int t_amt = 100)
 	{
-		int amt = rand() % 100;
+		int amt = rand() % t_amt;
 		for (int j = 0; j < amt; j++)
 		{
 			sf::Vector2f direction;

@@ -32,6 +32,7 @@ public:
 	virtual void position(sf::Vector2f& t_position)=0; //position the character to a specific location
 
 	virtual void writeYAML(YAML::Emitter& t_out) = 0; //writing data to yaml
+	virtual int getCurrentRoom() = 0;
 
 	void applyDamage(int t_damageAmt);
 	virtual void rotate(float t_angle) = 0;
