@@ -12,6 +12,10 @@ public:
 		m_sprite.setTexture(m_texture);
 		m_sprite.setTextureRect(sf::IntRect(0, 0, 0, 0));
 	}
+	void setRotation(float t_newRotation)
+	{
+		m_sprite.setRotation(t_newRotation);
+	}
 	void setOrigin(sf::Vector2f t_origin)
 	{
 		m_sprite.setOrigin(t_origin);
@@ -23,6 +27,7 @@ public:
 	void addFrame(sf::IntRect t_newFrame)
 	{
 		m_renderRegions.push_back(t_newFrame);
+		m_sprite.setTextureRect(m_renderRegions.at(0));
 	}
 	void update();
 	void setActive(bool active) { m_active = active; }
@@ -31,6 +36,7 @@ public:
 		if(m_active)
 			target.draw(m_sprite, states);
 	}
+	void setScale(sf::Vector2f t_newScale) { m_sprite.setScale(t_newScale); }
 private:
 	sf::Texture m_texture;
 	sf::Sprite m_sprite;

@@ -4,6 +4,8 @@
 #include "States.h"
 #include "RoomPlan.h"
 #include "YamlLoader.h"
+#include "AnimatedSprite.h"
+
 
 
 class Pawn
@@ -51,5 +53,5 @@ protected:
 	int m_health{ 100 };
 	int m_maxHealth{ 100 };
 	sf::Texture m_bodyTexture;
-	std::shared_ptr<sf::Sprite> m_bodySprite;
+	std::shared_ptr<AnimatedSprite> m_bodySprite;
 };
