@@ -10,7 +10,7 @@ struct Bullet
 	std::shared_ptr<sf::CircleShape> m_bullet;
 	sf::Vector2f m_displacement;
 	bool m_active;
-	int m_damage{ 50 };
+	int m_damage{ 20 };
 };
 
 struct collisionInfo

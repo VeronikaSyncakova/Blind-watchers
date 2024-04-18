@@ -30,6 +30,8 @@ public:
 	virtual void enter(std::shared_ptr<Pawn> t_pawn);
 	virtual void update(std::shared_ptr<Pawn> t_pawn);
 	virtual void exit(std::shared_ptr<Pawn> t_pawn);
+
+	void resetWanderPoint(std::shared_ptr<Pawn> t_pawn);
 private:
 	float m_wanderRadius{ 100.f };
 	sf::Vector2f m_startPosition;

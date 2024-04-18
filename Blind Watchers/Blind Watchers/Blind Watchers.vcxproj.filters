@@ -171,6 +171,9 @@
     <ClCompile Include="src\gameWin.cpp">
       <Filter>Source Files\GameMode</Filter>
     </ClCompile>
+    <ClCompile Include="src\WalkingStick.cpp">
+      <Filter>Source Files\GamePlay\Pawn</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameMode.h">
@@ -400,6 +403,9 @@
     </ClInclude>
     <ClInclude Include="include\gameWin.h">
       <Filter>Header Files\GameMode</Filter>
+    </ClInclude>
+    <ClInclude Include="include\WalkingStick.h">
+      <Filter>Header Files\GamePlay\Pawn</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

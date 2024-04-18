@@ -10,6 +10,8 @@
 /// <param name="t_characterData"></param>
 blindNpc::blindNpc(npcData& t_characterData) : m_visionCone(t_characterData.position, 100.f, 45.f)
 {
+	m_stick.initialise(t_characterData.position);
+
 	m_body = std::make_shared<body>();
 	m_body->initialiseBody(t_characterData);
 	m_position = t_characterData.position;
@@ -67,11 +69,14 @@ blindNpc::~blindNpc()
 
 void blindNpc::update()
 {
+	m_stick.update();
 	if (m_cantFindPlayer >= 0.f)
 	{
 		m_cantFindPlayer -= Game::deltaTime;
 		if (m_cantFindPlayer <= 0.f)
 		{
+			m_state->exit(std::make_shared<blindNpc>(*this));
+
 			switch (m_currentState)
 			{
 			case State::None:
@@ -86,6 +91,8 @@ void blindNpc::update()
 				m_state = std::make_shared<NoneState>();
 				break;
 			}
+
+			m_state->enter(std::make_shared<blindNpc>(*this));
 		}
 	}
 }
@@ -97,6 +104,7 @@ void blindNpc::expire()
 	m_position = sf::Vector2f(-10000.f, -10000.f);
 	m_body->m_rectangle->setPosition(m_position);
 	m_bodySprite->setPosition(m_position);
+	m_stick.setPos(m_position);
 
 }
 
@@ -109,6 +117,10 @@ void blindNpc::moveBody(sf::Vector2f const& t_moveVector)
 		if (auto t = std::dynamic_pointer_cast<PatrolState>(m_state))
 		{
 			t->skipPoint(std::make_shared<blindNpc>(*this));
+		}
+		if (auto t = std::dynamic_pointer_cast<WanderState>(m_state))
+		{
+			t->resetWanderPoint(std::make_shared<blindNpc>(*this));
 		}
 	}
 	else
@@ -140,7 +152,9 @@ void blindNpc::moveBody(sf::Vector2f const& t_moveVector)
 	if (t_moveVector.x != 0.f || t_moveVector.y != 0.f)
 		m_bodySprite->update();
 	m_bodySprite->setRotation(m_visionCone.getRotation());
+	m_stick.rotate(m_visionCone.getRotation());
 	m_bodySprite->setPosition(m_position);
+	m_stick.setPos(m_position);
 
 	m_visionCone.moveCone(m_position);
 	m_body->moveBody(m_position);
@@ -171,6 +185,8 @@ bool blindNpc::checkFoundPlayer(sf::FloatRect t_playerBounds)
 void blindNpc::rotate(float t_angle)
 {
 	m_visionCone.setRotation(t_angle);
+	m_stick.rotate(t_angle);
+
 }
 
 int blindNpc::getCurrentRoom()

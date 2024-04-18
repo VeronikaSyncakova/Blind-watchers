@@ -3,6 +3,7 @@
 #include "Pawn.h"
 #include "levelData.h"
 #include "VisionCone.h"
+#include "WalkingStick.h"
 
 /// <summary>
 /// struct holding the visible part of the npc,
@@ -50,4 +51,6 @@ private:
 
 	visionCone m_visionCone;
 	float m_cantFindPlayer{ 0.f };
+
+	WalkingStick m_stick;
 };

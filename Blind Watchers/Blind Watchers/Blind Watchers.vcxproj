@@ -45,6 +45,7 @@
     <ClCompile Include="src\Settings.cpp" />
     <ClCompile Include="src\statusBar.cpp" />
     <ClCompile Include="src\VisionCone.cpp" />
+    <ClCompile Include="src\WalkingStick.cpp" />
     <ClCompile Include="src\YamlLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +87,7 @@
     <ClInclude Include="include\SimpleButton.h" />
     <ClInclude Include="include\statusBar.h" />
     <ClInclude Include="include\VisionCone.h" />
+    <ClInclude Include="include\WalkingStick.h" />
     <ClInclude Include="include\yaml-cpp\anchor.h" />
     <ClInclude Include="include\yaml-cpp\binary.h" />
     <ClInclude Include="include\yaml-cpp\contrib\anchordict.h" />
