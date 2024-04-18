@@ -64,6 +64,13 @@ void GamePlay::resetLevel()
 	newBar.position = sf::Vector2f(20.f, 50.f);
 	newBar.size= sf::Vector2f(300.f, 10.f);
 	m_medProgress = StatusBar::addNewBar(FillType::FillUp, newBar);
+
+	barData newStress;
+	newStress.position = sf::Vector2f(20.f, 80.f);
+	newStress.size = sf::Vector2f(300.f, 10.f);
+	m_stressMeter = StatusBar::addNewBar(FillType::Empty, newStress);
+
+	
 }
 
 /// <summary>
@@ -106,15 +113,28 @@ void GamePlay::processKeys(sf::Event& t_event)
 /// <param name="t_deltaTime">delta time passed from game</param>
 void GamePlay::update()
 {
+	int activeRoom = 0;
 	if (m_currentGameMode == GameType::Shoot)
 	{
 		m_bulletManager.update();
 		for (std::shared_ptr<Pawn>& p : m_pawns)
 		{
 			if (typeid(*p) == typeid(Player))
-				continue;
-			m_bulletManager.checkCollisions(p->getBounds());
+			{
+				activeRoom = p->getCurrentRoom();
+				break;
+			}
 		}
+		for (std::shared_ptr<Pawn>& p : m_pawns)
+		{
+			if (typeid(*p) == typeid(Player))
+			{
+				continue;
+			}
+			if (p->getCurrentRoom() == activeRoom)
+				m_bulletManager.checkCollisions(p->getBounds());
+		}
+		m_bulletManager.checkWallCollision(activeRoom);
 	}
 
 	ParticleSystem::getInstance().update();
@@ -130,7 +150,8 @@ void GamePlay::update()
 			{
 				if (auto t = std::dynamic_pointer_cast<blindNpc>(c))
 				{
-					t->checkFoundPlayer(p->getBounds());
+					if (t->checkFoundPlayer(p->getBounds()))
+						m_stressMeter->changePercent(0.005f);
 				}
 				if (auto t = std::dynamic_pointer_cast<SeekPlayer>(c->getAbstractState()))
 				{
@@ -141,7 +162,6 @@ void GamePlay::update()
 	}
 	if (m_medProgress->checkEmpty())
 	{
-		// DEBUG_MSG("READY");
 		m_currentGameMode = GameType::Shoot;
 	}
 }

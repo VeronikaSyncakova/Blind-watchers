@@ -43,6 +43,7 @@ public:
 	void update();
 	void spawnNewBullet(sf::Vector2f t_loc, sf::Vector2f t_target);
 	void checkCollisions(sf::FloatRect t_bounds);
+	void checkWallCollision(int t_roomNum);
 private:
 	std::vector<Bullet> m_bullets;
 };

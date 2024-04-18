@@ -115,18 +115,25 @@ npcData blindNpc::getData()
 	return currentData;
 }
 
-void blindNpc::checkFoundPlayer(sf::FloatRect t_playerBounds)
+bool blindNpc::checkFoundPlayer(sf::FloatRect t_playerBounds)
 {
 	if (m_visionCone.checkCollision(t_playerBounds))
 	{
 		m_cantFindPlayer = 2.f;
 		m_state = std::make_shared<SeekPlayer>();
+		return true;
 	}
+	return false;
 }
 
 void blindNpc::rotate(float t_angle)
 {
 	m_visionCone.setRotation(t_angle);
+}
+
+int blindNpc::getCurrentRoom()
+{
+	return m_roomNumber;
 }
 
 void blindNpc::position(sf::Vector2f& t_position)

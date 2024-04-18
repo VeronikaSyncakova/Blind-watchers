@@ -55,7 +55,7 @@ public:
 
 			color = sf::Color(0, (rand() % 80) + 175, 0, 255);
 
-			ParticleSystem::getInstance().spawnNewParticle(2.f, t_spawnPos, direction, 1000.f, 0.5f, color);
+			ParticleSystem::getInstance().spawnNewParticle(4.f, t_spawnPos, direction, 1000.f, 0.5f, color);
 		}
 	}
 

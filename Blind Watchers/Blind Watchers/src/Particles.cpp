@@ -28,7 +28,7 @@ Particle::Particle(std::shared_ptr<sf::Shape> t_body, sf::Vector2f t_direction, 
 	m_maxTime = t_lifeTime;
 	m_alpha = t_body->getFillColor().a;
 
-	RenderObject::getInstance().addBG(m_body);
+	RenderObject::getInstance().addParticles(m_body);
 }
 
 // update the text particle
@@ -56,7 +56,7 @@ TextParticle::TextParticle(std::shared_ptr<sf::Text> t_body, sf::Vector2f t_dire
 	m_maxTime = t_lifeTime;
 	m_active = true;
 
-	RenderObject::getInstance().addBG(m_body);
+	RenderObject::getInstance().addParticles(m_body);
 }
 
 

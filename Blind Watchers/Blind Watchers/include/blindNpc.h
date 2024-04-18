@@ -33,9 +33,9 @@ public:
 	virtual sf::FloatRect getBounds()override { return m_body->m_rectangle->getGlobalBounds(); }
 
 	npcData getData(); 
-	void checkFoundPlayer(sf::FloatRect t_playerBounds);
+	bool checkFoundPlayer(sf::FloatRect t_playerBounds);
 	void rotate(float t_angle)override;
-
+	int getCurrentRoom()override;
 
 	void position(sf::Vector2f& t_position) override;
 

@@ -101,6 +101,11 @@ void Player::moveBody(sf::Vector2f const& t_moveVector)
 	m_bodySprite->setPosition(m_position);
 }
 
+int Player::getCurrentRoom()
+{
+	return m_roomNumber;
+}
+
 void Player::position(sf::Vector2f& t_position)
 {
 	m_position = t_position;

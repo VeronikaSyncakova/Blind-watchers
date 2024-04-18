@@ -105,3 +105,8 @@ sf::Vector2f Room::getPosition()
 {
 	return m_position;
 }
+
+sf::FloatRect Room::getRoomBounds()
+{
+	return m_roomWalls->getGlobalBounds();
+}

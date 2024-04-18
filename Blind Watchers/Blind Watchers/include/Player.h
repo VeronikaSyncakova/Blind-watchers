@@ -16,6 +16,7 @@ public:
 	void moveBody(sf::Vector2f const& t_moveVector)override;
 	virtual sf::FloatRect getBounds()override { return m_body->getGlobalBounds(); }
 	void rotate(float t_angle)override { ; }
+	int getCurrentRoom() override;
 
 	void position(sf::Vector2f& t_position) override;
 	void writeYAML(YAML::Emitter& t_out) override;
