@@ -3,6 +3,7 @@
 #include "GameMode.h"
 #include "SimpleButton.h"
 #include "Button.h"
+#include "AnimatedSprite.h"
 #include <vector>
 
 // simple struct to hold the information associated with the box
@@ -32,6 +33,14 @@ private:
 	void initialisePlayButton(); // spawn in the play button if the character is selected
 
 	std::vector<characterSelectionBox> m_selectionBoxes;
+	std::shared_ptr<sf::Sprite> m_bg;
+	std::shared_ptr<sf::Sprite> m_Select;
+
+	std::shared_ptr<sf::Text> m_name;
+	std::shared_ptr<AnimatedSprite> m_currentSprite;
+
+	std::vector<sf::Texture> m_assets;
+	std::vector<std::string> m_nameS;
 
 	PlayerType m_chosenData;
 	bool m_characterSelected = false;

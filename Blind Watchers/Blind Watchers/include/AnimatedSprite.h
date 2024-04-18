@@ -12,6 +12,10 @@ public:
 		m_sprite.setTexture(m_texture);
 		m_sprite.setTextureRect(sf::IntRect(0, 0, 0, 0));
 	}
+	void setTexture(sf::Texture& t_newTexture)
+	{
+		m_sprite.setTexture(t_newTexture);
+	}
 	void setRotation(float t_newRotation)
 	{
 		m_sprite.setRotation(t_newRotation);

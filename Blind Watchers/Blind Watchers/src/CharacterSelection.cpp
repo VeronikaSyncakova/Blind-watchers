@@ -1,5 +1,6 @@
 #include "CharacterSelection.h"
 #include "Game.h"
+#include "GlobalFontStorage.h"
 
 /// <summary>
 /// default constructor
@@ -7,6 +8,68 @@
 CharacterSelection::CharacterSelection()
 {
 	spawnSelectionBoxes();
+
+	m_name = std::make_shared<sf::Text>();
+
+	m_name->setFont(*GlobalFontStorage::getInstance().getFont());
+	m_name->setCharacterSize(72u);
+	m_name->setFillColor(sf::Color::White);
+	m_name->setOutlineColor(sf::Color::Black);
+	m_name->setOutlineThickness(0.5f);
+	m_name->setString("                                                  SELECT A CHARACTER BELOW");
+	m_name->setOrigin(m_name->getGlobalBounds().width / 2.f, m_name->getGlobalBounds().height / 2.f);
+	m_name->setPosition(SCREEN_WIDTH / 2.f - 600.f, 400.f);
+
+	RenderObject::getInstance().addHUD(m_name);
+
+	PlayerData data;
+
+	for (int i = 0; i < PLAYER_TYPE_AMT; i++)
+	{
+		data = static_cast<PlayerType>(i);
+
+		m_nameS.push_back(data.m_name);
+
+		m_assets.emplace_back();
+		if (!m_assets.at(i).loadFromFile("ASSETS\\IMAGES\\Misc\\" + m_nameS.at(i) + ".png"))
+			DEBUG_MSG("COULDNT LOAD PLAYER");
+	}
+	m_currentSprite = std::make_shared<AnimatedSprite>(0.2f, m_assets.at(0));
+
+	m_currentSprite->addFrame(sf::IntRect(0, 0, 35, 35));
+	m_currentSprite->addFrame(sf::IntRect(35, 0, 35, 35));
+	m_currentSprite->addFrame(sf::IntRect(0, 0, 35, 35));
+	m_currentSprite->addFrame(sf::IntRect(70, 0, 35, 35));
+
+
+	m_currentSprite->setPosition(sf::Vector2f(SCREEN_WIDTH / 2.f + 400.f, -400.f));
+	m_currentSprite->setOrigin(sf::Vector2f(17.5f, 17.5f));
+	m_currentSprite->setScale(sf::Vector2f(8.f, 8.f));
+	m_currentSprite->setRotation(90.f);
+
+	RenderObject::getInstance().addHUD(m_currentSprite);
+
+	m_bg = std::make_shared<sf::Sprite>();
+
+	m_assets.emplace_back();
+
+	m_assets.emplace_back();
+	m_Select = std::make_shared<sf::Sprite>();
+	if (!m_assets.at(m_assets.size() - 1).loadFromFile("ASSETS\\IMAGES\\Misc\\CharacterSelect.png"))
+		DEBUG_MSG("COULDNT LOAD CHARACTER SELECT");
+	m_Select->setTexture(m_assets.at(m_assets.size() - 1));
+	m_Select->setPosition(400.f,850.f);
+
+
+	RenderObject::getInstance().add(m_Select);
+
+	if (!m_assets.at(m_assets.size() - 2).loadFromFile("ASSETS\\IMAGES\\Misc\\background.png"))
+		DEBUG_MSG("COULDNT LOAD BackGround");
+	m_assets.at(m_assets.size() - 2).setRepeated(true);
+	m_bg->setTexture(m_assets.at(m_assets.size() - 2));
+	m_bg->setTextureRect(sf::IntRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT));
+
+	RenderObject::getInstance().addBG(m_bg);
 }
 
 /// <summary>
@@ -56,6 +119,8 @@ void CharacterSelection::processKeys(sf::Event& t_event)
 /// <param name="t_deltaTime">delta time passed from game</param>
 void CharacterSelection::update()
 {
+	m_currentSprite->update();
+
 	if (m_characterSelected)
 	{
 		m_playButton.updateFrame();
@@ -96,6 +161,12 @@ void CharacterSelection::processMouse(sf::Event& t_event)
 				m_chosenData = m_selectionBoxes.at(i).m_containedPlayer;
 				m_selectionBoxes.at(i).m_bounds->setOutlineColor(sf::Color::Yellow);
 				m_characterSelected = true;
+
+				m_currentSprite->setPosition(sf::Vector2f(SCREEN_WIDTH / 2.f + 400.f, 400.f));
+				m_currentSprite->setTexture(m_assets.at(i));
+				m_name->setString(m_nameS.at(i));
+				m_name->setOrigin(m_name->getGlobalBounds().width / 2.f, m_name->getGlobalBounds().height / 2.f);
+
 				
 				initialisePlayButton();
 			}
@@ -118,13 +189,13 @@ void CharacterSelection::spawnSelectionBoxes()
 		selectionBox = std::make_shared<sf::RectangleShape>();
 
 
-		float width = 1000.f / PLAYER_TYPE_AMT;
-		float height = 600.f;
+		float width = 400.f / PLAYER_TYPE_AMT;
+		float height = 150.f;
 		selectionBox->setSize(sf::Vector2f(width, height));
 
 
 		float spacing = SCREEN_WIDTH / (PLAYER_TYPE_AMT + 1);
-		selectionBox->setPosition((i + 1) * spacing, SCREEN_HEIGHT / 2.f);
+		selectionBox->setPosition((i + 1) * spacing, SCREEN_HEIGHT / 2.f + 400.f);
 
 
 		selectionBox->setOrigin(selectionBox->getGlobalBounds().width / 2.f, selectionBox->getGlobalBounds().height / 2.f);
