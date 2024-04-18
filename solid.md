@@ -10,6 +10,76 @@ The vision cone is a class solely comprised of its body, and some functions for 
 this class follows many of the SOLID principles such as DIP and of course single responsibility, as all it knows about, is itself
 
 
+```mermaid
+---
+Title: Two examples of SRP in vision cone and walking stick
+---
+classDiagram
+    blindNpc *-- visionCone
+    blindNpc *-- WalkingStick
+
+    class WalkingStick{
+	WalkingStick()
+	~WalkingStick()
+
+	void initialise(sf::Vector2f t_pos, float t_startAngle = 0.f)
+	void rotate(float t_newRotation)
+	void setPos(sf::Vector2f t_newPos)
+	void update()
+
+	std::shared_ptr<sf::RectangleShape> m_stick
+	float m_rotateSpeed
+	bool m_positive
+	float m_setAngle
+	float m_targetAngle
+    }
+
+    class blindNpc{
+	blindNpc(npcData& t_characterData)
+	~blindNpc()
+
+	virtual void update()override
+
+	void expire()override
+
+	virtual void moveBody(sf::Vector2f const& t_moveVector)override
+
+	virtual sf::FloatRect getBounds()override
+
+	npcData getData()
+	bool checkFoundPlayer(sf::FloatRect t_playerBounds)
+	void rotate(float t_angle)override
+	int getCurrentRoom()override
+
+	void position(sf::Vector2f& t_position) override
+
+	void writeYAML(YAML::Emitter& t_out) override
+
+	void huntPlayer()
+
+	void setPatrolPoints(npcData& t_characterData)
+
+	std::shared_ptr<body> m_body
+	float m_maxSpeed
+
+	visionCone m_visionCone
+	float m_cantFindPlayer
+
+	WalkingStick m_stick
+}
+
+    class visionCone{
+
+	visionCone(sf::Vector2f t_spawnPos, float t_len, float t_angle)
+	void moveCone(sf::Vector2f t_newPosition)
+	void setRotation(float t_angle)
+	bool checkCollision(sf::FloatRect t_playerBounds)
+	float getRotation()
+
+	std::shared_ptr<sf::ConvexShape> m_cone 
+}
+```
+
 Open/Closed Principle
 Some of the main classes created in our game follows the open closed principle very well.
 For instance the states class that the npcs and the player uses
