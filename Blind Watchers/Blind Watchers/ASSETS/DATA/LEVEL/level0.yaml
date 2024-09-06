@@ -47,8 +47,232 @@ npc:
       - point:
           x: 300
           y: 900
+  - position:
+      x: 544.9899
+      y: 717.4062
+    colour:
+      r: 255
+      g: 255
+      b: 255
+      a: 255
+    size:
+      x: 50
+      y: 50
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Wander
+    paths:
+      - point:
+          x: 100
+          y: 250
+      - point:
+          x: 800
+          y: 600
+      - point:
+          x: 300
+          y: 900
+  - position:
+      x: 1392.99
+      y: 223.9771
+    colour:
+      r: 255
+      g: 0
+      b: 255
+      a: 255
+    size:
+      x: 80
+      y: 80
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Patrol
+    paths:
+      - point:
+          x: 100
+          y: 250
+      - point:
+          x: 800
+          y: 600
+      - point:
+          x: 300
+          y: 900
+  - position:
+      x: 1416.483
+      y: 1042.069
+    colour:
+      r: 255
+      g: 255
+      b: 255
+      a: 255
+    size:
+      x: 50
+      y: 50
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Wander
+    paths:
+      - point:
+          x: 100
+          y: 2050
+      - point:
+          x: 800
+          y: 2400
+      - point:
+          x: 300
+          y: 2700
+  - position:
+      x: 90.48334
+      y: 1442.356
+    colour:
+      r: 255
+      g: 255
+      b: 255
+      a: 255
+    size:
+      x: 50
+      y: 50
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Wander
+    paths:
+      - point:
+          x: 100
+          y: 2050
+      - point:
+          x: 800
+          y: 2400
+      - point:
+          x: 300
+          y: 2700
+  - position:
+      x: 2396.484
+      y: 1278.25
+    colour:
+      r: 255
+      g: 255
+      b: 255
+      a: 255
+    size:
+      x: 50
+      y: 50
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Wander
+    paths:
+      - point:
+          x: 3500
+          y: 2050
+      - point:
+          x: 4200
+          y: 2400
+      - point:
+          x: 3700
+          y: 2700
+  - position:
+      x: 2981.484
+      y: 1501.125
+    colour:
+      r: 255
+      g: 0
+      b: 255
+      a: 255
+    size:
+      x: 80
+      y: 80
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Patrol
+    paths:
+      - point:
+          x: 3500
+          y: 2050
+      - point:
+          x: 4200
+          y: 2400
+      - point:
+          x: 3700
+          y: 2700
+  - position:
+      x: 2478.617
+      y: 194.1649
+    colour:
+      r: 255
+      g: 0
+      b: 255
+      a: 255
+    size:
+      x: 80
+      y: 80
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Patrol
+    paths:
+      - point:
+          x: 3500
+          y: 250
+      - point:
+          x: 4200
+          y: 600
+      - point:
+          x: 3700
+          y: 900
+  - position:
+      x: 1944.617
+      y: 187.5119
+    colour:
+      r: 255
+      g: 255
+      b: 255
+      a: 255
+    size:
+      x: 50
+      y: 50
+    speed: 100
+    texture: unavailableCurrently.png
+    pathingType: Wander
+    paths:
+      - point:
+          x: 3500
+          y: 250
+      - point:
+          x: 4200
+          y: 600
+      - point:
+          x: 3700
+          y: 900
 medication:
   - type: normal
     position:
       x: 300
       y: 100
+  - type: normal
+    position:
+      x: 1256.99
+      y: 551.0818
+  - type: normal
+    position:
+      x: 237.4833
+      y: 1120.796
+  - type: normal
+    position:
+      x: 1316.483
+      y: 1444.574
+  - type: normal
+    position:
+      x: 1954.484
+      y: 1128.558
+  - type: normal
+    position:
+      x: 1967.484
+      y: 1529.954
+  - type: normal
+    position:
+      x: 2705.484
+      y: 972.2128
+  - type: normal
+    position:
+      x: 1869.617
+      y: 463.6105
+  - type: normal
+    position:
+      x: 2777.617
+      y: 738.6002
